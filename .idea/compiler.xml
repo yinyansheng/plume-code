@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="plume-code-service" />
+        <module name="plume-code-web" />
+        <module name="plume-code-model" />
+        <module name="plume-code-start" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="plume-code" target="1.8" />
+      <module name="plume-code-model" target="1.8" />
+      <module name="plume-code-service" target="1.8" />
+      <module name="plume-code-start" target="1.8" />
+      <module name="plume-code-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

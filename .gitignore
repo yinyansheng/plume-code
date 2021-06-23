@@ -1,0 +1,14 @@
+### IntelliJ IDEA ###
+/.idea
+/logs
+*.iws
+*.iml
+*.ipr
+*.class
+*.log
+*.gz
+*/target/
+.idea
+*/node_modules/
+*/dist/
+
