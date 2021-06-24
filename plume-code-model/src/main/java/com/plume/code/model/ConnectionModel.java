@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DatabaseConnectionModel {
+public class ConnectionModel {
     private String driver;
     private String url;
     private String username;

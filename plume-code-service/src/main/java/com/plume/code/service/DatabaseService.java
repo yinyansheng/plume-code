@@ -1,32 +1,40 @@
 package com.plume.code.service;
 
-import com.plume.code.model.DatabaseConnectionModel;
+import com.plume.code.model.ColumnModel;
+import com.plume.code.model.ConnectionModel;
+import com.plume.code.model.TableModel;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.util.List;
 
-public class DatabaseService {
-    private DatabaseService() {
+/**
+ * database service
+ * get jdbc template
+ *
+ * @author yinyansheng
+ */
+public abstract class DatabaseService {
+    protected ConnectionModel connectionModel;
+
+    protected DatabaseService(ConnectionModel connectionModel) {
+        this.connectionModel = connectionModel;
     }
 
-    public static DatabaseService instance() {
-        return new DatabaseService();
+    public JdbcTemplate getJdbcTemplate() {
+        return new JdbcTemplate(getDataSource());
     }
 
-    public JdbcTemplate getJdbcTemplate(DatabaseConnectionModel databaseConnectionModel) {
-        return new JdbcTemplate(getDataSource(databaseConnectionModel));
-    }
-
-    protected DataSource getDataSource(DatabaseConnectionModel databaseConnectionModel) {
+    public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         //设置相应的参数
         //1、数据库驱动类
-        dataSource.setDriverClassName(databaseConnectionModel.getDriver());
+        dataSource.setDriverClassName(connectionModel.getDriver());
         //2、url，用户名，密码
-        dataSource.setUrl(databaseConnectionModel.getUrl());
-        dataSource.setUsername(databaseConnectionModel.getUsername());
-        dataSource.setPassword(databaseConnectionModel.getPassword());
+        dataSource.setUrl(connectionModel.getUrl());
+        dataSource.setUsername(connectionModel.getUsername());
+        dataSource.setPassword(connectionModel.getPassword());
         //3、初始化连接大小
         dataSource.setInitialSize(1);
         //4、连接池最大数据量
@@ -47,5 +55,11 @@ public class DatabaseService {
         dataSource.setTestWhileIdle(false);
         return dataSource;
     }
+
+    public abstract String getSchema();
+
+    public abstract List<TableModel> listTableModel();
+
+    public abstract List<ColumnModel> listColumnModel(String tableName);
 
 }
