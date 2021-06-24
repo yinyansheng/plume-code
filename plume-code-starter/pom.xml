@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>plume-code-start</artifactId>
+    <artifactId>plume-code-starter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
@@ -33,5 +33,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
