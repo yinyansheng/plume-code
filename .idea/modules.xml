@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/plume-code.iml" filepath="$PROJECT_DIR$/plume-code.iml" />
       <module fileurl="file://$PROJECT_DIR$/plume-code-model/plume-code-model.iml" filepath="$PROJECT_DIR$/plume-code-model/plume-code-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/plume-code-service/plume-code-service.iml" filepath="$PROJECT_DIR$/plume-code-service/plume-code-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/plume-code-start/plume-code-start.iml" filepath="$PROJECT_DIR$/plume-code-start/plume-code-start.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plume-code-start/plume-code-starter.iml" filepath="$PROJECT_DIR$/plume-code-start/plume-code-starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/plume-code-web/plume-code-web.iml" filepath="$PROJECT_DIR$/plume-code-web/plume-code-web.iml" />
     </modules>
   </component>
