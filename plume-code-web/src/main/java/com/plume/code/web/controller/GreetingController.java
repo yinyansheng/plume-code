@@ -1,7 +1,6 @@
-package com.plume.code.controller;
+package com.plume.code.web.controller;
 
 
-import com.plume.code.GetUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,7 @@ import java.util.Date;
 public class GreetingController {
 
     @Autowired
-    private GetUserInfoService getUserInfoService;
+    private GetUserInfoServiceImpl.GetUserInfoService getUserInfoService;
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "1") String name, Model model) {
