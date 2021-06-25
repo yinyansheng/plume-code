@@ -3,12 +3,6 @@ package com.plume.code.common.helper;
 import org.apache.commons.lang3.StringUtils;
 
 public class GeneratorHepler {
-    public static String removePrefixAndUnderline(String value, String... prefix) {
-        value = removePrefix(value, prefix);
-        value = removeUnderline(value);
-        return value;
-    }
-
     public static String removePrefix(String value, String... prefix) {
         if (StringUtils.isEmpty(value)) {
             return "";

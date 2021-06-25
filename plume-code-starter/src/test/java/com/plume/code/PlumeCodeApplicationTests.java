@@ -1,9 +1,7 @@
 package com.plume.code;
 
 import com.google.gson.Gson;
-import com.plume.code.model.ColumnModel;
-import com.plume.code.model.ConnectionModel;
-import com.plume.code.model.TableModel;
+import com.plume.code.model.*;
 import com.plume.code.service.DatabaseService;
 import com.plume.code.service.impl.MysqlDatabaseService;
 import org.junit.Before;
@@ -13,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+
+import static java.sql.JDBCType.BIT;
 
 
 @RunWith(SpringRunner.class)
@@ -33,22 +33,30 @@ public class PlumeCodeApplicationTests {
 
     @Test
     public void test2() {
-        System.out.println("1111");
+        System.out.println(BIT.getName());
     }
 
     @Test
     public void test() {
-        DatabaseService databaseService = MysqlDatabaseService.instance(connectionModel);
+        SettingModel settingModel = SettingModel.builder().author("yinyansheng")
+                .columnPrefix("s_")
+                .tablePrefix("test_")
+                .packageName("com.plume.code")
+                .projectName("plume-code")
+                .build();
+
+        DatabaseService databaseService = MysqlDatabaseService.instance(connectionModel, settingModel);
 
         String schema = databaseService.getSchema();
         System.out.println(schema);
 
         Gson gson = new Gson();
 
-        List<TableModel> tableModels = databaseService.listTableModel();
+        List<BaseTableModel> tableModels = databaseService.listTableModel();
         System.out.println(gson.toJson(tableModels));
 
-        List<ColumnModel> columnModels = databaseService.listColumnModel("test_user");
+        List<BaseColumnModel> columnModels = databaseService.listColumnModel("test_user");
         System.out.println(gson.toJson(columnModels));
+
     }
 }

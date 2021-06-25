@@ -1,12 +1,11 @@
 package com.plume.code.service;
 
-import com.plume.code.model.ColumnModel;
-import com.plume.code.model.ConnectionModel;
-import com.plume.code.model.TableModel;
+import com.plume.code.model.*;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.sql.JDBCType;
 import java.util.List;
 
 /**
@@ -18,8 +17,11 @@ import java.util.List;
 public abstract class DatabaseService {
     protected ConnectionModel connectionModel;
 
-    protected DatabaseService(ConnectionModel connectionModel) {
+    protected SettingModel settingModel;
+
+    protected DatabaseService(ConnectionModel connectionModel, SettingModel settingModel) {
         this.connectionModel = connectionModel;
+        this.settingModel = settingModel;
     }
 
     public JdbcTemplate getJdbcTemplate() {
@@ -58,8 +60,7 @@ public abstract class DatabaseService {
 
     public abstract String getSchema();
 
-    public abstract List<TableModel> listTableModel();
+    public abstract List<BaseTableModel> listTableModel();
 
-    public abstract List<ColumnModel> listColumnModel(String tableName);
-
+    public abstract List<BaseColumnModel> listColumnModel(String tableName);
 }

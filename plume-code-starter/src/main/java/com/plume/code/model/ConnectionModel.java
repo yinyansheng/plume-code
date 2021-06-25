@@ -11,7 +11,6 @@ public class ConnectionModel {
      * 1:h2
      */
     private Integer type;
-    
     private String driver;
     private String url;
     private String username;

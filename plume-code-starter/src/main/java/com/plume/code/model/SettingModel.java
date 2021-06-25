@@ -14,6 +14,8 @@ public class SettingModel {
 
     private String packageName;
 
+    private String author;
+
     /**
      * 0：关闭
      * 1：打开
@@ -45,4 +47,5 @@ public class SettingModel {
      * 3:jpa
      */
     private Integer repositoryMode;
+
 }
