@@ -1,8 +1,9 @@
-package com.plume.code.service;
+package com.plume.code.service.impl;
 
 import com.plume.code.model.ColumnModel;
 import com.plume.code.model.ConnectionModel;
 import com.plume.code.model.TableModel;
+import com.plume.code.service.DatabaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 

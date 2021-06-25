@@ -7,18 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="plume-code-service" />
         <module name="plume-code-portal" />
-        <module name="plume-code-web" />
-        <module name="plume-code-starter" />
-        <module name="plume-code-model" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="plume-code" target="1.8" />
       <module name="plume-code-model" target="1.8" />
       <module name="plume-code-portal" target="1.8" />
-      <module name="plume-code-service" target="1.8" />
       <module name="plume-code-starter" target="1.8" />
       <module name="plume-code-web" target="1.8" />
     </bytecodeTargetLevel>

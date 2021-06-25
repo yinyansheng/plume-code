@@ -1,4 +1,4 @@
-package com.plume.code.web.controller;
+package com.plume.code.controller;
 
 
 import org.springframework.stereotype.Controller;
