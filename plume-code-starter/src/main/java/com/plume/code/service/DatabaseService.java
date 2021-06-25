@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.sql.JDBCType;
 import java.util.List;
+import java.util.Set;
 
 /**
  * database service
@@ -61,6 +62,8 @@ public abstract class DatabaseService {
     public abstract String getSchema();
 
     public abstract List<BaseTableModel> listTableModel();
+
+    public abstract Set<String> getPrimaryKeySet(String tableName);
 
     public abstract List<BaseColumnModel> listColumnModel(String tableName);
 }

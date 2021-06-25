@@ -17,7 +17,7 @@ import static java.sql.JDBCType.BIT;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PlumeCodeApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PlumeCodeApplicationTests {
+public class MysqlTests {
 
     private ConnectionModel connectionModel;
 

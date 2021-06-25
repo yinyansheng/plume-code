@@ -4,6 +4,7 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.JDBCType;
+import java.util.Set;
 
 import static com.plume.code.common.helper.GeneratorHepler.removePrefix;
 import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
@@ -55,22 +56,19 @@ public class MysqlColumnModel extends BaseColumnModel {
     private String privileges;
 
     @Override
-    public void initialize(SettingModel settingModel) {
+    public void initialize(SettingModel settingModel, Set<String> primaryKeySet) {
         if (StringUtils.isNotEmpty(settingModel.getColumnPrefix())) {
             this.fieldName = removePrefix(columnName, settingModel.getColumnPrefix().split(","));
         }
-        this.fieldName = removeUnderline(this.fieldName);
+        this.fieldName = removeUnderline(this.fieldName).toLowerCase();
 
         this.fieldComment = columnComment;
 
         JDBCType jdbcType = getJdbcType(dataType);
         this.fieldType = getFieldType(jdbcType);
-
         this.fieldValue = columnDefault;
-
-        if (StringUtils.isNotEmpty(columnKey) && columnKey.toUpperCase().contains("PRI")) {
-            this.isPK = true;
-        }
+        this.isPK = primaryKeySet.contains(columnName);
+        this.isMultiplePk = primaryKeySet.size() > 1;
     }
 
     private JDBCType getJdbcType(String dataType) {

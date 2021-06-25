@@ -4,7 +4,6 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
-import java.util.Locale;
 
 import static com.plume.code.common.helper.GeneratorHepler.removePrefix;
 import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
@@ -14,11 +13,10 @@ import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
  * mysql table model
  */
 @Data
-public class MysqlTableModel extends BaseTableModel {
-    private String tableSchema;
+public class H2TableModel extends BaseTableModel {
+    private String tableCatalog;
     private String tableName;
-    private String tableComment;
-    private Timestamp createTime;
+    private String remarks;
 
     @Override
     public void initialize(SettingModel settingModel) {
@@ -28,6 +26,6 @@ public class MysqlTableModel extends BaseTableModel {
         }
 
         this.className = removeUnderline(tableName);
-        this.classComment = tableComment;
+        this.classComment = remarks;
     }
 }

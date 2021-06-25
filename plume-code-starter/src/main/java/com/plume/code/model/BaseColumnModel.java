@@ -1,6 +1,7 @@
 package com.plume.code.model;
 
 import java.sql.JDBCType;
+import java.util.Set;
 
 /**
  * @author yinyansheng
@@ -11,6 +12,7 @@ public abstract class BaseColumnModel {
     protected Object fieldValue;
     protected String fieldComment;
     protected boolean isPK;
+    protected boolean isMultiplePk;
 
     /**
      * 0：null
@@ -19,7 +21,7 @@ public abstract class BaseColumnModel {
      */
     protected Integer primaryKeyStrategy;
 
-    public abstract void initialize(SettingModel settingModel);
+    public abstract void initialize(SettingModel settingModel, Set<String> primaryKeySet);
 
     protected String getFieldType(JDBCType jdbcType) {
         switch (jdbcType) {
