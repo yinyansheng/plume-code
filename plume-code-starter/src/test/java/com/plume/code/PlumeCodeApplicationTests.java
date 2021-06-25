@@ -6,7 +6,6 @@ import com.plume.code.model.ConnectionModel;
 import com.plume.code.model.TableModel;
 import com.plume.code.service.DatabaseService;
 import com.plume.code.service.impl.MysqlDatabaseService;
-import com.plume.code.web.PlumeCodeApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

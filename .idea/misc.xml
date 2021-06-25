@@ -4,12 +4,12 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/plume-code-starter/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/plume-code-model/pom.xml" />
-        <option value="$PROJECT_DIR$/plume-code-starter/pom.xml" />
         <option value="$PROJECT_DIR$/plume-code-web/pom.xml" />
       </set>
     </option>

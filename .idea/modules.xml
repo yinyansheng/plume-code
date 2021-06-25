@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/plume-code.iml" filepath="$PROJECT_DIR$/plume-code.iml" />
       <module fileurl="file://$PROJECT_DIR$/plume-code-portal/plume-code-portal.iml" filepath="$PROJECT_DIR$/plume-code-portal/plume-code-portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plume-code-starter/plume-code-starter.iml" filepath="$PROJECT_DIR$/plume-code-starter/plume-code-starter.iml" />
     </modules>
   </component>
 </project>
