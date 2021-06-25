@@ -11,13 +11,14 @@
           :class="{'logo-group': true, 'logo-transition': asideTransition}"
           :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}"
           flex-box="0">
-          <img v-if="asideCollapse" :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/icon-only.png`">
-          <img v-else :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/all.png`">
+          <img v-if="asideCollapse" :src="`${$baseUrl}image/logo.png`">
+          <img v-else :src="`${$baseUrl}image/logo.png`">
         </router-link>
         <div class="toggle-aside-btn" @click="handleToggleAside" flex-box="0">
           <d2-icon name="bars"/>
         </div>
-        <d2-menu-header flex-box="1"/>
+        <div flex-box="1" />
+<!--        <d2-menu-header flex-box="1"/>-->
         <!-- 顶栏右侧 -->
         <div class="d2-header-right" flex-box="0">
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
@@ -27,8 +28,8 @@
           <d2-header-theme/>
           <d2-header-size/>
           <!--          <d2-header-locales/>-->
-          <!--          <d2-header-color/>-->
-          <d2-header-user/>
+                    <d2-header-color/>
+<!--          <d2-header-user/>-->
         </div>
       </div>
       <!-- 下面 主体 -->
