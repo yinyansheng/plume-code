@@ -21,6 +21,7 @@
         <module>plume-code-service</module>
         <module>plume-code-web</module>
         <module>plume-code-starter</module>
+        <module>plume-code-portal</module>
     </modules>
 
     <dependencyManagement>
