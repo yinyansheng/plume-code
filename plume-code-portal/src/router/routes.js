@@ -23,31 +23,31 @@ const frameIn = [
       },
       // 演示页面
       {
-        path: 'page1',
-        name: 'page1',
+        path: 'database',
+        name: 'database',
         meta: {
-          title: '页面 1',
+          title: '数据库管理',
           auth: true
         },
-        component: _import('demo/page1')
+        component: _import('plume/database')
       },
       {
-        path: 'page2',
-        name: 'page2',
+        path: 'generator',
+        name: 'generator',
         meta: {
-          title: '页面 2',
+          title: '代码生成',
           auth: true
         },
-        component: _import('demo/page2')
+        component: _import('plume/generator')
       },
       {
-        path: 'page3',
-        name: 'page3',
+        path: 'template',
+        name: 'template',
         meta: {
-          title: '页面 3',
+          title: '模版管理',
           auth: true
         },
-        component: _import('demo/page3')
+        component: _import('plume/template')
       },
       // 系统 前端日志
       {
