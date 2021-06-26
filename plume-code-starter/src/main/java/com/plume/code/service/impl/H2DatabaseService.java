@@ -41,7 +41,7 @@ public class H2DatabaseService extends DatabaseService {
     }
 
     @Override
-    public String getSchema() {
+    public String getDatabaseName() {
         String schema = getJdbcTemplate().queryForObject(SCHEME_SQL, String.class);
 
         if (StringUtils.isEmpty(schema)) {
@@ -53,20 +53,20 @@ public class H2DatabaseService extends DatabaseService {
 
     @Override
     public List<ClassModel> listTableModel() {
-        String schema = getSchema();
+        String schema = getDatabaseName();
         List<H2TableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(H2TableModel.class), schema);
         return tableModelList.stream().map(this::mapToClassModel).collect(Collectors.toList());
     }
 
     @Override
     public Set<String> getPrimaryKeySet(String tableName) {
-        String schema = getSchema();
+        String schema = getDatabaseName();
         return new HashSet<>(getJdbcTemplate().queryForList(PRIMARY_KEY_SQL, String.class, schema, tableName));
     }
 
     @Override
     public List<FieldModel> listColumnModel(String tableName) {
-        String schema = getSchema();
+        String schema = getDatabaseName();
         Set<String> primaryKeySet = getPrimaryKeySet(tableName);
         List<H2ColumnModel> columnModelList = getJdbcTemplate().query(COLUMN_SQL, new BeanPropertyRowMapper<>(H2ColumnModel.class), schema, tableName);
         return columnModelList.stream().map(r -> mapToFieldModel(r, primaryKeySet)).collect(Collectors.toList());

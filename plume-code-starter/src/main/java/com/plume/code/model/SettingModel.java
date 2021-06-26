@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class SettingModel {
+    private String batchNo;
+
     private String tablePrefix;
 
     private String columnPrefix;

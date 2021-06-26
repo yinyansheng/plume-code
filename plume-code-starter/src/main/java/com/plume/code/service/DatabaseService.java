@@ -26,7 +26,7 @@ public abstract class DatabaseService {
         this.connectionModel = connectionModel;
         this.settingModel = settingModel;
     }
-
+    
     public JdbcTemplate getJdbcTemplate() {
         return new JdbcTemplate(getDataSource());
     }
@@ -40,7 +40,7 @@ public abstract class DatabaseService {
         return dataSource;
     }
 
-    public abstract String getSchema();
+    public abstract String getDatabaseName();
 
     public abstract List<ClassModel> listTableModel();
 

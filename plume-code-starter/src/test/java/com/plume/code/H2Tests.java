@@ -1,12 +1,12 @@
 package com.plume.code;
 
 import com.google.gson.Gson;
+import com.plume.code.factory.DatabaseServiceFactory;
 import com.plume.code.model.FieldModel;
 import com.plume.code.model.ClassModel;
 import com.plume.code.model.ConnectionModel;
 import com.plume.code.model.SettingModel;
 import com.plume.code.service.DatabaseService;
-import com.plume.code.service.impl.H2DatabaseService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +27,7 @@ public class H2Tests {
     @Before
     public void contextLoads() {
         connectionModel = ConnectionModel.builder()
+                .type("h2")
                 .driver("org.h2.Driver")
                 .url("jdbc:h2:~/plume_test")
                 .username("sa")
@@ -43,9 +44,9 @@ public class H2Tests {
 
     @Test
     public void test() {
-        DatabaseService databaseService = H2DatabaseService.instance(connectionModel, settingModel);
+        DatabaseService databaseService = DatabaseServiceFactory.getDatabaseService(connectionModel, settingModel);
 
-        String schema = databaseService.getSchema();
+        String schema = databaseService.getDatabaseName();
         System.out.println(schema);
 
         Gson gson = new Gson();

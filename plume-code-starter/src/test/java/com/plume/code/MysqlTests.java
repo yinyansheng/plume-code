@@ -47,7 +47,7 @@ public class MysqlTests {
 
         DatabaseService databaseService = MysqlDatabaseService.instance(connectionModel, settingModel);
 
-        String schema = databaseService.getSchema();
+        String schema = databaseService.getDatabaseName();
         System.out.println(schema);
 
         Gson gson = new Gson();

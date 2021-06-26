@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.sql.JDBCType;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +41,7 @@ public class MysqlDatabaseService extends DatabaseService {
     }
 
     @Override
-    public String getSchema() {
+    public String getDatabaseName() {
         String schema = getJdbcTemplate().queryForObject(SCHEME_SQL, String.class);
 
         if (StringUtils.isEmpty(schema)) {
@@ -54,20 +53,20 @@ public class MysqlDatabaseService extends DatabaseService {
 
     @Override
     public List<ClassModel> listTableModel() {
-        String schema = getSchema();
+        String schema = getDatabaseName();
         List<MysqlTableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(MysqlTableModel.class), schema);
         return tableModelList.stream().map(r -> mapToClassModel(r)).collect(Collectors.toList());
     }
 
     @Override
     public Set<String> getPrimaryKeySet(String tableName) {
-        String schema = getSchema();
+        String schema = getDatabaseName();
         return new HashSet<>(getJdbcTemplate().query(PRIMARY_KEY_SQL, new BeanPropertyRowMapper<>(String.class), schema, tableName));
     }
 
     @Override
     public List<FieldModel> listColumnModel(String tableName) {
-        String schema = getSchema();
+        String schema = getDatabaseName();
         Set<String> primaryKeySet = getPrimaryKeySet(tableName);
         List<MysqlColumnModel> columnModelList = getJdbcTemplate().query(COLUMN_SQL, new BeanPropertyRowMapper<>(MysqlColumnModel.class), schema, tableName);
         return columnModelList.stream().map(r -> mapToFieldModel(r, primaryKeySet)).collect(Collectors.toList());
