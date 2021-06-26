@@ -5,10 +5,15 @@ import com.plume.code.service.DatabaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
+import java.sql.JDBCType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static com.plume.code.common.helper.GeneratorHepler.removePrefix;
+import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
 
 /**
  * mysql database service implement
@@ -48,11 +53,10 @@ public class MysqlDatabaseService extends DatabaseService {
     }
 
     @Override
-    public List<BaseTableModel> listTableModel() {
+    public List<ClassModel> listTableModel() {
         String schema = getSchema();
         List<MysqlTableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(MysqlTableModel.class), schema);
-        tableModelList.forEach(r -> r.initialize(settingModel));
-        return new ArrayList<>(tableModelList);
+        return tableModelList.stream().map(r -> mapToClassModel(r)).collect(Collectors.toList());
     }
 
     @Override
@@ -62,12 +66,70 @@ public class MysqlDatabaseService extends DatabaseService {
     }
 
     @Override
-    public List<BaseColumnModel> listColumnModel(String tableName) {
+    public List<FieldModel> listColumnModel(String tableName) {
         String schema = getSchema();
         Set<String> primaryKeySet = getPrimaryKeySet(tableName);
         List<MysqlColumnModel> columnModelList = getJdbcTemplate().query(COLUMN_SQL, new BeanPropertyRowMapper<>(MysqlColumnModel.class), schema, tableName);
-        columnModelList.forEach(r -> r.initialize(settingModel,primaryKeySet));
-        return new ArrayList<>(columnModelList);
+        return columnModelList.stream().map(r -> mapToFieldModel(r, primaryKeySet)).collect(Collectors.toList());
     }
 
+    public ClassModel mapToClassModel(MysqlTableModel mysqlTableModel) {
+        ClassModel classModel = new ClassModel();
+
+        String name = mysqlTableModel.getTableName().toLowerCase();
+        if (StringUtils.isNotEmpty(settingModel.getTablePrefix()) && mysqlTableModel.getTableName().startsWith(settingModel.getTablePrefix())) {
+            name = removePrefix(mysqlTableModel.getTableName(), settingModel.getTablePrefix().split(","));
+        }
+        classModel.setName(removeUnderline(name));
+
+        classModel.setName(removeUnderline(classModel.getName()));
+        classModel.setComment(mysqlTableModel.getTableComment());
+        return classModel;
+    }
+
+    private FieldModel mapToFieldModel(MysqlColumnModel mysqlColumnModel, Set<String> primaryKeySet) {
+        FieldModel fieldModel = new FieldModel();
+
+        String name = mysqlColumnModel.getColumnName().toLowerCase();
+        if (StringUtils.isNotEmpty(settingModel.getColumnPrefix())) {
+            name = removePrefix(name, settingModel.getColumnPrefix().split(","));
+        }
+        fieldModel.setName(removeUnderline(name));
+
+        fieldModel.setComment(mysqlColumnModel.getColumnComment());
+
+        JDBCType jdbcType = getJdbcType(mysqlColumnModel.getDataType());
+        fieldModel.setType(getFieldType(jdbcType));
+
+        fieldModel.setValue(mysqlColumnModel.getColumnDefault());
+        fieldModel.setPk(primaryKeySet.contains(mysqlColumnModel.getColumnName()));
+        fieldModel.setMultiplePk(primaryKeySet.size() > 1);
+        fieldModel.setPkStrategy(0);
+        return fieldModel;
+    }
+
+    private JDBCType getJdbcType(String dataType) {
+        switch (dataType.toLowerCase()) {
+            case "bit":
+                return JDBCType.BIT;
+            case "tinyint":
+            case "smallint":
+            case "mediumint":
+            case "int":
+            case "integer":
+                return JDBCType.INTEGER;
+            case "bigint":
+                return JDBCType.BIGINT;
+            case "double":
+            case "decimal":
+                return JDBCType.DECIMAL;
+            case "date":
+            case "datetime":
+                return JDBCType.DATE;
+            case "timestamp":
+                return JDBCType.TIMESTAMP;
+            default:
+                return JDBCType.VARCHAR;
+        }
+    }
 }

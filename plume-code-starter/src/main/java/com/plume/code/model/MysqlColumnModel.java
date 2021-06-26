@@ -11,7 +11,7 @@ import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
 
 
 @Data
-public class MysqlColumnModel extends BaseColumnModel {
+public class MysqlColumnModel extends FieldModel {
     // 所属库
     private String tableSchema;
 
@@ -54,45 +54,4 @@ public class MysqlColumnModel extends BaseColumnModel {
 
     // 列权限集合，以逗号隔开
     private String privileges;
-
-    @Override
-    public void initialize(SettingModel settingModel, Set<String> primaryKeySet) {
-        if (StringUtils.isNotEmpty(settingModel.getColumnPrefix())) {
-            this.fieldName = removePrefix(columnName, settingModel.getColumnPrefix().split(","));
-        }
-        this.fieldName = removeUnderline(this.fieldName).toLowerCase();
-
-        this.fieldComment = columnComment;
-
-        JDBCType jdbcType = getJdbcType(dataType);
-        this.fieldType = getFieldType(jdbcType);
-        this.fieldValue = columnDefault;
-        this.isPK = primaryKeySet.contains(columnName);
-        this.isMultiplePk = primaryKeySet.size() > 1;
-    }
-
-    private JDBCType getJdbcType(String dataType) {
-        switch (dataType.toLowerCase()) {
-            case "bit":
-                return JDBCType.BIT;
-            case "tinyint":
-            case "smallint":
-            case "mediumint":
-            case "int":
-            case "integer":
-                return JDBCType.INTEGER;
-            case "bigint":
-                return JDBCType.BIGINT;
-            case "double":
-            case "decimal":
-                return JDBCType.DECIMAL;
-            case "date":
-            case "datetime":
-                return JDBCType.DATE;
-            case "timestamp":
-                return JDBCType.TIMESTAMP;
-            default:
-                return JDBCType.VARCHAR;
-        }
-    }
 }

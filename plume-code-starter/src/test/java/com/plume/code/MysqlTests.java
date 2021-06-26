@@ -52,10 +52,10 @@ public class MysqlTests {
 
         Gson gson = new Gson();
 
-        List<BaseTableModel> tableModels = databaseService.listTableModel();
+        List<ClassModel> tableModels = databaseService.listTableModel();
         System.out.println(gson.toJson(tableModels));
 
-        List<BaseColumnModel> columnModels = databaseService.listColumnModel("test_user");
+        List<FieldModel> columnModels = databaseService.listColumnModel("test_user");
         System.out.println(gson.toJson(columnModels));
 
     }

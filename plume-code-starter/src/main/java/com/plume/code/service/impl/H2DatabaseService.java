@@ -5,10 +5,14 @@ import com.plume.code.service.DatabaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
-import java.util.ArrayList;
+import java.sql.JDBCType;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static com.plume.code.common.helper.GeneratorHepler.removePrefix;
+import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
 
 /**
  * mysql database service implement
@@ -18,9 +22,15 @@ import java.util.Set;
 public class H2DatabaseService extends DatabaseService {
 
     private static final String SCHEME_SQL = "SELECT database()";
-    private static final String COLUMN_SQL = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_CATALOG=? AND TABLE_NAME=? ORDER BY ORDINAL_POSITION";
-    private static final String TABLE_SQL = "SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_TYPE='TABLE' AND TABLE_CATALOG=?";
-    private static final String PRIMARY_KEY_SQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.INDEXES where TABLE_CATALOG=? AND TABLE_NAME=? AND INDEX_TYPE_NAME='PRIMARY KEY'";
+
+    private static final String TABLE_SQL = "SELECT * FROM INFORMATION_SCHEMA.TABLES " +
+            "WHERE TABLE_TYPE='TABLE' AND TABLE_CATALOG=?";
+
+    private static final String COLUMN_SQL = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS " +
+            "WHERE TABLE_CATALOG=? AND TABLE_NAME=? ORDER BY ORDINAL_POSITION";
+
+    private static final String PRIMARY_KEY_SQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.INDEXES " +
+            "WHERE TABLE_CATALOG=? AND TABLE_NAME=? AND PRIMARY_KEY='TRUE'";
 
     private H2DatabaseService(ConnectionModel connectionModel, SettingModel settingModel) {
         super(connectionModel, settingModel);
@@ -42,11 +52,10 @@ public class H2DatabaseService extends DatabaseService {
     }
 
     @Override
-    public List<BaseTableModel> listTableModel() {
+    public List<ClassModel> listTableModel() {
         String schema = getSchema();
         List<H2TableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(H2TableModel.class), schema);
-        tableModelList.forEach(r -> r.initialize(settingModel));
-        return new ArrayList<>(tableModelList);
+        return tableModelList.stream().map(this::mapToClassModel).collect(Collectors.toList());
     }
 
     @Override
@@ -56,12 +65,45 @@ public class H2DatabaseService extends DatabaseService {
     }
 
     @Override
-    public List<BaseColumnModel> listColumnModel(String tableName) {
+    public List<FieldModel> listColumnModel(String tableName) {
         String schema = getSchema();
         Set<String> primaryKeySet = getPrimaryKeySet(tableName);
         List<H2ColumnModel> columnModelList = getJdbcTemplate().query(COLUMN_SQL, new BeanPropertyRowMapper<>(H2ColumnModel.class), schema, tableName);
-        columnModelList.forEach(r -> r.initialize(settingModel, primaryKeySet));
-        return new ArrayList<>(columnModelList);
+        return columnModelList.stream().map(r -> mapToFieldModel(r, primaryKeySet)).collect(Collectors.toList());
+    }
+
+    public ClassModel mapToClassModel(H2TableModel h2TableModel) {
+        ClassModel classModel = new ClassModel();
+
+        String name = h2TableModel.getTableName().toLowerCase();
+        if (StringUtils.isNotEmpty(settingModel.getTablePrefix()) && h2TableModel.getTableName().startsWith(settingModel.getTablePrefix())) {
+            name = removePrefix(h2TableModel.getTableName(), settingModel.getTablePrefix().split(","));
+        }
+        classModel.setName(removeUnderline(name));
+
+        classModel.setComment(h2TableModel.getRemarks());
+        return classModel;
+    }
+
+    private FieldModel mapToFieldModel(H2ColumnModel h2ColumnModel, Set<String> primaryKeySet) {
+        FieldModel fieldModel = new FieldModel();
+
+        String name = h2ColumnModel.getColumnName().toLowerCase();
+        if (StringUtils.isNotEmpty(settingModel.getColumnPrefix())) {
+            name = removePrefix(name, settingModel.getColumnPrefix().split(","));
+        }
+        fieldModel.setName(removeUnderline(name));
+
+        fieldModel.setComment(h2ColumnModel.getRemarks());
+
+        JDBCType jdbcType = JDBCType.valueOf(Integer.parseInt(h2ColumnModel.getDataType()));
+        fieldModel.setType(getFieldType(jdbcType));
+
+        fieldModel.setValue(h2ColumnModel.getColumnDefault());
+        fieldModel.setPk(primaryKeySet.contains(h2ColumnModel.getColumnName()));
+        fieldModel.setMultiplePk(primaryKeySet.size() > 1);
+        fieldModel.setPkStrategy(0);
+        return fieldModel;
     }
 
 }

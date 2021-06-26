@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @Builder
 public class GeneratorContext {
-    private BaseTableModel tableModel;
-    private List<BaseColumnModel> columnModelList;
+    private ClassModel classModel;
+    private List<FieldModel> fieldModelList;
     private SettingModel settingModel;
 }
