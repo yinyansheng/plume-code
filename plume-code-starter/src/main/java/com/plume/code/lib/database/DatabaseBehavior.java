@@ -1,17 +1,21 @@
 package com.plume.code.lib.database;
 
+import com.plume.code.lib.database.model.ContextModel;
 import com.plume.code.lib.database.model.FieldModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
+import com.plume.code.lib.generator.GeneratorBehavior;
+import com.plume.code.lib.generator.GeneratorBehaviorFactory;
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
 import java.sql.JDBCType;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * database service
@@ -22,6 +26,9 @@ public abstract class DatabaseBehavior {
     protected ConnectionModel connectionModel;
 
     protected SettingModel settingModel;
+
+    @Autowired
+    private GeneratorBehaviorFactory generatorBehaviorFactory;
 
     void initialize(ConnectionModel connectionModel, SettingModel settingModel) {
         if (null == connectionModel) {
@@ -56,6 +63,48 @@ public abstract class DatabaseBehavior {
     public abstract Set<String> getPrimaryKeySet(String tableName);
 
     public abstract List<FieldModel> listFieldModel(String tableName);
+
+    public String generate() {
+        List<GeneratorBehavior> generatorBehaviorList = getGeneratorBehaviorList();
+        generatorBehaviorList.forEach(GeneratorBehavior::generate);
+        return "";
+    }
+
+    public List<GeneratorBehavior> getGeneratorBehaviorList() {
+        List<ContextModel> contextModelList = getContextModelList();
+
+        return contextModelList.stream().map(contextModel ->
+                generatorBehaviorFactory.getGeneratorBehaviorList(contextModel)
+        ).flatMap(Collection::stream).collect(Collectors.toList());
+    }
+
+    public List<ContextModel> getContextModelList() {
+        if (CollectionUtils.isEmpty(settingModel.getTableNameSet())) {
+            return Collections.emptyList();
+        }
+
+        List<ClassModel> classModels = listTableModel();
+        List<ContextModel> contextModels = new ArrayList<>();
+
+        for (ClassModel classModel : classModels) {
+            if (!settingModel.getTableNameSet().contains(classModel.getTableName())) {
+                continue;
+            }
+
+            List<FieldModel> fieldModels = listFieldModel(classModel.getTableName());
+
+            ContextModel contextModel = ContextModel.builder()
+                    .connectionModel(connectionModel)
+                    .settingModel(settingModel)
+                    .classModel(classModel)
+                    .fieldModelList(fieldModels)
+                    .build();
+
+            contextModels.add(contextModel);
+        }
+
+        return contextModels;
+    }
 
     protected String getFieldType(JDBCType jdbcType) {
         switch (jdbcType) {

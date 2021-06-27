@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ClassModel {
-    protected String name;
-    protected String comment;
+    private String tableName;
+    private String name;
+    private String comment;
 }

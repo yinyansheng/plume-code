@@ -1,6 +1,6 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.common.context.GeneratorContext;
+import com.plume.code.lib.database.model.ContextModel;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.FieldModel;
@@ -31,9 +31,9 @@ public abstract class GeneratorBehavior {
     protected ClassModel classModel;
     protected List<FieldModel> fieldModelList;
 
-    void initialize(GeneratorContext generatorContext) {
-        SettingModel settingModel = generatorContext.getSettingModel();
-        if (null == generatorContext.getSettingModel()) {
+    void initialize(ContextModel contextModel) {
+        SettingModel settingModel = contextModel.getSettingModel();
+        if (null == contextModel.getSettingModel()) {
             throw new IllegalArgumentException("settingModel must be not null");
         }
 
@@ -41,9 +41,9 @@ public abstract class GeneratorBehavior {
             throw new IllegalArgumentException("package name must be not empty");
         }
 
-        this.settingModel = generatorContext.getSettingModel();
-        this.classModel = generatorContext.getClassModel();
-        this.fieldModelList = generatorContext.getFieldModelList();
+        this.settingModel = contextModel.getSettingModel();
+        this.classModel = contextModel.getClassModel();
+        this.fieldModelList = contextModel.getFieldModelList();
     }
 
     public static final String BASE_FILE_PATH = "src/main/java/";
@@ -126,7 +126,7 @@ public abstract class GeneratorBehavior {
         velocityContext.put("author", settingModel.getAuthor());
         velocityContext.put("comment", classModel.getComment());
         velocityContext.put("lombok", settingModel.getLombokState());
-        
+
         return velocityContext;
     }
 }

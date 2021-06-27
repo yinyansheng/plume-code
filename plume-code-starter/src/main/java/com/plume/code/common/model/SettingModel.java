@@ -3,6 +3,10 @@ package com.plume.code.common.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Data
 @Builder
 public class SettingModel {
@@ -15,6 +19,8 @@ public class SettingModel {
     private String projectName;
 
     private String basePackageName;
+
+    private Set<String> tableNameSet;
 
     private String author;
 
@@ -31,12 +37,14 @@ public class SettingModel {
     private Boolean lombokState;
 
     /**
+     * 0:none
      * 1:d2admin
      * 2:iview
      */
     private Integer portalMode;
 
     /**
+     * 0:none
      * 1：api
      * 2:admin
      * 3:api & admin
@@ -44,9 +52,17 @@ public class SettingModel {
     private Integer controllerMode;
 
     /**
+     * 0:none
+     * 1：service
+     */
+    private Integer serviceMode;
+
+    /**
+     * 0:none
      * 1:mybatis
      * 2:mybatis-plus
      * 3:jpa
+     * 4:hibernate
      */
     private Integer repositoryMode;
 
