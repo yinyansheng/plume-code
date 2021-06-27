@@ -1,9 +1,10 @@
-package com.plume.code.service.impl;
+package com.plume.code.lib.database;
 
-import com.plume.code.model.*;
-import com.plume.code.service.DatabaseService;
+import com.plume.code.lib.database.model.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.JDBCType;
 import java.util.HashSet;
@@ -19,7 +20,9 @@ import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
  *
  * @author yinyansheng
  */
-public class H2DatabaseService extends DatabaseService {
+@Component("h2DatabaseBehavior")
+@Scope("prototype")
+class H2DatabaseBehavior extends DatabaseBehavior {
 
     private static final String SCHEME_SQL = "SELECT database()";
 
@@ -31,14 +34,6 @@ public class H2DatabaseService extends DatabaseService {
 
     private static final String PRIMARY_KEY_SQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.INDEXES " +
             "WHERE TABLE_CATALOG=? AND TABLE_NAME=? AND PRIMARY_KEY='TRUE'";
-
-    private H2DatabaseService(ConnectionModel connectionModel, SettingModel settingModel) {
-        super(connectionModel, settingModel);
-    }
-
-    public static H2DatabaseService instance(ConnectionModel connectionModel, SettingModel settingModel) {
-        return new H2DatabaseService(connectionModel, settingModel);
-    }
 
     @Override
     public String getDatabaseName() {

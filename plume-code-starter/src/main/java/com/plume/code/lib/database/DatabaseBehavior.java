@@ -1,9 +1,9 @@
-package com.plume.code.service;
+package com.plume.code.lib.database;
 
-import com.plume.code.model.FieldModel;
-import com.plume.code.model.ClassModel;
-import com.plume.code.model.ConnectionModel;
-import com.plume.code.model.SettingModel;
+import com.plume.code.lib.database.model.FieldModel;
+import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.common.model.ConnectionModel;
+import com.plume.code.common.model.SettingModel;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -17,21 +17,21 @@ import java.util.Set;
  *
  * @author yinyansheng
  */
-public abstract class DatabaseService {
+public abstract class DatabaseBehavior {
     protected ConnectionModel connectionModel;
 
     protected SettingModel settingModel;
 
-    protected DatabaseService(ConnectionModel connectionModel, SettingModel settingModel) {
+    public void initialize(ConnectionModel connectionModel, SettingModel settingModel) {
         this.connectionModel = connectionModel;
         this.settingModel = settingModel;
     }
-    
+
     public JdbcTemplate getJdbcTemplate() {
         return new JdbcTemplate(getDataSource());
     }
 
-    public DataSource getDataSource() {
+    private DataSource getDataSource() {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName(connectionModel.getDriver());
         dataSource.setJdbcUrl(connectionModel.getUrl());

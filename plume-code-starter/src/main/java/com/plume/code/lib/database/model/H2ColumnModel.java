@@ -1,4 +1,4 @@
-package com.plume.code.model;
+package com.plume.code.lib.database.model;
 
 import lombok.Data;
 

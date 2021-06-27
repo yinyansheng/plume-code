@@ -1,4 +1,4 @@
-package com.plume.code.service;
+package com.plume.code.lib.generator;
 
 import com.plume.code.common.context.GeneratorContext;
 
@@ -8,13 +8,13 @@ import java.util.Map;
 /**
  * generator base service
  */
-public abstract class GeneratorService {
+public abstract class GeneratorBehavior {
     protected GeneratorContext generatorContext;
 
-    protected GeneratorService(GeneratorContext generatorContext) {
+    public void initialize(GeneratorContext generatorContext) {
         this.generatorContext = generatorContext;
     }
-    
+
     protected abstract String getPackageName();
 
     protected String getPath() {

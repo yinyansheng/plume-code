@@ -1,12 +1,16 @@
 package com.plume.code;
 
 import com.google.gson.Gson;
-import com.plume.code.model.*;
-import com.plume.code.service.DatabaseService;
-import com.plume.code.service.impl.MysqlDatabaseService;
+import com.plume.code.lib.database.DatabaseBehaviorFactory;
+import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.common.model.ConnectionModel;
+import com.plume.code.lib.database.model.FieldModel;
+import com.plume.code.common.model.*;
+import com.plume.code.lib.database.DatabaseBehavior;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -36,26 +40,30 @@ public class MysqlTests {
         System.out.println(BIT.getName());
     }
 
+    @Autowired
+    private DatabaseBehaviorFactory databaseBehaviorFactory;
+
     @Test
     public void test() {
-        SettingModel settingModel = SettingModel.builder().author("yinyansheng")
+        SettingModel settingModel = SettingModel.builder()
+                .author("yinyansheng")
                 .columnPrefix("s_")
                 .tablePrefix("test_")
                 .packageName("com.plume.code")
                 .projectName("plume-code")
                 .build();
 
-        DatabaseService databaseService = MysqlDatabaseService.instance(connectionModel, settingModel);
+        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
 
-        String schema = databaseService.getDatabaseName();
+        String schema = databaseBehavior.getDatabaseName();
         System.out.println(schema);
 
         Gson gson = new Gson();
 
-        List<ClassModel> tableModels = databaseService.listTableModel();
+        List<ClassModel> tableModels = databaseBehavior.listTableModel();
         System.out.println(gson.toJson(tableModels));
 
-        List<FieldModel> columnModels = databaseService.listColumnModel("test_user");
+        List<FieldModel> columnModels = databaseBehavior.listColumnModel("test_user");
         System.out.println(gson.toJson(columnModels));
 
     }

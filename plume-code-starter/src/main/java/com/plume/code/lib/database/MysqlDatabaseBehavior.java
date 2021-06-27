@@ -1,9 +1,14 @@
-package com.plume.code.service.impl;
+package com.plume.code.lib.database;
 
-import com.plume.code.model.*;
-import com.plume.code.service.DatabaseService;
+import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.lib.database.model.FieldModel;
+import com.plume.code.lib.database.model.MysqlColumnModel;
+import com.plume.code.lib.database.model.MysqlTableModel;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.JDBCType;
 import java.util.HashSet;
@@ -19,7 +24,9 @@ import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
  *
  * @author yinyansheng
  */
-public class MysqlDatabaseService extends DatabaseService {
+@Component("mysqlDatabaseBehavior")
+@Scope(value = "prototype")
+class MysqlDatabaseBehavior extends DatabaseBehavior {
 
     private static final String SCHEME_SQL = "SELECT database()";
     private static final String COLUMN_SQL = "SELECT DISTINCT * FROM information_schema.COLUMNS WHERE table_schema = ? AND table_name = ? ORDER BY ORDINAL_POSITION";
@@ -31,14 +38,6 @@ public class MysqlDatabaseService extends DatabaseService {
             "WHERE t.constraint_type='PRIMARY KEY'\n" +
             "AND t.table_schema=?\n" +
             "AND t.table_name=?";
-
-    private MysqlDatabaseService(ConnectionModel connectionModel, SettingModel settingModel) {
-        super(connectionModel, settingModel);
-    }
-
-    public static MysqlDatabaseService instance(ConnectionModel connectionModel, SettingModel settingModel) {
-        return new MysqlDatabaseService(connectionModel, settingModel);
-    }
 
     @Override
     public String getDatabaseName() {

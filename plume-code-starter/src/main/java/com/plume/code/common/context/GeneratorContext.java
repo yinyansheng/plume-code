@@ -1,8 +1,8 @@
 package com.plume.code.common.context;
 
-import com.plume.code.model.ClassModel;
-import com.plume.code.model.FieldModel;
-import com.plume.code.model.SettingModel;
+import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.lib.database.model.FieldModel;
+import com.plume.code.common.model.SettingModel;
 import lombok.Builder;
 import lombok.Data;
 

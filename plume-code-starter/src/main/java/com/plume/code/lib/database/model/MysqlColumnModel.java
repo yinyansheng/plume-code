@@ -1,13 +1,6 @@
-package com.plume.code.model;
+package com.plume.code.lib.database.model;
 
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
-
-import java.sql.JDBCType;
-import java.util.Set;
-
-import static com.plume.code.common.helper.GeneratorHepler.removePrefix;
-import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
 
 
 @Data

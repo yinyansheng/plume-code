@@ -1,4 +1,4 @@
-package com.plume.code.model;
+package com.plume.code.common.model;
 
 import lombok.Builder;
 import lombok.Data;
