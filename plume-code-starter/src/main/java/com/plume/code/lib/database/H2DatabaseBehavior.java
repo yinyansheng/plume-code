@@ -12,15 +12,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.plume.code.common.helper.GeneratorHepler.removePrefix;
-import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
+import static com.plume.code.common.helper.GeneratorHelper.removePrefix;
+import static com.plume.code.common.helper.GeneratorHelper.removeUnderline;
 
 /**
  * mysql database service implement
  *
  * @author yinyansheng
  */
-@Component("h2DatabaseBehavior")
+@Component
 @Scope("prototype")
 class H2DatabaseBehavior extends DatabaseBehavior {
 
@@ -60,7 +60,7 @@ class H2DatabaseBehavior extends DatabaseBehavior {
     }
 
     @Override
-    public List<FieldModel> listColumnModel(String tableName) {
+    public List<FieldModel> listFieldModel(String tableName) {
         String schema = getDatabaseName();
         Set<String> primaryKeySet = getPrimaryKeySet(tableName);
         List<H2ColumnModel> columnModelList = getJdbcTemplate().query(COLUMN_SQL, new BeanPropertyRowMapper<>(H2ColumnModel.class), schema, tableName);

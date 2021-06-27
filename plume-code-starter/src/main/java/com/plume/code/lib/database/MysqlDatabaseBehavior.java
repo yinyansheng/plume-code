@@ -6,7 +6,6 @@ import com.plume.code.lib.database.model.MysqlColumnModel;
 import com.plume.code.lib.database.model.MysqlTableModel;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +15,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.plume.code.common.helper.GeneratorHepler.removePrefix;
-import static com.plume.code.common.helper.GeneratorHepler.removeUnderline;
+import static com.plume.code.common.helper.GeneratorHelper.removePrefix;
+import static com.plume.code.common.helper.GeneratorHelper.removeUnderline;
 
 /**
  * mysql database service implement
  *
  * @author yinyansheng
  */
-@Component("mysqlDatabaseBehavior")
+@Component
 @Scope(value = "prototype")
 class MysqlDatabaseBehavior extends DatabaseBehavior {
 
@@ -64,7 +63,7 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
     }
 
     @Override
-    public List<FieldModel> listColumnModel(String tableName) {
+    public List<FieldModel> listFieldModel(String tableName) {
         String schema = getDatabaseName();
         Set<String> primaryKeySet = getPrimaryKeySet(tableName);
         List<MysqlColumnModel> columnModelList = getJdbcTemplate().query(COLUMN_SQL, new BeanPropertyRowMapper<>(MysqlColumnModel.class), schema, tableName);

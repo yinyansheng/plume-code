@@ -49,7 +49,7 @@ public class MysqlTests {
                 .author("yinyansheng")
                 .columnPrefix("s_")
                 .tablePrefix("test_")
-                .packageName("com.plume.code")
+                .basePackageName("com.plume.code")
                 .projectName("plume-code")
                 .build();
 
@@ -63,7 +63,7 @@ public class MysqlTests {
         List<ClassModel> tableModels = databaseBehavior.listTableModel();
         System.out.println(gson.toJson(tableModels));
 
-        List<FieldModel> columnModels = databaseBehavior.listColumnModel("test_user");
+        List<FieldModel> columnModels = databaseBehavior.listFieldModel("test_user");
         System.out.println(gson.toJson(columnModels));
 
     }

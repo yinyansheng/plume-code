@@ -14,7 +14,7 @@ public class SettingModel {
 
     private String projectName;
 
-    private String packageName;
+    private String basePackageName;
 
     private String author;
 

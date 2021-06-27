@@ -2,7 +2,7 @@ package com.plume.code.common.helper;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class GeneratorHepler {
+public class GeneratorHelper {
     public static String removePrefix(String value, String... prefix) {
         if (StringUtils.isEmpty(value)) {
             return "";

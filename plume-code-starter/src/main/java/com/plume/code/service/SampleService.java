@@ -1,4 +1,9 @@
 package com.plume.code.service;
 
-public class SampleService {
+/**
+ * @description: 类描述
+ * @author: niaonao
+ * @date: DATE
+ **/
+public interface SampleService {
 }
