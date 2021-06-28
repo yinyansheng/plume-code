@@ -32,18 +32,17 @@ public abstract class GeneratorBehavior {
     protected List<FieldModel> fieldModelList;
 
     void initialize(ContextModel contextModel) {
-        SettingModel settingModel = contextModel.getSettingModel();
-        if (null == contextModel.getSettingModel()) {
+        this.settingModel = contextModel.getSettingModel();
+        this.classModel = contextModel.getClassModel();
+        this.fieldModelList = contextModel.getFieldModelList();
+
+        if (null == settingModel) {
             throw new IllegalArgumentException("settingModel must be not null");
         }
 
         if (StringUtils.isEmpty(settingModel.getBasePackageName())) {
             throw new IllegalArgumentException("package name must be not empty");
         }
-
-        this.settingModel = contextModel.getSettingModel();
-        this.classModel = contextModel.getClassModel();
-        this.fieldModelList = contextModel.getFieldModelList();
     }
 
     public static final String BASE_FILE_PATH = "src/main/java/";

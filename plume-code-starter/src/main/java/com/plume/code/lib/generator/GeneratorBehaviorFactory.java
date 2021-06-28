@@ -1,14 +1,13 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.common.constrant.SettingConstant;
-import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ContextModel;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -22,7 +21,7 @@ public class GeneratorBehaviorFactory {
     }
 
     public List<GeneratorBehavior> getGeneratorBehaviorList(ContextModel contextModel) {
-        return getTypeSet(contextModel.getSettingModel())
+        return GeneratorTypeProcesser.getTypeSet(contextModel.getSettingModel())
                 .stream()
                 .map(type -> getGeneratorBehavior(type, contextModel)).collect(Collectors.toList());
     }
@@ -37,17 +36,5 @@ public class GeneratorBehaviorFactory {
         generatorBehavior.initialize(contextModel);
         return generatorBehavior;
     }
-
-    public Set<String> getTypeSet(SettingModel settingModel) {
-        Set<String> set = new HashSet<>();
-        
-        if (settingModel.getServiceMode().equals(SettingConstant.ServiceMode.SERVICE)) {
-            set.add("service");
-            set.add("serviceImpl");
-        }
-
-        return set;
-    }
-
 
 }
