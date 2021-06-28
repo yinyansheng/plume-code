@@ -9,6 +9,7 @@ import com.plume.code.lib.database.DatabaseBehaviorFactory;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.ContextModel;
 import com.plume.code.lib.database.model.FieldModel;
+import com.plume.code.lib.database.model.ResultModel;
 import com.plume.code.lib.generator.GeneratorBehavior;
 import com.plume.code.lib.generator.GeneratorBehaviorFactory;
 import org.junit.Before;
@@ -63,7 +64,8 @@ public class MysqlGeneratorTests {
     @Test
     public void test4() {
         DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
-        databaseBehavior.generate();
+        ResultModel resultModel = databaseBehavior.generate();
+        System.out.println(resultModel);
     }
 
     @Test
