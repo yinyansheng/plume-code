@@ -17,6 +17,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.nio.file.NotDirectoryException;
 import java.sql.JDBCType;
@@ -84,7 +85,7 @@ public abstract class DatabaseBehavior {
         String directoryPath = resource.getPath().concat("download/").concat(settingModel.getBatchNo());
 
         if (!(new File(directoryPath).exists())) {
-            throw new NotDirectoryException(directoryPath);
+            throw new FileNotFoundException(directoryPath);
         }
 
         File zip = ZipUtil.zip(directoryPath);

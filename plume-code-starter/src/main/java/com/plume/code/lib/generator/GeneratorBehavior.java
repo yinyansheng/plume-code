@@ -14,6 +14,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -58,6 +59,7 @@ public abstract class GeneratorBehavior {
      */
     protected abstract String getFileName();
 
+    @SneakyThrows
     protected String getFilePath() {
         URL resource = this.getClass().getClassLoader().getResource("");
 
@@ -71,7 +73,7 @@ public abstract class GeneratorBehavior {
         if (!downloadPathFile.exists()) {
             boolean mkdirs = downloadPathFile.mkdirs();
             if (!mkdirs) {
-                throw new RuntimeException("create download directory failed");
+                throw new FileNotFoundException(downloadPath);
             }
         }
 
