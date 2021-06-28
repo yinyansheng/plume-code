@@ -1,12 +1,13 @@
 package com.plume.code;
 
 import com.google.gson.Gson;
-import com.plume.code.lib.database.model.ContextModel;
+import com.plume.code.common.constrant.SettingConstant;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.DatabaseBehavior;
 import com.plume.code.lib.database.DatabaseBehaviorFactory;
 import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.lib.database.model.ContextModel;
 import com.plume.code.lib.database.model.FieldModel;
 import com.plume.code.lib.generator.GeneratorBehavior;
 import com.plume.code.lib.generator.GeneratorBehaviorFactory;
@@ -24,7 +25,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PlumeCodeApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class GeneratorTests {
+public class MysqlGeneratorTests {
 
     private ConnectionModel connectionModel;
 
@@ -33,22 +34,22 @@ public class GeneratorTests {
     @Before
     public void contextLoads() {
         connectionModel = ConnectionModel.builder()
-                .type("h2")
-                .driver("org.h2.Driver")
-                .url("jdbc:h2:~/plume_test")
-                .username("sa")
-                .password("")
+                .type("mysql")
+                .driver("com.mysql.cj.jdbc.Driver")
+                .url("jdbc:mysql://10.102.126.18:3306/yugo_test?characterEncoding=utf-8")
+                .username("root")
+                .password("nice!123")
                 .build();
 
         settingModel = SettingModel.builder()
                 .batchNo(String.valueOf(System.currentTimeMillis()))
                 .author("yinyansheng")
                 .columnPrefix("s_")
-                .tablePrefix("plume_")
+                .tablePrefix("test_")
                 .basePackageName("com.plume.code")
                 .projectName("plume-code")
-                .tableNameSet(new HashSet<>(Arrays.asList("SMART_USER")))
-                .serviceMode(1)
+                .tableNameSet(new HashSet<>(Arrays.asList("test_user")))
+                .serviceMode(SettingConstant.ServiceMode.SERVICE)
                 .lombokState(true)
                 .build();
     }

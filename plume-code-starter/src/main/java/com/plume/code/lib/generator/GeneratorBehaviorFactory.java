@@ -1,5 +1,6 @@
 package com.plume.code.lib.generator;
 
+import com.plume.code.common.constrant.SettingConstant;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ContextModel;
 import org.apache.commons.lang3.NotImplementedException;
@@ -39,10 +40,12 @@ public class GeneratorBehaviorFactory {
 
     public Set<String> getTypeSet(SettingModel settingModel) {
         Set<String> set = new HashSet<>();
-        if (settingModel.getServiceMode() == 1) {
+        
+        if (settingModel.getServiceMode().equals(SettingConstant.ServiceMode.SERVICE)) {
             set.add("service");
             set.add("serviceImpl");
         }
+
         return set;
     }
 

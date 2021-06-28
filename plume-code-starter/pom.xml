@@ -88,6 +88,14 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-core -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.7.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
