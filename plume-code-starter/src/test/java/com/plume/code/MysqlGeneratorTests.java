@@ -49,7 +49,7 @@ public class MysqlGeneratorTests {
                 .tablePrefix("test_")
                 .basePackageName("com.plume.code")
                 .projectName("plume-code")
-                .tableNameSet(new HashSet<>(Arrays.asList("test_user")))
+                .tableNameSet(new HashSet<>(Arrays.asList("test_user", "test_student")))
                 .serviceMode(SettingConstant.ServiceMode.SERVICE)
                 .lombokState(true)
                 .build();
