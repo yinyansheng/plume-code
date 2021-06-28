@@ -15,6 +15,10 @@ public class GeneratorTypeProcesser {
             typeSet.add(GeneratorConstant.Type.service);
             typeSet.add(GeneratorConstant.Type.serviceImpl);
         }
+        
+        if (settingModel.getRepositoryMode().equals(SettingConstant.RepositoryMode.MYBATIS_PLUS)) {
+            typeSet.add(GeneratorConstant.Type.mybatisPlusEnt);
+        }
 
         return typeSet;
     }

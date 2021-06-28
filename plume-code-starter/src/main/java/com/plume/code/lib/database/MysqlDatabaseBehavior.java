@@ -92,6 +92,7 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
             name = removePrefix(name, settingModel.getColumnPrefix().split(","));
         }
         fieldModel.setName(removeUnderline(name));
+        fieldModel.setColumnName(mysqlColumnModel.getColumnName());
 
         fieldModel.setComment(mysqlColumnModel.getColumnComment());
 

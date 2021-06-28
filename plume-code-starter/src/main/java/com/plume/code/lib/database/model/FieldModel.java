@@ -7,6 +7,7 @@ import lombok.Data;
  */
 @Data
 public class FieldModel {
+    private String columnName;
     private String name;
     private String type;
     private Object value;

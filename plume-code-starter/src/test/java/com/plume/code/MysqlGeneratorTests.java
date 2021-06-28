@@ -53,6 +53,7 @@ public class MysqlGeneratorTests {
                 .projectName("plume-code")
                 .tableNameSet(new HashSet<>(Arrays.asList("test_user", "test_student")))
                 .serviceMode(SettingConstant.ServiceMode.SERVICE)
+                .repositoryMode(SettingConstant.RepositoryMode.MYBATIS_PLUS)
                 .lombokState(true)
                 .build();
     }

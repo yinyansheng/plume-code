@@ -10,4 +10,12 @@ public class SettingConstant {
         Integer NONE = 0;
         Integer SERVICE = 1;
     }
+
+    public interface RepositoryMode {
+        Integer NONE = 0;
+        Integer MYBATIS = 1;
+        Integer MYBATIS_PLUS = 2;
+        Integer JPA = 3;
+        Integer HIBERNATE = 4;
+    }
 }

@@ -88,6 +88,7 @@ class H2DatabaseBehavior extends DatabaseBehavior {
         if (StringUtils.isNotEmpty(settingModel.getColumnPrefix())) {
             name = removePrefix(name, settingModel.getColumnPrefix().split(","));
         }
+        fieldModel.setColumnName(h2ColumnModel.getColumnName());
         fieldModel.setName(removeUnderline(name));
 
         fieldModel.setComment(h2ColumnModel.getRemarks());

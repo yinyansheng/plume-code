@@ -124,9 +124,11 @@ public abstract class GeneratorBehavior {
         velocityContext.put("packageName", getPackageName());
         velocityContext.put("className", classModel.getName());
         velocityContext.put("ClassName", upperFirstCase(classModel.getName()));
+        velocityContext.put("tableName", classModel.getTableName());
         velocityContext.put("author", settingModel.getAuthor());
         velocityContext.put("comment", classModel.getComment());
         velocityContext.put("lombok", settingModel.getLombokState());
+        velocityContext.put("fieldModelList", fieldModelList);
 
         return velocityContext;
     }

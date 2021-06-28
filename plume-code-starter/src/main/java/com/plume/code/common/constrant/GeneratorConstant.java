@@ -5,5 +5,6 @@ public class GeneratorConstant {
     public interface Type {
         String service = "service";
         String serviceImpl = "serviceImpl";
+        String mybatisPlusEnt = "mybatisPlusEnt";
     }
 }
