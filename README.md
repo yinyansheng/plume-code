@@ -19,4 +19,8 @@
 
 - 支持shell、spring boot cli运行、plume-code-cli
 
+## 0.0.4 version
+
+- tbd
+
 

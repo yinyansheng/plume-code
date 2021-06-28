@@ -12,6 +12,7 @@ import com.plume.code.lib.database.model.FieldModel;
 import com.plume.code.lib.database.model.ResultModel;
 import com.plume.code.lib.generator.GeneratorBehavior;
 import com.plume.code.lib.generator.GeneratorBehaviorFactory;
+import com.plume.code.service.CommonService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -61,12 +63,25 @@ public class MysqlGeneratorTests {
     @Autowired
     private GeneratorBehaviorFactory generatorBehaviorFactory;
 
+    @Autowired
+    private CommonService commonService;
+
     @Test
     public void test4() {
         DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
         ResultModel resultModel = databaseBehavior.generate();
         System.out.println(resultModel);
     }
+
+    @Test
+    public void test5() {
+        System.out.println(new Date());
+        boolean connect = commonService.testConnection(connectionModel);
+        System.out.println(new Date());
+        boolean connect2 = commonService.testConnection(connectionModel);
+        System.out.println(new Date());
+    }
+
 
     @Test
     public void test3() {
