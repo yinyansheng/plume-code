@@ -1,5 +1,6 @@
 package com.plume.code.lib.database;
 
+import com.plume.code.common.constrant.DatabaseConstant;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.FieldModel;
 import com.plume.code.lib.database.model.MysqlColumnModel;
@@ -100,7 +101,13 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
         fieldModel.setValue(mysqlColumnModel.getColumnDefault());
         fieldModel.setPk(primaryKeySet.contains(mysqlColumnModel.getColumnName()));
         fieldModel.setMultiplePk(primaryKeySet.size() > 1);
-        fieldModel.setPkStrategy(0);
+
+        if (mysqlColumnModel.getExtra().contains("auto_increment")) {
+            fieldModel.setPkStrategy(DatabaseConstant.PkStrategy.AUTO_INCREMENT);
+        } else {
+            fieldModel.setPkStrategy(DatabaseConstant.PkStrategy.NONE);
+        }
+
         return fieldModel;
     }
 

@@ -1,5 +1,6 @@
 package com.plume.code.lib.database;
 
+import com.plume.code.common.constrant.DatabaseConstant;
 import com.plume.code.lib.database.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
@@ -97,7 +98,7 @@ class H2DatabaseBehavior extends DatabaseBehavior {
         fieldModel.setValue(h2ColumnModel.getColumnDefault());
         fieldModel.setPk(primaryKeySet.contains(h2ColumnModel.getColumnName()));
         fieldModel.setMultiplePk(primaryKeySet.size() > 1);
-        fieldModel.setPkStrategy(0);
+        fieldModel.setPkStrategy(DatabaseConstant.PkStrategy.NONE);
         return fieldModel;
     }
 

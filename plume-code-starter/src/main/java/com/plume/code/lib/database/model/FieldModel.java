@@ -15,7 +15,7 @@ public class FieldModel {
     private boolean multiplePk;
 
     /**
-     * 0：null
+     * 0：NONE
      * 1:AUTO_INCREMENT
      * 2:UUID
      */
