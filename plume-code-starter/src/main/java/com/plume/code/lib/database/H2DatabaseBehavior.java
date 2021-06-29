@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.plume.code.common.helper.GeneratorHelper.removePrefix;
-import static com.plume.code.common.helper.GeneratorHelper.removeUnderline;
+import static com.plume.code.common.helper.GeneratorHelper.*;
 
 /**
  * mysql database service implement
@@ -98,6 +97,7 @@ class H2DatabaseBehavior extends DatabaseBehavior {
         }
         fieldModel.setColumnName(h2ColumnModel.getColumnName());
         fieldModel.setName(removeUnderline(name));
+        fieldModel.setUpperCaseName(upperFirstCase(fieldModel.getName()));
 
         fieldModel.setComment(h2ColumnModel.getRemarks());
 

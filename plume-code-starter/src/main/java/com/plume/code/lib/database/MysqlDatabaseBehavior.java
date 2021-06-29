@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.plume.code.common.helper.GeneratorHelper.removePrefix;
-import static com.plume.code.common.helper.GeneratorHelper.removeUnderline;
+import static com.plume.code.common.helper.GeneratorHelper.*;
 
 /**
  * mysql database service implement
@@ -68,7 +67,7 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
     @Override
     public Set<String> getPrimaryKeySet(String tableName) {
         String schema = getDatabaseName();
-        return new HashSet<>(getJdbcTemplate().query(PRIMARY_KEY_SQL, new BeanPropertyRowMapper<>(String.class), schema, tableName));
+        return new HashSet<>(getJdbcTemplate().queryForList(PRIMARY_KEY_SQL, String.class, schema, tableName));
     }
 
     @Override
@@ -100,6 +99,7 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
             name = removePrefix(name, settingModel.getColumnPrefix().split(","));
         }
         fieldModel.setName(removeUnderline(name));
+        fieldModel.setUpperCaseName(upperFirstCase(fieldModel.getName()));
         fieldModel.setColumnName(mysqlColumnModel.getColumnName());
 
         fieldModel.setComment(mysqlColumnModel.getColumnComment());

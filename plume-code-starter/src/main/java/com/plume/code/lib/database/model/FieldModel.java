@@ -10,6 +10,7 @@ public class FieldModel {
     private String columnName;
     private String name;
     private String type;
+    private String upperCaseName;
     private Object value;
     private String comment;
     private boolean pk;
@@ -21,4 +22,6 @@ public class FieldModel {
      * 2:UUID
      */
     private Integer pkStrategy;
+
+
 }
