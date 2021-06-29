@@ -7,6 +7,7 @@ import com.plume.code.lib.database.model.FieldModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
+import com.plume.code.service.dto.UserDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,8 +49,8 @@ public class H2Tests {
 
     @Test
     public void test() {
-        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
-        DatabaseBehavior databaseBehavior1 = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
+        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel);
+        DatabaseBehavior databaseBehavior1 = databaseBehaviorFactory.getDatabaseBehavior(connectionModel);
         System.out.println(databaseBehavior);
         System.out.println(databaseBehavior1);
 
@@ -58,10 +59,16 @@ public class H2Tests {
 
         Gson gson = new Gson();
 
-        List<ClassModel> tableModels = databaseBehavior.listTableModel();
+        List<ClassModel> tableModels = databaseBehavior.listClassModel(settingModel);
         System.out.println(gson.toJson(tableModels));
 
-        List<FieldModel> columnModels = databaseBehavior.listFieldModel("SMART_USER");
+        List<FieldModel> columnModels = databaseBehavior.listFieldModel(settingModel, "SMART_USER");
         System.out.println(gson.toJson(columnModels));
+    }
+
+    public static void main(String[] args) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.age(1).name("zhagnsan");
+        System.out.println(userDTO);
     }
 }

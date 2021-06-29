@@ -1,6 +1,7 @@
 package com.plume.code.lib.database;
 
 import com.plume.code.common.constrant.DatabaseConstant;
+import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
@@ -48,10 +49,17 @@ class H2DatabaseBehavior extends DatabaseBehavior {
     }
 
     @Override
-    public List<ClassModel> listTableModel() {
+    public List<String> listTableName() {
         String schema = getDatabaseName();
         List<H2TableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(H2TableModel.class), schema);
-        return tableModelList.stream().map(this::mapToClassModel).collect(Collectors.toList());
+        return tableModelList.stream().map(H2TableModel::getTableName).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClassModel> listClassModel(SettingModel settingModel) {
+        String schema = getDatabaseName();
+        List<H2TableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(H2TableModel.class), schema);
+        return tableModelList.stream().map(r -> mapToClassModel(settingModel, r)).collect(Collectors.toList());
     }
 
     @Override
@@ -61,14 +69,14 @@ class H2DatabaseBehavior extends DatabaseBehavior {
     }
 
     @Override
-    public List<FieldModel> listFieldModel(String tableName) {
+    public List<FieldModel> listFieldModel(SettingModel settingModel, String tableName) {
         String schema = getDatabaseName();
         Set<String> primaryKeySet = getPrimaryKeySet(tableName);
         List<H2ColumnModel> columnModelList = getJdbcTemplate().query(COLUMN_SQL, new BeanPropertyRowMapper<>(H2ColumnModel.class), schema, tableName);
-        return columnModelList.stream().map(r -> mapToFieldModel(r, primaryKeySet)).collect(Collectors.toList());
+        return columnModelList.stream().map(h2ColumnModel -> mapToFieldModel(settingModel, h2ColumnModel, primaryKeySet)).collect(Collectors.toList());
     }
 
-    public ClassModel mapToClassModel(H2TableModel h2TableModel) {
+    private ClassModel mapToClassModel(SettingModel settingModel, H2TableModel h2TableModel) {
         ClassModel classModel = new ClassModel();
 
         String name = h2TableModel.getTableName().toLowerCase();
@@ -81,7 +89,7 @@ class H2DatabaseBehavior extends DatabaseBehavior {
         return classModel;
     }
 
-    private FieldModel mapToFieldModel(H2ColumnModel h2ColumnModel, Set<String> primaryKeySet) {
+    private FieldModel mapToFieldModel(SettingModel settingModel, H2ColumnModel h2ColumnModel, Set<String> primaryKeySet) {
         FieldModel fieldModel = new FieldModel();
 
         String name = h2ColumnModel.getColumnName().toLowerCase();

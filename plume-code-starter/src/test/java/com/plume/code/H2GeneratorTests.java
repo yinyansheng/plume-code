@@ -10,6 +10,8 @@ import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.FieldModel;
 import com.plume.code.lib.generator.GeneratorBehavior;
 import com.plume.code.lib.generator.GeneratorBehaviorFactory;
+import com.plume.code.service.DatabaseService;
+import com.plume.code.service.GeneratorService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,23 +61,33 @@ public class H2GeneratorTests {
     @Autowired
     private GeneratorBehaviorFactory generatorBehaviorFactory;
 
+    @Autowired
+    private GeneratorService generatorService;
+
+    @Autowired
+    private DatabaseService databaseService;
+
+
+    @Test
+    public void test5() {
+        List<String> tableNameList = databaseService.listTableName(connectionModel);
+        System.out.println(tableNameList);
+    }
+
     @Test
     public void test4() {
-        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
-        databaseBehavior.generate();
+        generatorService.generate(connectionModel, settingModel);
     }
 
     @Test
     public void test3() {
-        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
-        List<GeneratorBehavior> generatorBehaviorList = databaseBehavior.getGeneratorBehaviorList();
+        List<GeneratorBehavior> generatorBehaviorList = generatorService.getGeneratorBehaviorList(connectionModel, settingModel);
         generatorBehaviorList.forEach(GeneratorBehavior::generate);
     }
 
     @Test
     public void test2() {
-        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
-        List<ContextModel> contextModelList = databaseBehavior.getContextModelList();
+        List<ContextModel> contextModelList = generatorService.getContextModelList(connectionModel, settingModel);
 
         contextModelList.forEach(contextModel -> {
             List<GeneratorBehavior> generatorBehaviorList = generatorBehaviorFactory.getGeneratorBehaviorList(contextModel);
@@ -85,7 +97,7 @@ public class H2GeneratorTests {
 
     @Test
     public void test() {
-        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
+        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel);
         System.out.println(databaseBehavior);
 
         String schema = databaseBehavior.getDatabaseName();
@@ -93,8 +105,8 @@ public class H2GeneratorTests {
 
         Gson gson = new Gson();
 
-        List<ClassModel> classModels = databaseBehavior.listTableModel();
-        List<FieldModel> fieldModels = databaseBehavior.listFieldModel("SMART_USER");
+        List<ClassModel> classModels = databaseBehavior.listClassModel(settingModel);
+        List<FieldModel> fieldModels = databaseBehavior.listFieldModel(settingModel, "SMART_USER");
 
         ContextModel contextModel = ContextModel.builder()
                 .settingModel(settingModel)

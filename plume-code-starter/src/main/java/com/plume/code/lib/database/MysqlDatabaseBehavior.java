@@ -1,6 +1,7 @@
 package com.plume.code.lib.database;
 
 import com.plume.code.common.constrant.DatabaseConstant;
+import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.FieldModel;
 import com.plume.code.lib.database.model.MysqlColumnModel;
@@ -51,10 +52,17 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
     }
 
     @Override
-    public List<ClassModel> listTableModel() {
+    public List<String> listTableName() {
         String schema = getDatabaseName();
         List<MysqlTableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(MysqlTableModel.class), schema);
-        return tableModelList.stream().map(r -> mapToClassModel(r)).collect(Collectors.toList());
+        return tableModelList.stream().map(MysqlTableModel::getTableName).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClassModel> listClassModel(SettingModel settingModel) {
+        String schema = getDatabaseName();
+        List<MysqlTableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(MysqlTableModel.class), schema);
+        return tableModelList.stream().map(r -> mapToClassModel(settingModel, r)).collect(Collectors.toList());
     }
 
     @Override
@@ -64,14 +72,14 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
     }
 
     @Override
-    public List<FieldModel> listFieldModel(String tableName) {
+    public List<FieldModel> listFieldModel(SettingModel settingModel, String tableName) {
         String schema = getDatabaseName();
         Set<String> primaryKeySet = getPrimaryKeySet(tableName);
         List<MysqlColumnModel> columnModelList = getJdbcTemplate().query(COLUMN_SQL, new BeanPropertyRowMapper<>(MysqlColumnModel.class), schema, tableName);
-        return columnModelList.stream().map(r -> mapToFieldModel(r, primaryKeySet)).collect(Collectors.toList());
+        return columnModelList.stream().map(r -> mapToFieldModel(settingModel, r, primaryKeySet)).collect(Collectors.toList());
     }
 
-    public ClassModel mapToClassModel(MysqlTableModel mysqlTableModel) {
+    private ClassModel mapToClassModel(SettingModel settingModel, MysqlTableModel mysqlTableModel) {
         ClassModel classModel = new ClassModel();
 
         String name = mysqlTableModel.getTableName().toLowerCase();
@@ -84,7 +92,7 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
         return classModel;
     }
 
-    private FieldModel mapToFieldModel(MysqlColumnModel mysqlColumnModel, Set<String> primaryKeySet) {
+    private FieldModel mapToFieldModel(SettingModel settingModel, MysqlColumnModel mysqlColumnModel, Set<String> primaryKeySet) {
         FieldModel fieldModel = new FieldModel();
 
         String name = mysqlColumnModel.getColumnName().toLowerCase();

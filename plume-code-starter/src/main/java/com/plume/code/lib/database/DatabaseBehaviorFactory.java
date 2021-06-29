@@ -19,14 +19,14 @@ public class DatabaseBehaviorFactory {
         this.databaseBehaviorMap = databaseBehaviorMap;
     }
 
-    public DatabaseBehavior getDatabaseBehavior(ConnectionModel connectionModel, SettingModel settingModel) {
+    public DatabaseBehavior getDatabaseBehavior(ConnectionModel connectionModel) {
         String beanName = connectionModel.getType().toLowerCase().concat("DatabaseBehavior");
         if (!databaseBehaviorMap.containsKey(beanName)) {
             throw new NotImplementedException("not support:%s", beanName);
         }
 
         DatabaseBehavior databaseBehavior = databaseBehaviorMap.get(beanName);
-        databaseBehavior.initialize(connectionModel, settingModel);
+        databaseBehavior.initialize(connectionModel);
         return databaseBehavior;
     }
 }

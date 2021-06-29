@@ -2,7 +2,9 @@ package com.plume.code.service;
 
 import com.plume.code.common.model.ConnectionModel;
 
-public interface CommonService {
+import java.util.List;
+
+public interface DatabaseService {
     /**
      * test jdbc connection
      *
@@ -10,4 +12,6 @@ public interface CommonService {
      * @return
      */
     boolean testConnection(ConnectionModel connectionModel);
+
+    List<String> listTableName(ConnectionModel connectionModel);
 }

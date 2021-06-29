@@ -53,17 +53,17 @@ public class MysqlTests {
                 .projectName("plume-code")
                 .build();
 
-        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel, settingModel);
+        DatabaseBehavior databaseBehavior = databaseBehaviorFactory.getDatabaseBehavior(connectionModel);
 
         String schema = databaseBehavior.getDatabaseName();
         System.out.println(schema);
 
         Gson gson = new Gson();
 
-        List<ClassModel> tableModels = databaseBehavior.listTableModel();
+        List<ClassModel> tableModels = databaseBehavior.listClassModel(settingModel);
         System.out.println(gson.toJson(tableModels));
 
-        List<FieldModel> columnModels = databaseBehavior.listFieldModel("test_user");
+        List<FieldModel> columnModels = databaseBehavior.listFieldModel(settingModel, "test_user");
         System.out.println(gson.toJson(columnModels));
 
     }
