@@ -42,7 +42,7 @@ public abstract class DatabaseBehavior {
     }
 
     public abstract String getDatabaseName();
-    
+
     public abstract List<String> listTableName();
 
     public abstract List<ClassModel> listClassModel(SettingModel settingModel);
@@ -70,6 +70,8 @@ public abstract class DatabaseBehavior {
             case DECIMAL:
             case NUMERIC:
                 return "BigDecimal";
+            case TIMESTAMP:
+                return "Timestamp";
             case VARCHAR:
             case CHAR:
             case NCHAR:
@@ -79,7 +81,6 @@ public abstract class DatabaseBehavior {
                 return "String";
             case DATE:
             case TIME:
-            case TIMESTAMP:
                 return "Date";
             case CLOB:
             case NCLOB:

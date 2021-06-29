@@ -19,6 +19,7 @@ import java.io.StringWriter;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -130,6 +131,27 @@ public abstract class GeneratorBehavior {
         velocityContext.put("lombok", settingModel.getLombokState());
         velocityContext.put("fieldModelList", fieldModelList);
 
+        List<String> extraPackageNameList = getExtraPackageNameList();
+        velocityContext.put("extraPackageNameList", extraPackageNameList);
+
         return velocityContext;
+    }
+
+    protected List<String> getExtraPackageNameList() {
+        List<String> extraPackageNameList = new ArrayList<>();
+        if (fieldModelList.stream().anyMatch(r -> r.getType().equals("Date"))) {
+            extraPackageNameList.add("import java.util.Date;");
+        }
+
+        if (fieldModelList.stream().anyMatch(r -> r.getType().equals("BigDecimal"))) {
+            extraPackageNameList.add("import java.math.BigDecimal;");
+        }
+
+        if (fieldModelList.stream().anyMatch(r -> r.getType().equals("Timestamp"))) {
+            extraPackageNameList.add("import java.sql.Timestamp;");
+        }
+
+
+        return extraPackageNameList;
     }
 }

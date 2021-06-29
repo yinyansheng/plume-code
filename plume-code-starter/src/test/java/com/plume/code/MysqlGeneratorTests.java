@@ -76,7 +76,7 @@ public class MysqlGeneratorTests {
         List<String> tableNameList = databaseService.listTableName(connectionModel);
         System.out.println(tableNameList);
     }
-    
+
     @Test
     public void test4() {
         ResultModel resultModel = generatorService.generate(connectionModel, settingModel);
