@@ -58,6 +58,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         return ResultModel.builder()
                 .directoryPath(directoryPath)
                 .zipPath(zip.getPath())
+                .zipUrl("/download/".concat(zip.getName()))
                 .build();
     }
 

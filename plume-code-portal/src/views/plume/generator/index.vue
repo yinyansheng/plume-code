@@ -6,7 +6,7 @@
     </template>
     <el-row>
       <el-col :span="4">
-        <el-select style="width: 100%;" v-model="value" placeholder="请选择" @change="handleSelectDatabase">
+        <el-select style="width: 100%;" v-model="value" placeholder="请选择" @change="handleSelectDatabase" clearable>
           <el-option
             v-for="item in databases"
             :key="item.label"
@@ -18,7 +18,7 @@
           <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
           <div style="margin: 15px 0;"></div>
           <el-checkbox-group v-model="checkedTables" @change="handleCheckedChange">
-            <el-checkbox style="display: block" v-for="table in tables" :label="table.tableName" :key="table.name">{{`${table.tableName} - ${table.comment}` }}
+            <el-checkbox style="display: block" v-for="table in tables" :label="table" :key="table">{{table}}
             </el-checkbox>
           </el-checkbox-group>
         </div>
@@ -93,10 +93,10 @@
                   <el-input v-model="settingsForm.author" placeholder="作者"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="swaggerState">
-                  <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.swaggerState"><img
+                  <el-checkbox   v-model="settingsForm.swaggerState"><img
                     :src="`${$baseUrl}image/logo/swagger.png`" width="20px" height="20px"/>swagger
                   </el-checkbox>
-                  <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.lombokState"><img
+                  <el-checkbox   v-model="settingsForm.lombokState"><img
                     :src="`${$baseUrl}image/logo/lombok.png`" width="20px" height="20px"/>lombok
                   </el-checkbox>
                 </el-form-item>
@@ -109,7 +109,7 @@
               </el-collapse-item>
             </el-collapse>
           </el-card>
-          <el-row>
+          <el-row v-if="this.checkedTables.length > 0">
             <el-button type="primary" @click="submitForm('settingsForm')">一键下载</el-button>
             <el-button @click="resetForm('settingsForm')">查看</el-button>
           </el-row>
@@ -126,8 +126,10 @@ export default {
 
   data () {
     return {
+      apiurl: process.env.VUE_APP_API,
       open: '0',
       databases: [],
+      selectedSetting: null,
       value: '',
       checkAll: false,
       checkedTables: [],
@@ -140,8 +142,8 @@ export default {
         projectName: 'plume_code',
         basePackageName: 'com.github.plume',
         author: '',
-        swaggerState: 0,
-        lombokState: 0,
+        swaggerState: false,
+        lombokState: false,
         controllerMode_api: 0,
         controllerMode_admin: 2,
         controllerMode: 2,
@@ -177,9 +179,15 @@ export default {
   },
   methods: {
     handleSelectDatabase (setting) {
-      api.listTable(setting).then(res => {
-
-      })
+      if (setting) {
+        this.selectedSetting = setting
+        api.listTables(setting).then(res => {
+          this.tables = res.data
+        })
+      } else {
+        this.selectedSetting = null
+        this.tables = []
+      }
     },
     handleCheckAllChange (val) {
       this.checkedTables = val ? this.tables : []
@@ -208,8 +216,14 @@ export default {
           } else if (req.controllerMode_admin === 2) {
             req.controllerMode = 2
           }
-          req.tables = this.checkedTables
-          console.log(req)
+          req.tableNameSet = this.checkedTables
+          api.generate({ connectionModel: this.selectedSetting, settingModel: req }).then(res => {
+            if (res.success) {
+              window.open(`${this.apiurl}${res.data.zipUrl}`)
+            } else {
+              this.$message.warning(res.message)
+            }
+          })
         } else {
           return false
         }

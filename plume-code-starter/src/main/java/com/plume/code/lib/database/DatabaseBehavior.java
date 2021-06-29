@@ -6,6 +6,7 @@ import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.FieldModel;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 import javax.sql.DataSource;
 import java.sql.JDBCType;
@@ -33,11 +34,8 @@ public abstract class DatabaseBehavior {
     }
 
     private DataSource getDataSource() {
-        HikariDataSource dataSource = new HikariDataSource();
+        SingleConnectionDataSource dataSource = new SingleConnectionDataSource(connectionModel.getUrl(), connectionModel.getUsername(), connectionModel.getPassword(), false);
         dataSource.setDriverClassName(connectionModel.getDriver());
-        dataSource.setJdbcUrl(connectionModel.getUrl());
-        dataSource.setUsername(connectionModel.getUsername());
-        dataSource.setPassword(connectionModel.getPassword());
         return dataSource;
     }
 

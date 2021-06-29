@@ -37,7 +37,7 @@ const pages = undefined
 module.exports = {
   // 根据你的实际情况更改这里
   publicPath,
-  // outputDir: '../plume-code-web/src/main/resources/web/templates/dist',
+  outputDir: '../plume-code-starter/src/main/resources/web/templates/dist',
   lintOnSave: true,
   devServer: {
     publicPath, // 和 publicPath 保持一致
