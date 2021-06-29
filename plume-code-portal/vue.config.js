@@ -53,7 +53,9 @@ module.exports = {
   },
   pages,
   configureWebpack: config => {
-    const configNew = {}
+    const configNew = {
+      devtool: process.env.NODE_ENV === 'development' ? 'source-map' : undefined,
+    }
     if (process.env.NODE_ENV === 'production') {
       configNew.externals = externals
       configNew.plugins = [

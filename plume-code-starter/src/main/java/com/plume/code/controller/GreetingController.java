@@ -1,16 +1,23 @@
 package com.plume.code.controller;
 
 
-import org.springframework.stereotype.Controller;
+import com.plume.code.common.model.ConnectionModel;
+import com.plume.code.controller.vo.R;
+import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.service.CommonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.util.Collections;
+import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("plume")
 public class GreetingController {
+
+    @Autowired
+    private CommonService commonService;
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "1") String name, Model model) {
@@ -18,9 +25,15 @@ public class GreetingController {
         return "greeting";
     }
 
-    @GetMapping("/hello")
-    @ResponseBody
-    public Date hello() {
-        return new Date();
+    @PostMapping("/test")
+    public R<Object> test(@RequestBody ConnectionModel connectionModel) {
+        commonService.testConnection(connectionModel);
+        return R.OK;
+    }
+
+    @PostMapping("listTables")
+    public List<ClassModel> listTable(@RequestBody ConnectionModel connectionModel) {
+
+        return Collections.emptyList();
     }
 }
