@@ -10,24 +10,28 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
-* @description: ${comment}
-* @author: ${author}
-* @date:  ${createTime}
-**/
+ * @description: ${comment}
+ * @author: ${author}
+ * @date:  ${createTime}
+ **/
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("${tableName}")
 public class ${ClassName}ENT implements Serializable {
 
-#foreach(${fieldModel} in ${fieldModelList})
-/**
-* $fieldModel.comment
-*/
-    #if($fieldModel.pk)
-    @TableId(value = "${fieldModel.columnName}"#if($fieldModel.pkStrategy==1), type = IdType.AUTO#end)
-    #end
-private ${fieldModel.type} ${fieldModel.name};
+    #foreach(${fieldModel} in ${fieldModelList})
+        /**
+         * ${fieldModel.comment}
+         */
+        #if(${fieldModel.pk})
+        @TableId(value = "${fieldModel.columnName}"
+            #if(${fieldModel.pkStrategy}==1)
+                    , type = IdType.AUTO
+            #end
+        )
+        #end
+    private ${fieldModel.type} ${fieldModel.name};
 
-#end
+    #end
 }

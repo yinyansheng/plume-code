@@ -89,11 +89,11 @@ public abstract class GeneratorBehavior {
     }
 
     /**
-     * @return like 'service.vm' or 'serviceImpl.vm'
+     * @return like 'service.java.tpl' or 'serviceImpl.java.tpl'
      */
     protected String getTemplatePath() {
         String templateFileName = this.getClass().getSimpleName()
-                .replace("GeneratorBehavior", "").concat(".vm");
+                .replace("GeneratorBehavior", "").concat(".java.tpl");
 
         return BASE_TEMPLATE_PATH.concat(templateFileName);
     }
