@@ -15,10 +15,19 @@ public class GeneratorTypeProcesser {
             typeSet.add(GeneratorConstant.Type.service);
             typeSet.add(GeneratorConstant.Type.serviceImpl);
         }
-        
+
         if (settingModel.getRepositoryMode().equals(SettingConstant.RepositoryMode.MYBATIS_PLUS)) {
             typeSet.add(GeneratorConstant.Type.mybatisPlusEnt);
         }
+
+        if (settingModel.getPortalMode().equals(SettingConstant.PortalMode.ELEMENT_UI)) {
+            typeSet.add(GeneratorConstant.Type.mainVue);
+            typeSet.add(GeneratorConstant.Type.elementTableVue);
+        }
+
+//        if (settingModel.getPortalMode().equals(SettingConstant.PortalMode.IVIEW)) {
+//            typeSet.add(GeneratorConstant.Type.mainVue);
+//        }
 
         return typeSet;
     }

@@ -29,7 +29,7 @@ export const menuHeader = supplementPath([
 ])
 
 export const menuAside = supplementPath([
-  { path: '/index', title: '首页', icon: 'home' },
+  // { path: '/index', title: '首页', icon: 'home' },
   { path: '/database', title: '数据库管理', icon: 'database' },
   { path: '/generator', title: '代码生成', icon: 'diamond' },
   // { path: '/template', title: '模版管理', icon: 'cogs' }

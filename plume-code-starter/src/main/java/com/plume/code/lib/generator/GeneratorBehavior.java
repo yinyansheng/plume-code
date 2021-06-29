@@ -106,7 +106,7 @@ public abstract class GeneratorBehavior {
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocityEngine.init();
 
-        Template template = velocityEngine.getTemplate(getTemplatePath());
+        Template template = velocityEngine.getTemplate(getTemplatePath(), StandardCharsets.UTF_8.name());
         VelocityContext velocityContext = getVelocityContext();
 
         StringWriter stringWriter = new StringWriter();

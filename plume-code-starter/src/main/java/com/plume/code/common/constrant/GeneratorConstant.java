@@ -6,5 +6,7 @@ public class GeneratorConstant {
         String service = "service";
         String serviceImpl = "serviceImpl";
         String mybatisPlusEnt = "mybatisPlusEnt";
+        String mainVue = "mainVue";
+        String elementTableVue = "elementTableVue";
     }
 }

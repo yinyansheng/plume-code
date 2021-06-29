@@ -18,4 +18,10 @@ public class SettingConstant {
         Integer JPA = 3;
         Integer HIBERNATE = 4;
     }
+
+    public interface PortalMode {
+        Integer NONE = 0;
+        Integer ELEMENT_UI = 1;
+        Integer IVIEW = 2;
+    }
 }

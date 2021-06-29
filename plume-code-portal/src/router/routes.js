@@ -82,11 +82,11 @@ const frameIn = [
  */
 const frameOut = [
   // 登录
-  {
-    path: '/login',
-    name: 'login',
-    component: _import('system/login')
-  }
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   component: _import('system/login')
+  // }
 ]
 
 /**

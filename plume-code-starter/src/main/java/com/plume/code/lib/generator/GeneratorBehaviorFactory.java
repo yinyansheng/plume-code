@@ -29,7 +29,7 @@ public class GeneratorBehaviorFactory {
     public GeneratorBehavior getGeneratorBehavior(String type, ContextModel contextModel) {
         String beanName = type.concat("GeneratorBehavior");
         if (!generatorBehaviorMap.containsKey(beanName)) {
-            throw new NotImplementedException("not support:%s", beanName);
+            throw new NotImplementedException(String.format("not support:%s", beanName));
         }
 
         GeneratorBehavior generatorBehavior = generatorBehaviorMap.get(beanName);

@@ -3,7 +3,7 @@
     <template slot="header">
       <d2-icon name="database"/>
       数据库配置
-      <el-tooltip style="margin-right: 10px" effect="dark" content="配置存储在浏览器Local Storage" placement="right-end">
+      <el-tooltip style="margin-right: 10px" effect="dark" content="配置存储在浏览器Local Storage 【key: d2admin-1.20.1 value: database/public/database/settings】" placement="right-end">
       <i class="el-icon-warning-outline"></i>
     </el-tooltip>
     </template>
@@ -64,7 +64,7 @@
       </el-table-column>
       <el-table-column
         prop="url"
-        label="url">
+        label="jdbc url">
       </el-table-column>
       <el-table-column
         prop="username"
@@ -95,7 +95,7 @@
             <el-option label="org.h2.Driver" value="org.h2.Driver"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="url" prop="url">
+        <el-form-item label="jdbc url" prop="url">
           <el-input v-model="form.url" placeholder="例如：jdbc:mysql://127.0.0.1:3306/plume_code?characterEncoding=utf-8"/>
         </el-form-item>
         <el-form-item label="用户名" prop="username">
@@ -268,14 +268,14 @@ export default {
     },
     doSave (settings) {
       this.$store.dispatch('d2admin/db/set', {
-        dbName: 'sys',
+        dbName: 'database',
         path: 'database.settings',
         value: settings
       }, { root: true })
     },
     getSettings () {
       return this.$store.dispatch('d2admin/db/get', {
-        dbName: 'sys',
+        dbName: 'database',
         path: 'database.settings',
         defaultValue: []
       }, { root: true })

@@ -55,6 +55,7 @@ public class MysqlGeneratorTests {
                 .tableNameSet(new HashSet<>(Arrays.asList("test_user", "test_student")))
                 .serviceMode(SettingConstant.ServiceMode.SERVICE)
                 .repositoryMode(SettingConstant.RepositoryMode.MYBATIS_PLUS)
+                .portalMode(SettingConstant.PortalMode.ELEMENT_UI)
                 .lombokState(true)
                 .build();
     }

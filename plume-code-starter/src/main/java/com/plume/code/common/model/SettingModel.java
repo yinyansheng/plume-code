@@ -42,7 +42,7 @@ public class SettingModel {
 
     /**
      * 0:none
-     * 1:d2admin
+     * 1:element-ui
      * 2:iview
      */
     private Integer portalMode;
