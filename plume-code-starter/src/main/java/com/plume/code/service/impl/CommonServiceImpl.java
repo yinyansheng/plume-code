@@ -12,17 +12,25 @@ public class CommonServiceImpl implements CommonService {
 
     @Override
     public boolean testConnection(ConnectionModel connectionModel) {
+        Connection connection = null;
         try {
             Class.forName(connectionModel.getDriver());
-            Connection connection = DriverManager.getConnection(
+            connection = DriverManager.getConnection(
                     connectionModel.getUrl(),
                     connectionModel.getUsername(),
                     connectionModel.getPassword());
-
-            connection.close();
             return true;
         } catch (Exception e) {
-            return false;
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -24,3 +24,24 @@
 - tbd
 
 
+## 项目基础
+
+### 后端
+
+- springboot
+- lombok
+- hutool
+
+
+### 前端
+
+[d2admin](https://d2.pub/zh/) 
+
+
+[element-ui](https://element.eleme.cn/2.15/#/zh-CN) 
+
+
+## 其他
+熟练使用你就是CURD代码挖掘机！！
+
+数据库配置存储在浏览器local-storage

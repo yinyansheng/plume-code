@@ -76,10 +76,10 @@ function createService () {
  */
 function createRequestFunction (service) {
   return function (config) {
-    const token = util.cookies.get('token')
+    // const token = util.cookies.get('token')
     const configDefault = {
       headers: {
-        Authorization: token,
+        // Authorization: token,
         'Content-Type': get(config, 'headers.Content-Type', 'application/json')
       },
       timeout: 5000,
