@@ -4,7 +4,7 @@ package com.plume.code.controller;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.controller.vo.R;
 import com.plume.code.lib.database.model.ClassModel;
-import com.plume.code.service.CommonService;
+import com.plume.code.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import java.util.List;
 public class GreetingController {
 
     @Autowired
-    private CommonService commonService;
+    private DatabaseService databaseService;
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "1") String name, Model model) {
@@ -27,7 +27,7 @@ public class GreetingController {
 
     @PostMapping("/test")
     public R<Object> test(@RequestBody ConnectionModel connectionModel) {
-        commonService.testConnection(connectionModel);
+        databaseService.testConnection(connectionModel);
         return R.OK;
     }
 
