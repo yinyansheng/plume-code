@@ -1,6 +1,5 @@
 package com.plume.code.lib.generator;
 
-import org.apache.velocity.VelocityContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +18,6 @@ class MybatisPlusEntGeneratorBehavior extends GeneratorBehavior {
     protected String getFileName() {
         return String.format("%sENT.java", upperFirstCase(classModel.getName()));
     }
-    
+
 
 }

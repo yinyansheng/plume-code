@@ -47,11 +47,11 @@
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成api.js,CURD.vue结构" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox v-model="settingsForm.portalMode" :true-label="1" :false-label="0"><img
-                  :src="`${$baseUrl}image/logo/d2.png`" width="20px" height="20px"/>d2admin
+                <el-checkbox v-model="settingsForm.portalMode" :true-label="1" :false-label="0">
+                  <img :src="`${$baseUrl}image/logo/elementui.svg`" width="70px" height="20px"/>
                 </el-checkbox>
-                <el-checkbox v-model="settingsForm.portalMode" :true-label="2" :false-label="0"><img
-                  :src="`${$baseUrl}image/logo/iview.svg`" width="20px" height="20px"/>iview
+                <el-checkbox v-model="settingsForm.portalMode" :true-label="2" :false-label="0">
+                  <img :src="`${$baseUrl}image/logo/iview.svg`" width="20px" height="20px"/>iview
                 </el-checkbox>
               </el-form-item>
               <el-form-item label="控制层" prop="region">
@@ -89,7 +89,7 @@
           <el-card class="box-card">
             <el-collapse v-model="open" accordion>
               <el-collapse-item title="高级配置" name="1">
-                <el-form-item label="作者：" prop="author">
+                <el-form-item label="作者" prop="author">
                   <el-input v-model="settingsForm.author" placeholder="作者"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="swaggerState">
@@ -100,10 +100,16 @@
                     :src="`${$baseUrl}image/logo/lombok.png`" width="20px" height="20px"/>lombok
                   </el-checkbox>
                 </el-form-item>
-                <el-form-item label="表名前缀：" prop="tablePrefix">
-                  <el-input v-model="settingsForm.tablePrefix" placeholder="例如：plume_"></el-input>
+                <el-form-item label="表名前缀" prop="tablePrefix">
+                  <el-tooltip style="margin-right: 10px" effect="dark" content="填写前缀生成的文件将移除前缀" placement="top">
+                    <i class="el-icon-warning-outline"></i>
+                  </el-tooltip>
+                  <el-input v-model="settingsForm.tablePrefix" style="display: inline-block;" placeholder="例如：plume_"></el-input>
                 </el-form-item>
-                <el-form-item label="字段前缀：" prop="columnPrefix">
+                <el-form-item label="字段前缀" prop="columnPrefix">
+                  <el-tooltip style="margin-right: 10px" effect="dark" content="填写前缀生成的文件将移除前缀" placement="top">
+                    <i class="el-icon-warning-outline"></i>
+                  </el-tooltip>
                   <el-input v-model="settingsForm.columnPrefix" placeholder="例如：n_,s_,d_"></el-input>
                 </el-form-item>
               </el-collapse-item>
@@ -187,6 +193,7 @@ export default {
       } else {
         this.selectedSetting = null
         this.tables = []
+        this.checkedTables = []
       }
     },
     handleCheckAllChange (val) {
