@@ -9,7 +9,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/download").addResourceLocations(
+        registry.addResourceHandler("/download/**").addResourceLocations(
                 "classpath:/download/");
         registry.addResourceHandler("swagger-ui.html").addResourceLocations(
                 "classpath:/META-INF/resources/");
