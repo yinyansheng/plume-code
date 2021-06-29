@@ -7,16 +7,16 @@ export default {
     'd2-panel-search': () => import('../components/panel-search')
   },
   mounted () {
-    // 绑定搜索功能快捷键 [ 打开 ]
-    hotkeys(this.searchHotkey.open, event => {
-      event.preventDefault()
-      this.searchPanelOpen()
-    })
-    // 绑定搜索功能快捷键 [ 关闭 ]
-    hotkeys(this.searchHotkey.close, event => {
-      event.preventDefault()
-      this.searchPanelClose()
-    })
+    // // 绑定搜索功能快捷键 [ 打开 ]
+    // hotkeys(this.searchHotkey.open, event => {
+    //   event.preventDefault()
+    //   this.searchPanelOpen()
+    // })
+    // // 绑定搜索功能快捷键 [ 关闭 ]
+    // hotkeys(this.searchHotkey.close, event => {
+    //   event.preventDefault()
+    //   this.searchPanelClose()
+    // })
   },
   beforeDestroy () {
     hotkeys.unbind(this.searchHotkey.open)

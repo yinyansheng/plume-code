@@ -2,9 +2,12 @@ package com.plume.code.controller;
 
 
 import com.plume.code.common.model.ConnectionModel;
+import com.plume.code.controller.vo.GenerateVO;
 import com.plume.code.controller.vo.R;
 import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.lib.database.model.ResultModel;
 import com.plume.code.service.DatabaseService;
+import com.plume.code.service.GeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,8 @@ public class GreetingController {
 
     @Autowired
     private DatabaseService databaseService;
+    @Autowired
+    private GeneratorService generatorService;
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "1") String name, Model model) {
@@ -32,8 +37,14 @@ public class GreetingController {
     }
 
     @PostMapping("listTables")
-    public List<ClassModel> listTable(@RequestBody ConnectionModel connectionModel) {
+    public R<List<String>> listTable(@RequestBody ConnectionModel connectionModel) {
+        return R.ok(databaseService.listTableName(connectionModel));
+    }
 
-        return Collections.emptyList();
+    @PostMapping("generate")
+    public R<ResultModel> generate(@RequestBody GenerateVO generateVO) {
+        generateVO.getSettingModel().setBatchNo(String.valueOf(System.currentTimeMillis()));
+        ResultModel result = generatorService.generate(generateVO.getConnectionModel(), generateVO.getSettingModel());
+        return R.ok(result);
     }
 }

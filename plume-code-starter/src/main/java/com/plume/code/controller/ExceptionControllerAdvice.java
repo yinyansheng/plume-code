@@ -11,6 +11,7 @@ public class ExceptionControllerAdvice {
 
     @ExceptionHandler
     public R<Object> handleException(Exception ex) {
+        ex.printStackTrace();
         return R.fail(ex.getMessage());
     }
 

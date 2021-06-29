@@ -6,7 +6,7 @@
     </template>
     <el-row>
       <el-col :span="4">
-        <el-select style="width: 100%;" v-model="value" placeholder="请选择" @change="handleSelectDatabase">
+        <el-select style="width: 100%;" v-model="value" placeholder="请选择" @change="handleSelectDatabase" clearable>
           <el-option
             v-for="item in databases"
             :key="item.label"
@@ -18,7 +18,7 @@
           <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
           <div style="margin: 15px 0;"></div>
           <el-checkbox-group v-model="checkedTables" @change="handleCheckedChange">
-            <el-checkbox style="display: block" v-for="table in tables" :label="table.tableName" :key="table.name">{{`${table.tableName} - ${table.comment}` }}
+            <el-checkbox style="display: block" v-for="table in tables" :label="table" :key="table">{{table}}
             </el-checkbox>
           </el-checkbox-group>
         </div>
@@ -47,11 +47,11 @@
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成api.js,CURD.vue结构" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox v-model="settingsForm.portalMode" :true-label="1" :false-label="0"><img
-                  :src="`${$baseUrl}image/logo/d2.png`" width="20px" height="20px"/>d2admin
+                <el-checkbox v-model="settingsForm.portalMode" :true-label="1" :false-label="0">
+                  <img :src="`${$baseUrl}image/logo/elementui.svg`" width="70px" height="20px"/>
                 </el-checkbox>
-                <el-checkbox v-model="settingsForm.portalMode" :true-label="2" :false-label="0"><img
-                  :src="`${$baseUrl}image/logo/iview.svg`" width="20px" height="20px"/>iview
+                <el-checkbox v-model="settingsForm.portalMode" :true-label="2" :false-label="0">
+                  <img :src="`${$baseUrl}image/logo/iview.svg`" width="20px" height="20px"/>iview
                 </el-checkbox>
               </el-form-item>
               <el-form-item label="控制层" prop="region">
@@ -89,27 +89,33 @@
           <el-card class="box-card">
             <el-collapse v-model="open" accordion>
               <el-collapse-item title="高级配置" name="1">
-                <el-form-item label="作者：" prop="author">
+                <el-form-item label="作者" prop="author">
                   <el-input v-model="settingsForm.author" placeholder="作者"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="swaggerState">
-                  <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.swaggerState"><img
+                  <el-checkbox   v-model="settingsForm.swaggerState"><img
                     :src="`${$baseUrl}image/logo/swagger.png`" width="20px" height="20px"/>swagger
                   </el-checkbox>
-                  <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.lombokState"><img
+                  <el-checkbox   v-model="settingsForm.lombokState"><img
                     :src="`${$baseUrl}image/logo/lombok.png`" width="20px" height="20px"/>lombok
                   </el-checkbox>
                 </el-form-item>
-                <el-form-item label="表名前缀：" prop="tablePrefix">
-                  <el-input v-model="settingsForm.tablePrefix" placeholder="例如：plume_"></el-input>
+                <el-form-item label="表名前缀" prop="tablePrefix">
+                  <el-tooltip style="margin-right: 10px" effect="dark" content="填写前缀生成的文件将移除前缀" placement="top">
+                    <i class="el-icon-warning-outline"></i>
+                  </el-tooltip>
+                  <el-input v-model="settingsForm.tablePrefix" style="display: inline-block;" placeholder="例如：plume_"></el-input>
                 </el-form-item>
-                <el-form-item label="字段前缀：" prop="columnPrefix">
+                <el-form-item label="字段前缀" prop="columnPrefix">
+                  <el-tooltip style="margin-right: 10px" effect="dark" content="填写前缀生成的文件将移除前缀" placement="top">
+                    <i class="el-icon-warning-outline"></i>
+                  </el-tooltip>
                   <el-input v-model="settingsForm.columnPrefix" placeholder="例如：n_,s_,d_"></el-input>
                 </el-form-item>
               </el-collapse-item>
             </el-collapse>
           </el-card>
-          <el-row>
+          <el-row v-if="this.checkedTables.length > 0">
             <el-button type="primary" @click="submitForm('settingsForm')">一键下载</el-button>
             <el-button @click="resetForm('settingsForm')">查看</el-button>
           </el-row>
@@ -126,8 +132,10 @@ export default {
 
   data () {
     return {
+      apiurl: process.env.VUE_APP_API,
       open: '0',
       databases: [],
+      selectedSetting: null,
       value: '',
       checkAll: false,
       checkedTables: [],
@@ -140,8 +148,8 @@ export default {
         projectName: 'plume_code',
         basePackageName: 'com.github.plume',
         author: '',
-        swaggerState: 0,
-        lombokState: 0,
+        swaggerState: false,
+        lombokState: false,
         controllerMode_api: 0,
         controllerMode_admin: 2,
         controllerMode: 2,
@@ -177,9 +185,16 @@ export default {
   },
   methods: {
     handleSelectDatabase (setting) {
-      api.listTable(setting).then(res => {
-
-      })
+      if (setting) {
+        this.selectedSetting = setting
+        api.listTables(setting).then(res => {
+          this.tables = res.data
+        })
+      } else {
+        this.selectedSetting = null
+        this.tables = []
+        this.checkedTables = []
+      }
     },
     handleCheckAllChange (val) {
       this.checkedTables = val ? this.tables : []
@@ -208,8 +223,14 @@ export default {
           } else if (req.controllerMode_admin === 2) {
             req.controllerMode = 2
           }
-          req.tables = this.checkedTables
-          console.log(req)
+          req.tableNameSet = this.checkedTables
+          api.generate({ connectionModel: this.selectedSetting, settingModel: req }).then(res => {
+            if (res.success) {
+              window.open(`${this.apiurl}${res.data.zipUrl}`)
+            } else {
+              this.$message.warning(res.message)
+            }
+          })
         } else {
           return false
         }

@@ -1,6 +1,5 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.common.model.SettingModel;
 import org.apache.velocity.VelocityContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

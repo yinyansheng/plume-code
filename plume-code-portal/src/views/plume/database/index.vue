@@ -3,16 +3,42 @@
     <template slot="header">
       <d2-icon name="database"/>
       数据库配置
+      <el-tooltip style="margin-right: 10px" effect="dark" content="配置存储在浏览器Local Storage" placement="right-end">
+      <i class="el-icon-warning-outline"></i>
+    </el-tooltip>
     </template>
     <el-row>
       <el-button type="primary" @click="handleAdd">新增</el-button>
+      <el-popconfirm
+        placement="top"
+        confirm-button-text='确定'
+        cancel-button-text='取消'
+        icon="el-icon-info"
+        icon-color="red"
+        confirm-button-type="danger"
+        title="确定清空配置吗？"
+        @confirm="handleClearSetting"
+      >
+        <el-button style="margin-left: 10px" type="danger" slot="reference" >清空配置</el-button>
+      </el-popconfirm>
     </el-row>
     <el-table
       :data="tableData"
       style="width: 100%">
       <el-table-column width="350">
         <template slot-scope="{$index, row}">
-          <el-button type="danger" @click="handleRemove($index, row)">删 除</el-button>
+          <el-popconfirm
+            placement="top"
+            confirm-button-text='确定'
+            cancel-button-text='取消'
+            icon="el-icon-info"
+            icon-color="red"
+            confirm-button-type="danger"
+            title="确定删除吗？"
+            @confirm="handleRemove($index, row)"
+          >
+            <el-button style="margin-right: 10px" type="danger"  slot="reference">删 除</el-button>
+          </el-popconfirm>
           <el-button type="primary" @click="handleShowEdit($index, row)">编 辑</el-button>
           <el-button type="primary" style="margin-right: 10px;" @click="handleTest(row)">测试连接</el-button>
 
@@ -29,12 +55,12 @@
       <el-table-column
         prop="type"
         label="数据库类型"
-        width="180">
+        width="120">
       </el-table-column>
       <el-table-column
         prop="driver"
         label="驱动"
-        width="180">
+        width="200">
       </el-table-column>
       <el-table-column
         prop="url"
@@ -42,11 +68,13 @@
       </el-table-column>
       <el-table-column
         prop="username"
-        label="用户名">
+        label="用户名"
+        width="200">
       </el-table-column>
       <el-table-column
         prop="password"
-        label="密码">
+        label="密码"
+        width="200">
       </el-table-column>
     </el-table>
     <el-dialog title="数据库配置" :visible.sync="dialogFormVisible">
@@ -152,6 +180,10 @@ export default {
   methods: {
     async load () {
       this.tableData = await this.getSettings()
+    },
+    handleClearSetting () {
+      this.tableData = []
+      this.doSave([])
     },
     handleAdd () {
       this.form.isValid = false

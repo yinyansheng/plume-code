@@ -10,9 +10,16 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       data
     })
   },
-  listTable (data = {}) {
+  listTables (data = {}) {
     return request({
-      url: '/plume/listTable',
+      url: '/plume/listTables',
+      method: 'post',
+      data
+    })
+  },
+  generate (data = {}) {
+    return request({
+      url: '/plume/generate',
       method: 'post',
       data
     })

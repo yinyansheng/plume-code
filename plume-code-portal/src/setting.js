@@ -3,8 +3,8 @@ export default {
   // 支持快捷键 例如 ctrl+shift+s
   hotkey: {
     search: {
-      open: 's',
-      close: 'esc'
+      // open: 's',
+      // close: 'esc'
     }
   },
   // 侧边栏默认配置
@@ -16,10 +16,10 @@ export default {
   page: {
     opened: [
       {
-        name: 'index',
-        fullPath: '/index',
+        name: 'database',
+        fullPath: '/database',
         meta: {
-          title: '首页',
+          title: '数据库配置',
           auth: false
         }
       }
@@ -33,14 +33,14 @@ export default {
   theme: {
     list: [
       {
-        title: 'd2admin 经典',
-        name: 'd2',
-        preview: 'image/theme/d2/preview@2x.png'
-      },
-      {
         title: 'Chester',
         name: 'chester',
         preview: 'image/theme/chester/preview@2x.png'
+      },
+      {
+        title: 'd2admin 经典',
+        name: 'd2',
+        preview: 'image/theme/d2/preview@2x.png'
       },
       {
         title: 'Element',
