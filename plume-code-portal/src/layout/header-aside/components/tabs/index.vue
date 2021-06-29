@@ -7,7 +7,7 @@
           :x="contentmenuX"
           :y="contentmenuY">
           <d2-contextmenu-list
-            :menulist="tagName === '/index' ? contextmenuListIndex : contextmenuList"
+            :menulist="tagName === '/database' ? contextmenuListIndex : contextmenuList"
             @rowClick="contextmenuClick"/>
         </d2-contextmenu>
         <el-tabs
@@ -103,7 +103,7 @@ export default {
      * @param {Object} page 其中一个标签页
      */
     isTabClosable (page) {
-      return page.name !== 'index'
+      return page.name !== 'database'
     },
     /**
      * @description 右键菜单功能点击
