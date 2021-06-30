@@ -43,19 +43,10 @@ public class ${ClassName}ENT implements Serializable {
     public ${fieldModel.type} get${fieldModel.upperCaseName}() {
         return ${fieldModel.name};
     }
- * <p>
- * crm公共图片表 服务类
- * </p>
- *
- * @author code generator
- * @since 2021-02-25
- */
-public interface CrmImgService extends IService<CrmImgENT> {
 
     public void set${fieldModel.upperCaseName}(${fieldModel.type} ${fieldModel.name}) {
         this.${fieldModel.name} = ${fieldModel.name};
     }
-}
 
 #end
 }

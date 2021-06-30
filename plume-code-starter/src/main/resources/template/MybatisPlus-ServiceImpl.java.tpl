@@ -1,8 +1,8 @@
 package ${packageName};
 
-import ${backPackageName}.mapper.entity.${ClassName}ENT;
-import ${backPackageName}.mapper.${ClassName}Mapper;
-import ${backPackageName}.service.${ClassName}Service;
+import ${basePackageName}.mapper.entity.${ClassName}ENT;
+import ${basePackageName}.mapper.${ClassName}Mapper;
+import ${basePackageName}.service.${ClassName}Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

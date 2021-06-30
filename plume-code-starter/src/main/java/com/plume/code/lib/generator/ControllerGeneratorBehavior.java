@@ -16,7 +16,7 @@ class ControllerGeneratorBehavior extends JavaGeneratorBehavior {
 
     @Override
     protected String getPackageName() {
-        return settingModel.getBasePackageName().concat("admin.controller");
+        return settingModel.getBasePackageName().concat(".admin.controller");
     }
 
     @Override
