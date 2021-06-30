@@ -1,6 +1,6 @@
 package ${packageName};
 
-#foreach(${extraPackageName} in ${extraPackageNameList})
+#foreach(${extraPackageName} in ${typePackageNameList})
 ${typePackageName}
 #end
 

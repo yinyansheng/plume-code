@@ -50,20 +50,20 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
     }
 
     protected List<String> getTypePackageNameList() {
-        List<String> extraPackageNameList = new ArrayList<>();
+        List<String> typePackageNameList = new ArrayList<>();
         if (fieldModelList.stream().anyMatch(r -> r.getType().equals("Date"))) {
-            extraPackageNameList.add("import java.util.Date;");
+            typePackageNameList.add("import java.util.Date;");
         }
 
         if (fieldModelList.stream().anyMatch(r -> r.getType().equals("BigDecimal"))) {
-            extraPackageNameList.add("import java.math.BigDecimal;");
+            typePackageNameList.add("import java.math.BigDecimal;");
         }
 
         if (fieldModelList.stream().anyMatch(r -> r.getType().equals("Timestamp"))) {
-            extraPackageNameList.add("import java.sql.Timestamp;");
+            typePackageNameList.add("import java.sql.Timestamp;");
         }
 
 
-        return extraPackageNameList;
+        return typePackageNameList;
     }
 }

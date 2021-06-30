@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
-#foreach(${extraPackageName} in ${extraPackageNameList})
+#foreach(${extraPackageName} in ${typePackageNameList})
 ${extraPackageName}
 #end
 
