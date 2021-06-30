@@ -16,7 +16,7 @@ class VOGeneratorBehavior extends JavaGeneratorBehavior {
 
     @Override
     protected String getPackageName() {
-        return settingModel.getBasePackageName().concat(".controller.vo");
+        return settingModel.getBasePackageName().concat(".admin.controller.vo");
     }
 
     @Override

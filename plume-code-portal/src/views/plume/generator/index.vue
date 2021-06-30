@@ -44,11 +44,11 @@
               <span>项目信息</span>
             </div>
             <div>
-              <el-form-item label="页面层" prop="portalMode">
+              <el-form-item label="页面层" prop="portal">
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成后台管理页面" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox v-model="settingsForm.portalMode"  :true-label="1" :false-label="0" label="Element-UI" />
+                <el-checkbox v-model="settingsForm.portal"  label="Element-UI" />
               </el-form-item>
               <el-form-item label="控制层" prop="controller">
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成UserController类,UserQuery类,UserVO类"
@@ -123,7 +123,13 @@ const templateMap = {
     2: ['JPA-Service.java.tpl', 'JPA-ServiceImpl.java.tpl'],
     3: ['Mybatis-Service.java.tpl', 'Mybatis-ServiceImpl.java.tpl']
   },
-  controller: ['ElementUi-api.js.tpl', 'ElementUi-Dialog.vue.tpl', 'ElementUi-index.js.tpl', 'ElementUi-Main.vue.tpl', 'ElementUi-object.js.tpl', 'ElementUi-Search.vue.tpl', 'ElementUi-Table.vue.tpl'],
+  controller: {
+    0: ['Controller.java.tpl'],
+    1: ['MybatisPlus-Controller.java.tpl'],
+    2: [],
+    3: []
+  },
+  portal: ['ElementUi-api.js.tpl', 'ElementUi-Dialog.vue.tpl', 'ElementUi-index.js.tpl', 'ElementUi-Main.vue.tpl', 'ElementUi-object.js.tpl', 'ElementUi-Search.vue.tpl', 'ElementUi-Table.vue.tpl'],
   VO: ['VO.java.tpl'],
   DTO: ['DTO.java.tpl'],
   Query: ['Query.java.tpl']
@@ -145,7 +151,7 @@ export default {
       tables: [],
       isIndeterminate: true,
       settingsForm: {
-        portalMode: 1,
+        portal: true,
         tablePrefix: '',
         columnPrefix: '',
         projectName: 'plume_code',
@@ -230,11 +236,14 @@ export default {
           if (req.repositoryMode) {
             templateNameSet.push(...templateMap[req.repositoryMode])
             req.service && templateNameSet.push(...templateMap.service[req.repositoryMode])
+            req.controller && templateNameSet.push(...templateMap.controller[req.repositoryMode])
           } else {
             req.service && templateNameSet.push(...templateMap.service[0])
+            req.controller && templateNameSet.push(...templateMap.controller[0])
           }
 
-          req.controller && templateNameSet.push(...templateMap.controller)
+          req.portal && templateNameSet.push(...templateMap.portal)
+
           req.VO && templateNameSet.push(...templateMap.VO)
           req.DTO && templateNameSet.push(...templateMap.DTO)
           req.Query && templateNameSet.push(...templateMap.Query)

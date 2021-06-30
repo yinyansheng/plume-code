@@ -20,6 +20,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
   generate (data = {}) {
     return request({
       url: '/plume/generate',
+      timeout: 10000,
       method: 'post',
       data
     })

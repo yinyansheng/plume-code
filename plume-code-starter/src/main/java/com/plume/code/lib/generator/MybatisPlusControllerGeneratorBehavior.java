@@ -7,21 +7,21 @@ import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
 
 @Component
 @Scope("prototype")
-class QueryGeneratorBehavior extends JavaGeneratorBehavior {
+class MybatisPlusControllerGeneratorBehavior extends JavaGeneratorBehavior {
 
     @Override
     protected String getTemplateName() {
-        return "Query.java.tpl";
+        return "MybatisPlus-Controller.java.tpl";
     }
 
     @Override
     protected String getPackageName() {
-        return settingModel.getBasePackageName().concat(".admin.controller.query");
+        return settingModel.getBasePackageName().concat(".admin.controller");
     }
 
     @Override
     protected String getFileName() {
-        return String.format("%sQuery.java", upperFirstCase(classModel.getName()));
+        return String.format("%sController.java", upperFirstCase(classModel.getName()));
     }
 
 
