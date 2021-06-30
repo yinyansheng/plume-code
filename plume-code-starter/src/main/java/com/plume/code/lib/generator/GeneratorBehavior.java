@@ -50,14 +50,9 @@ public abstract class GeneratorBehavior {
     }
 
     @SneakyThrows
-    private  String getProjectPath() {
-        URL resource = this.getClass().getClassLoader().getResource("");
-
-        if (null == resource) {
-            throw new RuntimeException("can't find the resource URL");
-        }
-
-        String downloadPath = resource.getPath().concat("download");
+    private String getProjectPath() {
+        String userDirPath = System.getProperty("user.dir");
+        String downloadPath = userDirPath.concat("/plume-code-download");
         File downloadPathFile = new File(downloadPath);
 
         if (!downloadPathFile.exists()) {

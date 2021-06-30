@@ -4,9 +4,6 @@ import com.plume.code.common.helper.GeneratorHelper;
 import lombok.SneakyThrows;
 import org.apache.velocity.VelocityContext;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +14,12 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
 
     protected abstract String getPackageName();
 
+    /**
+     * java文件的path 可以由packageName 转换的来
+     * 例子 com.example.order.service  对应的文件夹位 {sourcePath}/com/example/order/service
+     *
+     * @return the generate file path
+     */
     @SneakyThrows
     @Override
     protected String getFilePath() {
