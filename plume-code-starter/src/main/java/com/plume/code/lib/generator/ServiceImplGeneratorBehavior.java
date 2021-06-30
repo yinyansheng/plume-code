@@ -8,11 +8,16 @@ import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
 
 @Component
 @Scope("prototype")
-class ServiceImplGeneratorBehavior extends GeneratorBehavior {
+class ServiceImplGeneratorBehavior extends JavaGeneratorBehavior {
 
     @Override
     protected String getPackageName() {
         return settingModel.getBasePackageName().concat(".service.impl");
+    }
+
+    @Override
+    protected String getTemplateName() {
+        return "ServiceImpl.java.tpl";
     }
 
     @Override

@@ -11,6 +11,11 @@ public class SettingConstant {
         Integer SERVICE = 1;
     }
 
+    public interface DtoMode {
+        Integer NONE = 0;
+        Integer DTO = 1;
+    }
+
     public interface RepositoryMode {
         Integer NONE = 0;
         Integer MYBATIS = 1;

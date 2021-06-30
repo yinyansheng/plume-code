@@ -40,34 +40,9 @@ public class SettingModel {
      */
     private Boolean lombokState;
 
-    /**
-     * 0:none
-     * 1:element-ui
-     * 2:iview
-     */
-    private Integer portalMode;
 
     /**
-     * 0:none
-     * 1：api
-     * 2:admin
-     * 3:api & admin
+     * 模板文件列表
      */
-    private Integer controllerMode;
-
-    /**
-     * 0:none
-     * 1：service
-     */
-    private Integer serviceMode;
-
-    /**
-     * 0:none
-     * 1:mybatis
-     * 2:mybatis-plus
-     * 3:jpa
-     * 4:hibernate
-     */
-    private Integer repositoryMode;
-
+    private Set<String> templateNameSet;
 }

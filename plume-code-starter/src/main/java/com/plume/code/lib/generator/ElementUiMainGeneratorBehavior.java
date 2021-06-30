@@ -12,14 +12,14 @@ import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
 
 @Component
 @Scope("prototype")
-public class ElementTableVueGeneratorBehavior extends VueGeneratorBehavior{
+public class ElementUiMainGeneratorBehavior extends VueGeneratorBehavior {
     @Override
     protected String getFileName() {
-        return "components/Table.vue";
+        return upperFirstCase(classModel.getName()).concat("Main.vue");
     }
 
     @Override
     protected String getTemplateName() {
-        return "elementTableVue.vue.tpl";
+        return "ElementUi-Main.vue.tpl";
     }
 }

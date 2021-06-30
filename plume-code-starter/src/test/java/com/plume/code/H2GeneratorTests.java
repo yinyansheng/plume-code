@@ -50,7 +50,11 @@ public class H2GeneratorTests {
                 .basePackageName("com.plume.code")
                 .projectName("plume-code")
                 .tableNameSet(new HashSet<>(Arrays.asList("SMART_USER")))
-                .serviceMode(1)
+                .templateNameSet(new HashSet<>(Arrays.asList(
+                        "MybatisPlus-ENT.java.tpl",
+                        "Service.java.tpl",
+                        "ServiceImpl.java.tpl"
+                )))
                 .lombokState(true)
                 .build();
     }

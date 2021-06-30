@@ -20,14 +20,20 @@ public class ${ClassName}ENT implements Serializable {
 
 #foreach(${fieldModel} in ${fieldModelList})
     /**
-     * ${fieldModel.comment}
+     * columnName:${fieldModel.columnName}
+     * comment:${fieldModel.comment}
      */
 #if($fieldModel.pk)
+#if($fieldModel.pkStrategy==1)
     @TableId(value = "${fieldModel.name}", type = IdType.AUTO)
+#else
+    @TableId(value = "${fieldModel.name}")
+#end
 #end
     private ${fieldModel.type} ${fieldModel.name};
 
 #end
+
 #foreach(${fieldModel} in ${fieldModelList})
     public ${fieldModel.type} get${fieldModel.upperCaseName}() {
         return ${fieldModel.name};

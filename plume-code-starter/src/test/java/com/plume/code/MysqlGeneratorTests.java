@@ -53,9 +53,11 @@ public class MysqlGeneratorTests {
                 .basePackageName("com.plume.code")
                 .projectName("plume-code")
                 .tableNameSet(new HashSet<>(Arrays.asList("test_user", "test_student")))
-                .serviceMode(SettingConstant.ServiceMode.SERVICE)
-                .repositoryMode(SettingConstant.RepositoryMode.MYBATIS_PLUS)
-                .portalMode(SettingConstant.PortalMode.ELEMENT_UI)
+                .templateNameSet(new HashSet<>(Arrays.asList(
+                        "MybatisPlus-ENT.java.tpl",
+                        "Service.java.tpl",
+                        "ServiceImpl.java.tpl"
+                )))
                 .lombokState(true)
                 .build();
     }

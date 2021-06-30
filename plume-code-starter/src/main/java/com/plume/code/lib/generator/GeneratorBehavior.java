@@ -48,54 +48,22 @@ public abstract class GeneratorBehavior {
     }
 
     public static final String BASE_FILE_PATH = "src/main/java/";
-
     public static final String BASE_TEMPLATE_PATH = "velocity/";
 
-    protected abstract String getPackageName();
+    /**
+     * @return like 'MybatisPlus-ENT.java.tpl'
+     */
+    protected abstract String getTemplateName();
 
     /**
-     * like 'userService.java'
-     *
-     * @return
+     * @return like 'userService.java'
      */
     protected abstract String getFileName();
 
-    @SneakyThrows
-    protected String getFilePath() {
-        URL resource = this.getClass().getClassLoader().getResource("");
-
-        if (null == resource) {
-            throw new RuntimeException("can't find the resource URL");
-        }
-
-        String downloadPath = resource.getPath().concat("download");
-        File downloadPathFile = new File(downloadPath);
-
-        if (!downloadPathFile.exists()) {
-            boolean mkdirs = downloadPathFile.mkdirs();
-            if (!mkdirs) {
-                throw new FileNotFoundException(downloadPath);
-            }
-        }
-
-        String projectName = settingModel.getProjectName();
-        String packagePath = BASE_FILE_PATH.concat(getPackageName().replace(".", "/"));
-
-        return String.format("%s/%s/%s/%s/%s",
-                downloadPath,
-                settingModel.getBatchNo(),
-                projectName,
-                packagePath,
-                getFileName());
-    }
-
     /**
-     * @return like 'service.java.tpl' or 'serviceImpl.java.tpl'
+     * @return full file path
      */
-    protected String getTemplateName() {
-        return this.getClass().getSimpleName()
-                .replace("GeneratorBehavior", "").concat(".java.tpl");
-    }
+    protected abstract String getFilePath();
 
     @SneakyThrows
     public void generate() {
@@ -120,7 +88,6 @@ public abstract class GeneratorBehavior {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         velocityContext.put("createTime", simpleDateFormat.format(new Date()));
-        velocityContext.put("packageName", getPackageName());
         velocityContext.put("className", classModel.getName());
         velocityContext.put("ClassName", upperFirstCase(classModel.getName()));
         velocityContext.put("tableName", classModel.getTableName());
@@ -129,27 +96,6 @@ public abstract class GeneratorBehavior {
         velocityContext.put("lombok", settingModel.getLombokState());
         velocityContext.put("fieldModelList", fieldModelList);
 
-        List<String> extraPackageNameList = getExtraPackageNameList();
-        velocityContext.put("extraPackageNameList", extraPackageNameList);
-
         return velocityContext;
-    }
-
-    protected List<String> getExtraPackageNameList() {
-        List<String> extraPackageNameList = new ArrayList<>();
-        if (fieldModelList.stream().anyMatch(r -> r.getType().equals("Date"))) {
-            extraPackageNameList.add("import java.util.Date;");
-        }
-
-        if (fieldModelList.stream().anyMatch(r -> r.getType().equals("BigDecimal"))) {
-            extraPackageNameList.add("import java.math.BigDecimal;");
-        }
-
-        if (fieldModelList.stream().anyMatch(r -> r.getType().equals("Timestamp"))) {
-            extraPackageNameList.add("import java.sql.Timestamp;");
-        }
-
-
-        return extraPackageNameList;
     }
 }

@@ -7,16 +7,21 @@ import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
 
 @Component
 @Scope("prototype")
-class MybatisPlusEntGeneratorBehavior extends GeneratorBehavior {
+class DTOGeneratorBehavior extends JavaGeneratorBehavior {
+
+    @Override
+    protected String getTemplateName() {
+        return "DTO.java.tpl";
+    }
 
     @Override
     protected String getPackageName() {
-        return settingModel.getBasePackageName().concat(".mapper.entity");
+        return settingModel.getBasePackageName().concat(".service.dto");
     }
 
     @Override
     protected String getFileName() {
-        return String.format("%sENT.java", upperFirstCase(classModel.getName()));
+        return String.format("%sDTO.java", upperFirstCase(classModel.getName()));
     }
 
 

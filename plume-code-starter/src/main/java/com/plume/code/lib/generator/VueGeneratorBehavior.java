@@ -12,11 +12,6 @@ import java.net.URL;
  */
 public abstract class VueGeneratorBehavior extends GeneratorBehavior {
 
-    @Override
-    protected String getPackageName() {
-        return StringUtils.EMPTY;
-    }
-
     @SneakyThrows
     @Override
     protected String getFilePath() {
