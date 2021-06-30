@@ -1,5 +1,6 @@
 package com.plume.code.lib.generator;
 
+import com.plume.code.common.helper.GeneratorHelper;
 import lombok.SneakyThrows;
 import org.apache.velocity.VelocityContext;
 
@@ -50,12 +51,21 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
     protected VelocityContext getVelocityContext() {
         VelocityContext velocityContext = super.getVelocityContext();
 
+        velocityContext.put("basePackageName", settingModel.getBasePackageName());
         velocityContext.put("packageName", getPackageName());
-        velocityContext.put("extraPackageNameList", getExtraPackageNameList());
+
+        String entityPackageName = settingModel.getBasePackageName()
+                .concat(String.format(".entity.%sENT;", GeneratorHelper.upperFirstCase(classModel.getName())));
+        velocityContext.put("entityPackageName", entityPackageName);
+
+        String interfacePackageName = settingModel.getBasePackageName().concat(".service");
+        velocityContext.put("interfacePackageName", interfacePackageName);
+
+        velocityContext.put("typePackageNameList", getTypePackageNameList());
         return velocityContext;
     }
 
-    protected List<String> getExtraPackageNameList() {
+    protected List<String> getTypePackageNameList() {
         List<String> extraPackageNameList = new ArrayList<>();
         if (fieldModelList.stream().anyMatch(r -> r.getType().equals("Date"))) {
             extraPackageNameList.add("import java.util.Date;");

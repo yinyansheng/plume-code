@@ -55,8 +55,12 @@ public class MysqlGeneratorTests {
                 .tableNameSet(new HashSet<>(Arrays.asList("test_user", "test_student")))
                 .templateNameSet(new HashSet<>(Arrays.asList(
                         "MybatisPlus-ENT.java.tpl",
-                        "Service.java.tpl",
-                        "ServiceImpl.java.tpl"
+//                        "Service.java.tpl",
+//                        "ServiceImpl.java.tpl",
+                        "MybatisPlus-Mapper.java.tpl",
+                        "MybatisPlus-Service.java.tpl",
+                        "MybatisPlus-ServiceImpl.java.tpl",
+                        "DTO.java.tpl"
                 )))
                 .lombokState(true)
                 .build();

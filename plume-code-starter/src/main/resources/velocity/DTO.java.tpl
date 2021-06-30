@@ -1,7 +1,7 @@
 package ${packageName};
 
 #foreach(${extraPackageName} in ${extraPackageNameList})
-${extraPackageName}
+${typePackageName}
 #end
 
 import java.io.Serializable;

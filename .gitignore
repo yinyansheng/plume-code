@@ -1,6 +1,4 @@
 ### IntelliJ IDEA ###
-/.idea
-/logs
 *.iws
 *.iml
 *.ipr
@@ -8,6 +6,7 @@
 *.log
 *.gz
 */target/
-.idea
 */node_modules/
 */dist/
+/.idea/
+/logs/

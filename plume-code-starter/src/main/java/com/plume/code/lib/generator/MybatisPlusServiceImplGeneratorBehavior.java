@@ -7,16 +7,16 @@ import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
 
 @Component
 @Scope("prototype")
-class ServiceImplGeneratorBehavior extends JavaGeneratorBehavior {
+class MybatisPlusServiceImplGeneratorBehavior extends JavaGeneratorBehavior {
+
+    @Override
+    protected String getTemplateName() {
+        return "MybatisPlus-ServiceImpl.java.tpl";
+    }
 
     @Override
     protected String getPackageName() {
         return settingModel.getBasePackageName().concat(".service.impl");
-    }
-
-    @Override
-    protected String getTemplateName() {
-        return "ServiceImpl.java.tpl";
     }
 
     @Override
