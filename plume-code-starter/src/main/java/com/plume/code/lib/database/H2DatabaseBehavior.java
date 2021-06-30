@@ -27,8 +27,8 @@ class H2DatabaseBehavior extends DatabaseBehavior {
 
     private static final String SCHEME_SQL = "SELECT database()";
 
-    private static final String TABLE_SQL = "SELECT * FROM INFORMATION_SCHEMA.TABLES " +
-            "WHERE TABLE_TYPE='TABLE' AND TABLE_CATALOG=?";
+    private static final String TABLE_SQL = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES " +
+            "WHERE TABLE_CATALOG=?";
 
     private static final String COLUMN_SQL = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS " +
             "WHERE TABLE_CATALOG=? AND TABLE_NAME=? ORDER BY ORDINAL_POSITION";
@@ -50,8 +50,7 @@ class H2DatabaseBehavior extends DatabaseBehavior {
     @Override
     public List<String> listTableName() {
         String schema = getDatabaseName();
-        List<H2TableModel> tableModelList = getJdbcTemplate().query(TABLE_SQL, new BeanPropertyRowMapper<>(H2TableModel.class), schema);
-        return tableModelList.stream().map(H2TableModel::getTableName).collect(Collectors.toList());
+        return getJdbcTemplate().queryForList(TABLE_SQL, String.class, schema);
     }
 
     @Override

@@ -52,7 +52,7 @@ public abstract class GeneratorBehavior {
     @SneakyThrows
     private String getProjectPath() {
         String userDirPath = System.getProperty("user.dir");
-        String downloadPath = userDirPath.concat("/plume-code-download");
+        String downloadPath = userDirPath.concat("\\plume-code-download");
         File downloadPathFile = new File(downloadPath);
 
         if (!downloadPathFile.exists()) {

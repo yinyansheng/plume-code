@@ -1,4 +1,4 @@
-package com.plume.code.controller;
+package com.plume.code.common.advice;
 
 import com.plume.code.controller.vo.R;
 import lombok.extern.slf4j.Slf4j;

@@ -41,13 +41,10 @@ public class GeneratorServiceImpl implements GeneratorService {
         List<GeneratorBehavior> generatorBehaviorList = getGeneratorBehaviorList(connectionModel, settingModel);
         generatorBehaviorList.forEach(GeneratorBehavior::generate);
 
-        URL resource = this.getClass().getClassLoader().getResource("");
+        String userDirPath = System.getProperty("user.dir");
+        String downloadPath = userDirPath.concat("/plume-code-download/");
 
-        if (null == resource) {
-            throw new RuntimeException("can't find the resource URL");
-        }
-
-        String directoryPath = resource.getPath().concat("download/").concat(settingModel.getBatchNo());
+        String directoryPath = downloadPath.concat(settingModel.getBatchNo());
 
         if (!(new File(directoryPath).exists())) {
             throw new FileNotFoundException(directoryPath);
@@ -58,7 +55,6 @@ public class GeneratorServiceImpl implements GeneratorService {
         return ResultModel.builder()
                 .directoryPath(directoryPath)
                 .zipPath(zip.getPath())
-                .zipUrl("/download/".concat(zip.getName()))
                 .build();
     }
 
