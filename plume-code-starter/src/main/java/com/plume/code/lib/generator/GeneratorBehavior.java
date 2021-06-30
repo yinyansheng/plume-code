@@ -14,7 +14,9 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.StringWriter;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,6 +31,7 @@ public abstract class GeneratorBehavior {
     protected SettingModel settingModel;
     protected ClassModel classModel;
     protected List<FieldModel> fieldModelList;
+    protected String projectPath;
 
     void initialize(ContextModel contextModel) {
         this.settingModel = contextModel.getSettingModel();
@@ -42,6 +45,34 @@ public abstract class GeneratorBehavior {
         if (StringUtils.isEmpty(settingModel.getBasePackageName())) {
             throw new IllegalArgumentException("package name must be not empty");
         }
+
+        projectPath = getProjectPath();
+    }
+
+    @SneakyThrows
+    private  String getProjectPath() {
+        URL resource = this.getClass().getClassLoader().getResource("");
+
+        if (null == resource) {
+            throw new RuntimeException("can't find the resource URL");
+        }
+
+        String downloadPath = resource.getPath().concat("download");
+        File downloadPathFile = new File(downloadPath);
+
+        if (!downloadPathFile.exists()) {
+            boolean mkdirs = downloadPathFile.mkdirs();
+            if (!mkdirs) {
+                throw new FileNotFoundException(downloadPath);
+            }
+        }
+
+        String projectName = settingModel.getProjectName();
+
+        return String.format("%s/%s/%s",
+                downloadPath,
+                settingModel.getBatchNo(),
+                projectName);
     }
 
     public static final String BASE_FILE_PATH = "src/main/java/";

@@ -54,13 +54,20 @@ public class MysqlGeneratorTests {
                 .projectName("plume-code")
                 .tableNameSet(new HashSet<>(Arrays.asList("test_user", "test_student")))
                 .templateNameSet(new HashSet<>(Arrays.asList(
-                        "MybatisPlus-ENT.java.tpl",
+                        "ElementUi-api.js.tpl",
+                        "ElementUi-Dialog.vue.tpl",
+                        "ElementUi-index.js.tpl",
+                        "ElementUi-Main.vue.tpl",
+                        "ElementUi-object.js.tpl",
+                        "ElementUi-Search.vue.tpl",
+                        "ElementUi-Table.vue.tpl"
+//                        "MybatisPlus-ENT.java.tpl",
 //                        "Service.java.tpl",
 //                        "ServiceImpl.java.tpl",
-                        "MybatisPlus-Mapper.java.tpl",
-                        "MybatisPlus-Service.java.tpl",
-                        "MybatisPlus-ServiceImpl.java.tpl",
-                        "DTO.java.tpl"
+//                        "MybatisPlus-Mapper.java.tpl",
+//                        "MybatisPlus-Service.java.tpl",
+//                        "MybatisPlus-ServiceImpl.java.tpl",
+//                        "DTO.java.tpl"
                 )))
                 .lombokState(true)
                 .build();

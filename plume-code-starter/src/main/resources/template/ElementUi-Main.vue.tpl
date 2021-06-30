@@ -1,50 +1,43 @@
 <template>
-  <d2-container>
-    <Search :search-form="searchForm" @search="load" @show-add-modal="showAddModal" @batch-del="batchDelete"/>
-    <Table :search-form="searchForm" ref="table" @show-edit-modal="showEditModal"/>
-    <EditModal ref="dialog" @load-data="load"/>
-  </d2-container>
+  <div>
+    <Search ref="search" />
+    <el-row style="text-align: left">
+      <el-button @click="showAdd">Add</el-button>
+    </el-row>
+    <Table ref="table" />
+    <OptionDialog ref="dialog"/>
+  </div>
 </template>
 
 <script>
-import Search from './components/Search'
-import Table from './components/Table'
-import EditModal from './components/EditModal'
-import { searchForm, ${ClassName}ENT } from './components/object'
-
-#set( $refs = "$refs")
-
+import Search from './Search'
+import Table from './Table'
+import OptionDialog from './OptionDialog'
+import {${ClassName}Ent} from "./object";
 export default {
-  name: '${className}',
-  components: {
-    Search,
-    Table,
-    EditModal
-  },
-  data () {
+  name: "Bankcard",
+  components: {Search,Table, OptionDialog},
+  provide: function () {
     return {
-      searchForm
+      loadData: this.loadData,
+      showEdit: this.showEdit
     }
-  },
-  mounted: function () {
-    this.load(true)
   },
   methods: {
-    load (isSearch) {
-      this.${refs}.table.load(isSearch)
+    loadData(isFirst) {
+      const searchForm = this.$refs.search.getSearchForm()
+      this.$refs.table.loadData(isFirst, searchForm)
     },
-    showAddModal () {
-      this.${refs}.dialog.open(new ${ClassName}ENT())
+    showEdit(row) {
+      this.$refs.dialog.show(true, {...row})
     },
-    batchDelete () {
-      this.${refs}.table.batchDelete()
+    showAdd() {
+      this.$refs.dialog.show(false, new ${ClassName}Ent())
     },
-    showEditModal (row) {
-      this.${refs}.dialog.open({ ...row }, true)
-    },
-    release () {
-      this.${refs}.table.release()
-    }
   }
 }
 </script>
+
+<style scoped>
+
+</style>

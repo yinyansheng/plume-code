@@ -1,98 +1,99 @@
 <template>
-  <div class="table-container">
-    <el-table ref="table" :data="data" :loading="loading" @on-selection-change="handleSelectChange" highlight-row>
+    <div>
+      <div class="table-container">
+        <el-table stripe border :data="data" v-loading="loading" highlight-current-row>
 #foreach(${fieldModel} in ${fieldModelList})
     <el-table-column prop="${fieldModel.name}" label="${fieldModel.comment}" width="300" align="center"/>
 #end
-    <el-table-column prop="id" label="操作" width="250" align="center">
-      <template slot-scope="scope">
-        <el-button size="mini" @click="showEditModel(scope.row)">编辑</el-button>
-        <el-popconfirm
-          placement="top"
-          confirm-button-text='确定'
-          cancel-button-text='取消'
-          icon="el-icon-info"
-          icon-color="red"
-          confirm-button-type="danger"
-          title="确定删除吗？"
-          @confirm="disable(scope.row)"
-        >
-          <el-button style="margin-left: 10px" type="danger" size="mini" slot="reference">删除</el-button>
-        </el-popconfirm>
-      </template>
-    </el-table-column>
-    </el-table>
-    <div class="page-container">
-      <el-pagination
-        background
-        @size-change="sizeChange"
-        @current-change="currentChange"
-        :current-page="pageInfo.pageIndex"
-        :page-sizes="[10, 20, 50, 100]"
-        :page-size="pageInfo.pageSize"
-        layout="total,sizes, prev, pager, next"
-        :total="pageInfo.total">
-      </el-pagination>
+          <el-table-column label="操作" width="100">
+            <template slot-scope="{row}">
+              <el-button @click="handleShowEdit(row)" type="text" size="small">编辑</el-button>
+              <el-button @click="deleteRow(row)" type="text" size="small">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="page-container">
+        <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="pageInfo.page"
+            :page-sizes="[10, 20, 30]"
+            :page-size="pageInfo.limit"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="pageInfo.total">
+        </el-pagination>
+      </div>
     </div>
-  </div>
 </template>
 <script>
-import api from '@/api'
-
+import {
+  Page,
+  Delete,
+} from '@/api/bankcard'
 export default {
-  props: {
-    searchForm: {
-      type: Object,
-      required: true
-    }
-  },
-  data: function () {
+  name: "Table",
+  inject: ['showEdit'],
+  data() {
     return {
       loading: false,
       data: [],
       pageInfo: {
-        pageIndex: 1,
-        pageSize: 10,
+        page: 1,
+        limit: 10,
         total: 0
       }
     }
   },
-  mounted: function () {
-
-  },
   methods: {
-    load (isSearch = false) {
-      isSearch && (this.pageInfo.pageIndex = 1)
+    loadData(firstPage = false, searchForm) {
+      firstPage && (this.pageInfo.page = 1)
+      let req = {...searchForm, ...this.pageInfo}
+      this.doLoadData(req)
+    },
+    doLoadData(req) {
       this.loading = true
-      api.config.page({ ...this.searchForm, ...this.pageInfo }).then(res => {
-        this.data = res.records
-        this.pageInfo.total = res.total
+      Page(req).then(res => {
+        this.data = res.data.records
+        this.pageInfo.total = res.data.total
         this.loading = false
       })
     },
-    disable (row) {
-      api.config.disable({ id: row.id }).then(res => {
-        this.$message.success('删除成功！')
-        this.load(true)
+    deleteRow(row) {
+      this.$confirm('确定删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        Delete({id: row.id}).then(res => {
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+          this.loadData()
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     },
-    batchDelete () {
-
+    handleSizeChange(v) {
+      this.pageInfo.limit = v
+      this.loadData()
     },
-    handleSelectChange (selection) {
-      this.selectedRows = selection
+    handleCurrentChange(v) {
+      this.pageInfo.page = v
+      this.loadData()
     },
-    showEditModel (row) {
-      this.$emit('show-edit-modal', row)
+    handleShowEdit(row) {
+      this.showEdit({...row})
     },
-    sizeChange (v) {
-      this.pageInfo.pageSize = v
-      this.load(false)
-    },
-    currentChange (v) {
-      this.pageInfo.pageIndex = v
-      this.load(false)
-    }
   }
 }
 </script>
+
+<style scoped>
+
+</style>

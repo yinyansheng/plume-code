@@ -20,29 +20,10 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
     @SneakyThrows
     @Override
     protected String getFilePath() {
-        URL resource = this.getClass().getClassLoader().getResource("");
-
-        if (null == resource) {
-            throw new RuntimeException("can't find the resource URL");
-        }
-
-        String downloadPath = resource.getPath().concat("download");
-        File downloadPathFile = new File(downloadPath);
-
-        if (!downloadPathFile.exists()) {
-            boolean mkdirs = downloadPathFile.mkdirs();
-            if (!mkdirs) {
-                throw new FileNotFoundException(downloadPath);
-            }
-        }
-
-        String projectName = settingModel.getProjectName();
         String packagePath = BASE_FILE_PATH.concat(getPackageName().replace(".", "/"));
 
-        return String.format("%s/%s/%s/%s/%s",
-                downloadPath,
-                settingModel.getBatchNo(),
-                projectName,
+        return String.format("%s/%s/%s",
+                projectPath,
                 packagePath,
                 getFileName());
     }
