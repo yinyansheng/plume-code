@@ -1,6 +1,6 @@
 package ${packageName};
 
-import ${interfacePackageName}.${ClassName}Service;
+import ${servicePackageName}.${ClassName}Service;
 #if($lombok)
 import lombok.extern.slf4j.Slf4j;
 #end

@@ -39,8 +39,8 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
                 .concat(String.format(".entity.%sENT;", GeneratorHelper.upperFirstCase(classModel.getName())));
         velocityContext.put("entityPackageName", entityPackageName);
 
-        String interfacePackageName = settingModel.getBasePackageName().concat(".service");
-        velocityContext.put("interfacePackageName", interfacePackageName);
+        String servicePackageName = settingModel.getBasePackageName().concat(".service");
+        velocityContext.put("servicePackageName", servicePackageName);
 
         velocityContext.put("typePackageNameList", getTypePackageNameList());
         return velocityContext;
