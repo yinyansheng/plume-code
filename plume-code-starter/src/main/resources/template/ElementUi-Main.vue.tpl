@@ -9,6 +9,8 @@
   </div>
 </template>
 
+#set($refs="$refs")
+
 <script>
 import Search from './Search'
 import Table from './Table'
@@ -29,10 +31,10 @@ export default {
       this.$refs.table.loadData(isFirst, searchForm)
     },
     showEdit(row) {
-      this.$refs.dialog.show(true, {...row})
+      this.${refs}.dialog.show(true, {...row})
     },
     showAdd() {
-      this.$refs.dialog.show(false, new ${ClassName}Ent())
+      this.${refs}.dialog.show(false, new ${ClassName}Ent())
     },
   }
 }
