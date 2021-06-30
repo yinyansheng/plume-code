@@ -15,7 +15,7 @@
   </el-dialog>
 </template>
 <script>
-
+#set($refs="$refs")
 import {
   Add,
   Update
@@ -38,7 +38,7 @@ export default {
         console.log("xxxx");
     },
     submit() {
-      this.$refs.ent.validate((validate) => {
+      this.${refs}.ent.validate((validate) => {
         if (validate) {
           this.isEdit ? this.updateRow() : this.addRow()
         }

@@ -15,10 +15,11 @@
           </el-option>
         </el-select>
         <div style="padding:10px">
-          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选
+          </el-checkbox>
           <div style="margin: 15px 0;"></div>
           <el-checkbox-group v-model="checkedTables" @change="handleCheckedChange">
-            <el-checkbox style="display: block" v-for="table in tables" :label="table" :key="table">{{table}}
+            <el-checkbox style="display: block" v-for="table in tables" :label="table" :key="table">{{ table }}
             </el-checkbox>
           </el-checkbox-group>
         </div>
@@ -43,95 +44,97 @@
               <span>项目信息</span>
             </div>
             <div>
-              <el-form-item label="页面层" prop="name">
-                <el-tooltip style="margin-right: 10px" effect="dark" content="生成api.js,CURD.vue结构" placement="top">
+              <el-form-item label="页面层" prop="portalMode">
+                <el-tooltip style="margin-right: 10px" effect="dark" content="生成后台管理页面" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox v-model="settingsForm.portalMode" :true-label="1" :false-label="0">
-                  <img :src="`${$baseUrl}image/logo/elementui.svg`" width="70px" height="20px"/>
-                </el-checkbox>
-                <el-checkbox v-model="settingsForm.portalMode" :true-label="2" :false-label="0">
-                  <img :src="`${$baseUrl}image/logo/iview.svg`" width="20px" height="20px"/>iview
-                </el-checkbox>
+                <el-checkbox v-model="settingsForm.portalMode"  :true-label="1" :false-label="0" label="Element-UI" />
               </el-form-item>
-              <el-form-item label="控制层" prop="region">
-                <el-tooltip style="margin-right: 10px" effect="dark" content="生成controller类" placement="top">
-                  <i class="el-icon-warning-outline"></i>
-                </el-tooltip>
-                <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.controllerMode_api">api
-                </el-checkbox>
-                <el-checkbox :true-label="2" :false-label="0" v-model="settingsForm.controllerMode_admin">admin
-                </el-checkbox>
-              </el-form-item>
-              <el-form-item label="服务层">
-                <el-tooltip style="margin-right: 10px" effect="dark" content="生成service接口与service实现， DTO类"
+              <el-form-item label="控制层" prop="controller">
+                <el-tooltip style="margin-right: 10px" effect="dark" content="生成UserController类,UserQuery类,UserVO类"
                             placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.serviceMode">service</el-checkbox>
+                <el-checkbox  v-model="settingsForm.controller">Controller
+                </el-checkbox>
+                <el-checkbox v-model="settingsForm.Query">Query</el-checkbox>
+                <el-checkbox v-model="settingsForm.VO">VO</el-checkbox>
               </el-form-item>
-              <el-form-item label="持久层" prop="delivery">
-                <el-tooltip style="margin-right: 10px" effect="dark" content="生成Mapper接口与表对应的实体类" placement="top">
+              <el-form-item label="服务层" prop="service">
+                <el-tooltip style="margin-right: 10px" effect="dark"
+                            content="生成UserService、UserServiceImpl、UserDTO"
+                            placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.repositoryMode"><img
-                  :src="`${$baseUrl}image/logo/mybatis.jpg`" height="20px" width="20px"/>mybatis
-                </el-checkbox>
-                <el-checkbox :true-label="2" :false-label="0" v-model="settingsForm.repositoryMode"><img
-                  :src="`${$baseUrl}image/logo/mybatis-plus.svg`" height="20px" width="20px"/>mybatis plus
-                </el-checkbox>
-                <el-checkbox :true-label="3" :false-label="0" v-model="settingsForm.repositoryMode"><img
-                  :src="`${$baseUrl}image/logo/spring.png`" width="20px" height="20px"/>jpa
-                </el-checkbox>
+                <el-checkbox v-model="settingsForm.service">Service</el-checkbox>
+                <el-checkbox v-model="settingsForm.DTO">DTO</el-checkbox>
+              </el-form-item>
+              <el-form-item label="持久层" prop="repositoryMode">
+                <el-tooltip style="margin-right: 10px" effect="dark" content="生成Mapper、Entity、XML" placement="top">
+                  <i class="el-icon-warning-outline"></i>
+                </el-tooltip>
+                <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.repositoryMode" label="MybatisPlus" />
+                <el-checkbox :true-label="2" :false-label="0" v-model="settingsForm.repositoryMode" label="JPA" />
+                <el-checkbox :true-label="3" :false-label="0" v-model="settingsForm.repositoryMode" label="Mybatis"/>
               </el-form-item>
             </div>
           </el-card>
           <el-card class="box-card">
-            <el-collapse v-model="open" accordion>
-              <el-collapse-item title="高级配置" name="1">
-                <el-form-item label="作者" prop="author">
-                  <el-input v-model="settingsForm.author" placeholder="作者"></el-input>
-                </el-form-item>
-                <el-form-item label="" prop="swaggerState">
-                  <el-checkbox   v-model="settingsForm.swaggerState"><img
-                    :src="`${$baseUrl}image/logo/swagger.png`" width="20px" height="20px"/>swagger
-                  </el-checkbox>
-                  <el-checkbox   v-model="settingsForm.lombokState"><img
-                    :src="`${$baseUrl}image/logo/lombok.png`" width="20px" height="20px"/>lombok
-                  </el-checkbox>
-                </el-form-item>
-                <el-form-item label="表名前缀" prop="tablePrefix">
-                  <el-tooltip style="margin-right: 10px" effect="dark" content="填写前缀生成的文件将移除前缀" placement="top">
-                    <i class="el-icon-warning-outline"></i>
-                  </el-tooltip>
-                  <el-input v-model="settingsForm.tablePrefix" style="display: inline-block;" placeholder="例如：plume_"></el-input>
-                </el-form-item>
-                <el-form-item label="字段前缀" prop="columnPrefix">
-                  <el-tooltip style="margin-right: 10px" effect="dark" content="填写前缀生成的文件将移除前缀" placement="top">
-                    <i class="el-icon-warning-outline"></i>
-                  </el-tooltip>
-                  <el-input v-model="settingsForm.columnPrefix" placeholder="例如：n_,s_,d_"></el-input>
-                </el-form-item>
-              </el-collapse-item>
-            </el-collapse>
+            <div slot="header" class="clearfix">
+              <span>高级配置</span>
+            </div>
+            <div>
+              <el-form-item label="作者" prop="author">
+                <el-input v-model="settingsForm.author" placeholder="作者"></el-input>
+              </el-form-item>
+              <el-form-item label="表名前缀" prop="tablePrefix">
+                <el-input v-model="settingsForm.tablePrefix" style="display: inline-block;"
+                          placeholder="填写前缀生成的文件将移除前缀，例如：plume_"></el-input>
+              </el-form-item>
+              <el-form-item label="字段前缀" prop="columnPrefix">
+                <el-input v-model="settingsForm.columnPrefix" placeholder="填写前缀生成的文件将移除前缀，例如：n_,s_,d_"></el-input>
+              </el-form-item>
+            </div>
           </el-card>
-          <el-row v-if="this.checkedTables.length > 0">
-            <el-button type="primary" @click="submitForm('settingsForm')">一键下载</el-button>
-            <el-button @click="resetForm('settingsForm')">查看</el-button>
-          </el-row>
+
         </el-form>
       </el-col>
     </el-row>
+    <template slot="footer">
+      <el-row>
+        <el-col :span="20" :offset="4">
+          <el-button :loading="loading"  type="primary" @click="submitForm('settingsForm')">一键下载</el-button>
+          <el-button :loading="loading"  type="primary" @click="resetForm('settingsForm')">代码预览</el-button>
+        </el-col>
+      </el-row>
+    </template>
   </d2-container>
 </template>
 
 <script>
 import api from '@api'
+const templateMap = {
+  1: ['MybatisPlus-ENT.java.tpl', 'MybatisPlus-Mapper.java.tpl'],
+  2: ['JPA-ENT.java.tpl', 'JPA-Mapper.java.tpl'],
+  3: ['Mybatis-ENT.java.tpl', 'Mybatis-Mapper.java.tpl'],
+  service: {
+    0: ['Service.java.tpl', 'ServiceImpl.java.tpl'],
+    1: ['MybatisPlus-Service.java.tpl', 'MybatisPlus-ServiceImpl.java.tpl'],
+    2: ['JPA-Service.java.tpl', 'JPA-ServiceImpl.java.tpl'],
+    3: ['Mybatis-Service.java.tpl', 'Mybatis-ServiceImpl.java.tpl']
+  },
+  controller: ['ElementUi-api.js.tpl', 'ElementUi-Dialog.vue.tpl', 'ElementUi-index.js.tpl', 'ElementUi-Main.vue.tpl', 'ElementUi-object.js.tpl', 'ElementUi-Search.vue.tpl', 'ElementUi-Table.vue.tpl'],
+  VO: ['VO.java.tpl'],
+  DTO: ['DTO.java.tpl'],
+  Query: ['Query.java.tpl']
+}
+
 export default {
   name: 'generator',
 
   data () {
     return {
+      loading:false,
       apiurl: process.env.VUE_APP_API,
       open: '0',
       databases: [],
@@ -147,14 +150,16 @@ export default {
         columnPrefix: '',
         projectName: 'plume_code',
         basePackageName: 'com.github.plume',
-        author: '',
+        author: 'plume-code',
         swaggerState: false,
         lombokState: false,
-        controllerMode_api: 0,
-        controllerMode_admin: 2,
-        controllerMode: 2,
-        serviceMode: 1,
-        repositoryMode: 2
+        controller: true,
+        Query: true,
+        VO: true,
+        service: true,
+        serviceImpl: true,
+        DTO: true,
+        repositoryMode: 1
       },
       rules: {
         projectName: [
@@ -213,23 +218,44 @@ export default {
       }))
     },
     submitForm (formName) {
+      if (this.checkedTables.length === 0) {
+        this.$message.warning('请选择要生成的表')
+        return
+      }
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const req = { ...this.settingsForm }
-          if (req.controllerMode_api > 0 && req.controllerMode_admin > 0) {
-            req.controllerMode = 3
-          } else if (req.controllerMode_api === 1) {
-            req.controllerMode = 1
-          } else if (req.controllerMode_admin === 2) {
-            req.controllerMode = 2
+          const templateNameSet = []
+
+          if (req.repositoryMode) {
+            templateNameSet.push(...templateMap[req.repositoryMode])
+            req.service && templateNameSet.push(...templateMap.service[req.repositoryMode])
+          } else {
+            req.service && templateNameSet.push(...templateMap.service[0])
           }
+
+          req.controller && templateNameSet.push(...templateMap.controller)
+          req.VO && templateNameSet.push(...templateMap.VO)
+          req.DTO && templateNameSet.push(...templateMap.DTO)
+          req.Query && templateNameSet.push(...templateMap.Query)
+
+          req.templateNameSet = templateNameSet
+
           req.tableNameSet = this.checkedTables
-          api.generate({ connectionModel: this.selectedSetting, settingModel: req }).then(res => {
+
+          console.log(templateNameSet)
+          this.loading = true
+          api.generate({
+            connectionModel: this.selectedSetting,
+            settingModel: req
+          }).then(res => {
             if (res.success) {
               window.open(`${this.apiurl}${res.data.zipUrl}`)
             } else {
               this.$message.warning(res.message)
             }
+          }).finally(() => {
+            this.loading = false
           })
         } else {
           return false
@@ -241,7 +267,7 @@ export default {
     },
     getSettings () {
       return this.$store.dispatch('d2admin/db/get', {
-        dbName: 'sys',
+        dbName: 'database',
         path: 'database.settings',
         defaultValue: []
       }, { root: true })
@@ -252,5 +278,8 @@ export default {
 <style lang="scss" scoped>
 .box-card {
   margin-bottom: 10px;
+}
+.el-checkbox {
+  width: 120px
 }
 </style>

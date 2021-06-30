@@ -15,7 +15,7 @@ import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
 public class ElementUiTableGeneratorBehavior extends VueGeneratorBehavior {
     @Override
     protected String getFileName() {
-        return "components/Table.vue";
+        return "Table.vue";
     }
 
     @Override
