@@ -1,8 +1,8 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.lib.database.model.ContextModel;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.lib.database.model.ContextModel;
 import com.plume.code.lib.database.model.FieldModel;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
@@ -92,11 +92,9 @@ public abstract class GeneratorBehavior {
     /**
      * @return like 'service.java.tpl' or 'serviceImpl.java.tpl'
      */
-    protected String getTemplatePath() {
-        String templateFileName = this.getClass().getSimpleName()
+    protected String getTemplateName() {
+        return this.getClass().getSimpleName()
                 .replace("GeneratorBehavior", "").concat(".java.tpl");
-
-        return BASE_TEMPLATE_PATH.concat(templateFileName);
     }
 
     @SneakyThrows
@@ -106,7 +104,7 @@ public abstract class GeneratorBehavior {
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocityEngine.init();
 
-        Template template = velocityEngine.getTemplate(getTemplatePath(), StandardCharsets.UTF_8.name());
+        Template template = velocityEngine.getTemplate(BASE_TEMPLATE_PATH.concat(getTemplateName()), StandardCharsets.UTF_8.name());
         VelocityContext velocityContext = getVelocityContext();
 
         StringWriter stringWriter = new StringWriter();

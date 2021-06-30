@@ -17,4 +17,9 @@ public class ElementTableVueGeneratorBehavior extends VueGeneratorBehavior{
     protected String getFileName() {
         return "components/Table.vue";
     }
+
+    @Override
+    protected String getTemplateName() {
+        return "elementTableVue.vue.tpl";
+    }
 }

@@ -1,7 +1,5 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.common.helper.GeneratorHelper;
-import com.sun.tools.internal.ws.processor.generator.GeneratorUtil;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,14 +47,4 @@ public abstract class VueGeneratorBehavior extends GeneratorBehavior {
                 getFileName());
     }
 
-    /**
-     * @return like 'table.vue.tpl' or 'search.vue.tpl'
-     */
-    @Override
-    protected String getTemplatePath() {
-        String templateFileName = GeneratorHelper.lowerFirstCase(this.getClass().getSimpleName())
-                .replace("GeneratorBehavior", "").concat(".vue.tpl");
-
-        return BASE_TEMPLATE_PATH.concat(templateFileName);
-    }
 }

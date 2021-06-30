@@ -17,4 +17,9 @@ public class MainVueGeneratorBehavior extends VueGeneratorBehavior{
     protected String getFileName() {
         return upperFirstCase(classModel.getName()).concat("Main.vue");
     }
+
+    @Override
+    protected String getTemplateName() {
+        return "mainVue.vue.tpl";
+    }
 }
