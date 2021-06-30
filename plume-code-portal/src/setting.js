@@ -33,14 +33,14 @@ export default {
   theme: {
     list: [
       {
-        title: 'Chester',
-        name: 'chester',
-        preview: 'image/theme/chester/preview@2x.png'
-      },
-      {
         title: 'd2admin 经典',
         name: 'd2',
         preview: 'image/theme/d2/preview@2x.png'
+      },
+      {
+        title: 'Chester',
+        name: 'chester',
+        preview: 'image/theme/chester/preview@2x.png'
       },
       {
         title: 'Element',

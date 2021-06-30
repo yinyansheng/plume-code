@@ -3,7 +3,7 @@ const VueFilenameInjector = require('@d2-projects/vue-filename-injector')
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
 const forElementUI = require('webpack-theme-color-replacer/forElementUI')
 const cdnDependencies = require('./dependencies-cdn')
-const {chain, set, each} = require('lodash')
+const { chain, set, each } = require('lodash')
 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
@@ -13,7 +13,7 @@ process.env.VUE_APP_VERSION = require('./package.json').version
 process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYYY-M-D HH:mm:ss')
 
 // 基础路径 注意发布之前要先修改这里
-const publicPath = process.env.VUE_APP_PUBLIC_PATH || '/'
+const publicPath = process.env.NODE_ENV === 'production' ? './' : process.env.VUE_APP_PUBLIC_PATH
 
 // 设置不参与构建的库
 const externals = {}
@@ -54,7 +54,7 @@ module.exports = {
   pages,
   configureWebpack: config => {
     const configNew = {
-      devtool: process.env.NODE_ENV === 'development' ? 'source-map' : undefined,
+      devtool: process.env.NODE_ENV === 'development' ? 'source-map' : undefined
     }
     if (process.env.NODE_ENV === 'production') {
       configNew.externals = externals

@@ -17,7 +17,7 @@
         icon-color="red"
         confirm-button-type="danger"
         title="确定清空配置吗？"
-        @confirm="handleClearSetting"
+        @onConfirm="handleClearSetting"
       >
         <el-button style="margin-left: 10px" type="danger" slot="reference" >清空配置</el-button>
       </el-popconfirm>
@@ -35,16 +35,12 @@
             icon-color="red"
             confirm-button-type="danger"
             title="确定删除吗？"
-            @confirm="handleRemove($index, row)"
+            @onConfirm="handleRemove($index, row)"
           >
             <el-button style="margin-right: 10px" type="danger"  slot="reference">删 除</el-button>
           </el-popconfirm>
           <el-button type="primary" @click="handleShowEdit($index, row)">编 辑</el-button>
           <el-button type="primary" style="margin-right: 10px;" @click="handleTest(row)">测试连接</el-button>
-
-          <i v-if="row.isValid" style="color:green" class="el-icon-check"></i>
-          <i v-else style="color: red" class="el-icon-close"></i>
-
         </template>
       </el-table-column>
       <el-table-column
@@ -67,6 +63,16 @@
         label="jdbc url">
       </el-table-column>
       <el-table-column
+        prop="isValid"
+        label="状态"
+        width="100"
+      >
+        <template slot-scope="{$index, row}">
+          <i v-if="row.isValid" style="color:green" class="el-icon-success"></i>
+          <i v-else style="color: red" class="el-icon-error"></i>
+        </template>
+      </el-table-column>
+      <el-table-column
         prop="username"
         label="用户名"
         width="200">
@@ -76,20 +82,21 @@
         label="密码"
         width="200">
       </el-table-column>
+
     </el-table>
-    <el-dialog title="数据库配置" :visible.sync="dialogFormVisible">
+    <el-dialog title="数据库配置" width="30%" :visible.sync="dialogFormVisible">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="120px">
         <el-form-item label="数据库名称" prop="name">
           <el-input v-model="form.name"/>
         </el-form-item>
         <el-form-item label="数据库类型" prop="type">
-          <el-select v-model="form.type" placeholder="请选择数据库类型">
+          <el-select style="width: 100%;" v-model="form.type" placeholder="请选择数据库类型">
             <el-option label="MySQL" value="mysql"></el-option>
             <el-option label="H2" value="h2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="数据库驱动" prop="driver">
-          <el-select v-model="form.driver" placeholder="请选择数据库驱动">
+          <el-select style="width: 100%;"  v-model="form.driver" placeholder="请选择数据库驱动">
             <el-option label="com.mysql.cj.jdbc.Driver" value="com.mysql.cj.jdbc.Driver"></el-option>
             <el-option label="com.mysql.jdbc.Driver" value="com.mysql.jdbc.Driver"></el-option>
             <el-option label="org.h2.Driver" value="org.h2.Driver"></el-option>
@@ -105,7 +112,7 @@
           <el-input v-model="form.password"/>
         </el-form-item>
       </el-form>
-      <div slot="footer" style="text-align: left">
+      <div slot="footer" style="text-align: center">
         <el-button :loading="testing" type="primary" @click="test">{{ testName }}</el-button>
         <el-button @click="submit">保存</el-button>
       </div>
@@ -283,3 +290,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+
+</style>
