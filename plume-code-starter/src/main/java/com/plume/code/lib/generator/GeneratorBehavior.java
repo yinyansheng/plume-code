@@ -14,12 +14,9 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.StringWriter;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +45,7 @@ public abstract class GeneratorBehavior {
     }
 
     public static final String BASE_FILE_PATH = "src/main/java/";
-    public static final String BASE_TEMPLATE_PATH = "velocity/";
+    public static final String BASE_TEMPLATE_PATH = "template/";
 
     /**
      * @return like 'MybatisPlus-ENT.java.tpl'
