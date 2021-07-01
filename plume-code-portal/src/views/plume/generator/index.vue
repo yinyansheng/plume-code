@@ -77,8 +77,8 @@
                 </el-tooltip>
                 <el-checkbox true-label="mybatisPlus" false-label="none" v-model="settingsForm.repositoryMode"
                              label="MybatisPlus"/>
-                <el-checkbox true-label="jpa" false-label="none" v-model="settingsForm.repositoryMode" label="JPA"/>
-                <el-checkbox true-label="mybatis" false-label="none" v-model="settingsForm.repositoryMode"
+                <el-checkbox true-label="jpa" disabled false-label="none" v-model="settingsForm.repositoryMode" label="JPA"/>
+                <el-checkbox true-label="mybatis" disabled false-label="none" v-model="settingsForm.repositoryMode"
                              label="Mybatis"/>
               </el-form-item>
             </div>
