@@ -26,6 +26,13 @@ import 'codemirror/mode/vue/vue.js'
 import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/mode/clike/clike.js'
 import 'codemirror/theme/base16-dark.css'
+
+const postfixModeMap = {
+  js: 'text/javascript',
+  vue: 'text/javascript',
+  java: 'text/x-java'
+}
+
 export default {
   name: 'showCode',
   data () {
@@ -46,7 +53,7 @@ export default {
         lineNumbers: true,
         line: true,
         readOnly: true,
-        mode: 'text/x-java', // "text/x-vue"
+        mode: 'text/x-java', // "text/x-vue" text/x-java
         theme: 'base16-dark'
       },
       loading: false
@@ -59,13 +66,17 @@ export default {
     handleNodeClick (node) {
       if (!node.directory) {
         api.content({ filePath: node.path }).then(res => {
+          const fileName = node.name
+          const index = fileName.lastIndexOf('.')
+          const postfix = fileName.substr(index + 1)
+          this.cmOptions.mode = postfixModeMap[postfix]
           this.content = res.data
         })
       }
     },
     loadCodeTree () {
       api.codeTree({ batchNo: this.batchNo }).then(res => {
-        this.codeTree = [res.data]
+        this.codeTree = [...res.data.children]
       })
     },
     show (batchNo) {
