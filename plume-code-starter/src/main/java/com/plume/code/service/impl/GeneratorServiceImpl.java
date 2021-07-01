@@ -1,7 +1,7 @@
 package com.plume.code.service.impl;
 
 import cn.hutool.core.util.ZipUtil;
-import com.plume.code.common.helper.PathHelper;
+import com.plume.code.common.bean.PathHandler;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.DatabaseBehavior;
@@ -20,7 +20,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -36,13 +35,16 @@ public class GeneratorServiceImpl implements GeneratorService {
     @Autowired
     protected GeneratorBehaviorFactory generatorBehaviorFactory;
 
+    @Autowired
+    private PathHandler pathHandler;
+
     @SneakyThrows
     @Override
     public ResultModel generate(ConnectionModel connectionModel, SettingModel settingModel) {
         List<GeneratorBehavior> generatorBehaviorList = getGeneratorBehaviorList(connectionModel, settingModel);
         generatorBehaviorList.forEach(GeneratorBehavior::generate);
 
-        String downloadPath = PathHelper.getDownloadPath();
+        String downloadPath = pathHandler.getDownloadPath();
         String directoryPath = downloadPath.concat(settingModel.getBatchNo());
 
         if (!(new File(directoryPath).exists())) {

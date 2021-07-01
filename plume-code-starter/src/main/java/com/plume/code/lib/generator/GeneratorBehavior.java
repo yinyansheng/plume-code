@@ -1,6 +1,6 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.common.helper.PathHelper;
+import com.plume.code.common.bean.PathHandler;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.ContextModel;
@@ -13,6 +13,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +34,9 @@ public abstract class GeneratorBehavior {
     protected List<FieldModel> fieldModelList;
     protected String projectPath;
 
+    @Autowired
+    protected PathHandler pathHandler;
+
     void initialize(ContextModel contextModel) {
         this.settingModel = contextModel.getSettingModel();
         this.classModel = contextModel.getClassModel();
@@ -51,7 +55,7 @@ public abstract class GeneratorBehavior {
 
     @SneakyThrows
     private String getProjectPath() {
-        String downloadPath = PathHelper.getDownloadPath();
+        String downloadPath = pathHandler.getDownloadPath();
         File downloadPathFile = new File(downloadPath);
 
         if (!downloadPathFile.exists()) {
