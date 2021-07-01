@@ -30,7 +30,8 @@ import 'codemirror/theme/base16-dark.css'
 const postfixModeMap = {
   js: 'text/javascript',
   vue: 'text/javascript',
-  java: 'text/x-java'
+  java: 'text/x-java',
+  xml: 'text/xml'
 }
 
 export default {

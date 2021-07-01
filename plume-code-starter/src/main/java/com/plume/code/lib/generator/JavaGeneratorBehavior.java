@@ -40,6 +40,7 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
 
         String entityPackageName = settingModel.getBasePackageName()
                 .concat(String.format(".entity.%sENT;", StringHelper.upperFirstCase(classModel.getName())));
+
         velocityContext.put("entityPackageName", entityPackageName);
 
         String servicePackageName = settingModel.getBasePackageName().concat(".service");

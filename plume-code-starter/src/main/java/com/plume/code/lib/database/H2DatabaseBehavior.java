@@ -102,7 +102,7 @@ class H2DatabaseBehavior extends DatabaseBehavior {
 
         JDBCType jdbcType = JDBCType.valueOf(Integer.parseInt(h2ColumnModel.getDataType()));
         fieldModel.setType(getFieldType(jdbcType));
-
+        fieldModel.setJdbcType(jdbcType.getName());
         fieldModel.setValue(h2ColumnModel.getColumnDefault());
         fieldModel.setPk(primaryKeySet.contains(h2ColumnModel.getColumnName()));
         fieldModel.setMultiplePk(primaryKeySet.size() > 1);
