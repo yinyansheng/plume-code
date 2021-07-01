@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.plume.code.common.helper.GeneratorHelper.*;
+import static com.plume.code.common.helper.StringHelper.*;
 
 /**
  * mysql database service implement

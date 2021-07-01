@@ -1,14 +1,7 @@
 package com.plume.code.lib.generator;
 
-import lombok.SneakyThrows;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URL;
-
-import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
 
 /**
  * @author : pdl

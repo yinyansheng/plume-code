@@ -1,6 +1,7 @@
 package com.plume.code.service.impl;
 
 import cn.hutool.core.util.ZipUtil;
+import com.plume.code.common.helper.PathHelper;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.DatabaseBehavior;
@@ -41,9 +42,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         List<GeneratorBehavior> generatorBehaviorList = getGeneratorBehaviorList(connectionModel, settingModel);
         generatorBehaviorList.forEach(GeneratorBehavior::generate);
 
-        String userDirPath = System.getProperty("user.dir");
-        String downloadPath = userDirPath.concat("/plume-code-download/");
-
+        String downloadPath = PathHelper.getDownloadPath();
         String directoryPath = downloadPath.concat(settingModel.getBatchNo());
 
         if (!(new File(directoryPath).exists())) {

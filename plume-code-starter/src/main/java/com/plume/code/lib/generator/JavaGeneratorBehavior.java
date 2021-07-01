@@ -1,6 +1,6 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.common.helper.GeneratorHelper;
+import com.plume.code.common.helper.StringHelper;
 import lombok.SneakyThrows;
 import org.apache.velocity.VelocityContext;
 
@@ -39,7 +39,7 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
         velocityContext.put("packageName", getPackageName());
 
         String entityPackageName = settingModel.getBasePackageName()
-                .concat(String.format(".entity.%sENT;", GeneratorHelper.upperFirstCase(classModel.getName())));
+                .concat(String.format(".entity.%sENT;", StringHelper.upperFirstCase(classModel.getName())));
         velocityContext.put("entityPackageName", entityPackageName);
 
         String servicePackageName = settingModel.getBasePackageName().concat(".service");

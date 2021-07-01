@@ -1,11 +1,9 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.common.helper.GeneratorHelper;
-import org.apache.velocity.VelocityContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
+import static com.plume.code.common.helper.StringHelper.upperFirstCase;
 
 @Component
 @Scope("prototype")

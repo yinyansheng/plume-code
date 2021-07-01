@@ -1,5 +1,6 @@
 package com.plume.code.lib.generator;
 
+import com.plume.code.common.helper.PathHelper;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.ContextModel;
@@ -16,13 +17,12 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static com.plume.code.common.helper.GeneratorHelper.upperFirstCase;
+import static com.plume.code.common.helper.StringHelper.upperFirstCase;
 
 /**
  * generator base service
@@ -51,8 +51,7 @@ public abstract class GeneratorBehavior {
 
     @SneakyThrows
     private String getProjectPath() {
-        String userDirPath = System.getProperty("user.dir");
-        String downloadPath = userDirPath.concat("\\plume-code-download");
+        String downloadPath = PathHelper.getDownloadPath();
         File downloadPathFile = new File(downloadPath);
 
         if (!downloadPathFile.exists()) {
