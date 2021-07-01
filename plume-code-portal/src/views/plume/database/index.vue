@@ -84,7 +84,7 @@
       </el-table-column>
 
     </el-table>
-    <el-dialog title="数据库配置" width="30%" :visible.sync="dialogFormVisible">
+    <el-dialog title="数据库配置" width="30%" :visible.sync="dialogFormVisible" :close-on-press-escape="false" :close-on-click-modal="false">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="120px">
         <el-form-item label="数据库名称" prop="name">
           <el-input v-model="form.name"/>
@@ -134,11 +134,11 @@ export default {
       tableData: [],
       form: {
         index: -1,
-        name: 'plume_code',
-        driver: 'com.mysql.cj.jdbc.Driver',
-        type: 'mysql',
-        url: '',
-        username: '',
+        name: 'plume_test',
+        driver: 'org.h2.Driver',
+        type: 'h2',
+        url: 'jdbc:h2:~/plume_test',
+        username: 'sa',
         password: '',
         isValid: false
       },
@@ -161,20 +161,6 @@ export default {
           {
             required: true,
             message: '请输入url',
-            trigger: 'blur'
-          }
-        ],
-        username: [
-          {
-            required: true,
-            message: '请输入用户名',
-            trigger: 'blur'
-          }
-        ],
-        password: [
-          {
-            required: true,
-            message: '请输入密码',
             trigger: 'blur'
           }
         ]
@@ -284,7 +270,16 @@ export default {
       return this.$store.dispatch('d2admin/db/get', {
         dbName: 'database',
         path: 'database.settings',
-        defaultValue: []
+        defaultValue: [{
+          index: -1,
+          name: 'plume_test',
+          driver: 'org.h2.Driver',
+          type: 'h2',
+          url: 'jdbc:h2:~/plume_test',
+          username: 'sa',
+          password: '',
+          isValid: true
+        }]
       }, { root: true })
     }
   }

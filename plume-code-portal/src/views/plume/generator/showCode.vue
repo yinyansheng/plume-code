@@ -1,5 +1,5 @@
 <template>
-  <el-dialog top="10px" title="预览" width="80%" :visible.sync="dialogFormVisible">
+  <el-dialog top="10px" title="预览" width="80%" :visible.sync="dialogFormVisible" :close-on-press-escape="false" :close-on-click-modal="false">
 
     <el-row >
       <el-col :span="6" style="height: 80vh;  overflow: auto">
