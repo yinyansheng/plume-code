@@ -5,6 +5,7 @@ import org.apache.velocity.VelocityContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.plume.code.common.helper.StringHelper.upperFirstCase;
@@ -29,9 +30,9 @@ class MybatisMapperXmlGeneratorBehavior extends JavaGeneratorBehavior {
     }
 
     @Override
-    protected VelocityContext getVelocityContext() {
-       VelocityContext context = super.getVelocityContext();
-       context.put("primaryKeyList", fieldModelList.stream().filter(FieldModel::isPk).collect(Collectors.toList()));
-       return  context;
+    protected Map<String, Object> getTemplateContext() {
+        Map<String, Object> templateContext = super.getTemplateContext();
+        templateContext.put("primaryKeyList", fieldModelList.stream().filter(FieldModel::isPk).collect(Collectors.toList()));
+        return templateContext;
     }
 }

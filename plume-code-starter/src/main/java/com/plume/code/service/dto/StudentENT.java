@@ -20,6 +20,7 @@ public class StudentENT implements Serializable {
      * columnName:id
      * comment:自动增长ip
      */
+
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 

@@ -6,6 +6,7 @@ import org.apache.velocity.VelocityContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * generator base service
@@ -32,22 +33,22 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
     }
 
     @Override
-    protected VelocityContext getVelocityContext() {
-        VelocityContext velocityContext = super.getVelocityContext();
+    protected Map<String, Object> getTemplateContext() {
+        Map<String, Object> templateContext = super.getTemplateContext();
 
-        velocityContext.put("basePackageName", settingModel.getBasePackageName());
-        velocityContext.put("packageName", getPackageName());
+        templateContext.put("basePackageName", settingModel.getBasePackageName());
+        templateContext.put("packageName", getPackageName());
 
         String entityPackageName = settingModel.getBasePackageName()
                 .concat(String.format(".entity.%sENT;", StringHelper.upperFirstCase(classModel.getName())));
 
-        velocityContext.put("entityPackageName", entityPackageName);
+        templateContext.put("entityPackageName", entityPackageName);
 
         String servicePackageName = settingModel.getBasePackageName().concat(".service");
-        velocityContext.put("servicePackageName", servicePackageName);
+        templateContext.put("servicePackageName", servicePackageName);
 
-        velocityContext.put("typePackageNameList", getTypePackageNameList());
-        return velocityContext;
+        templateContext.put("typePackageNameList", getTypePackageNameList());
+        return templateContext;
     }
 
     protected List<String> getTypePackageNameList() {

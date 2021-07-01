@@ -21,7 +21,9 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.plume.code.common.helper.StringHelper.upperFirstCase;
 
@@ -93,35 +95,39 @@ public abstract class GeneratorBehavior {
 
     @SneakyThrows
     public void generate() {
+        Map<String, Object> templateContext = getTemplateContext();
+        String content = render(templateContext);
+        String filePath = getFilePath();
+        FileUtils.write(new File(filePath), content, StandardCharsets.UTF_8);
+    }
+
+    protected String render(Map<String, Object> templateContext) {
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocityEngine.init();
 
         Template template = velocityEngine.getTemplate(BASE_TEMPLATE_PATH.concat(getTemplateName()), StandardCharsets.UTF_8.name());
-        VelocityContext velocityContext = getVelocityContext();
+        VelocityContext velocityContext = new VelocityContext(templateContext);
 
         StringWriter stringWriter = new StringWriter();
         template.merge(velocityContext, stringWriter);
-        String content = stringWriter.toString();
-
-        String filePath = getFilePath();
-        FileUtils.write(new File(filePath), content, StandardCharsets.UTF_8);
+        return stringWriter.toString();
     }
 
-    protected VelocityContext getVelocityContext() {
-        VelocityContext velocityContext = new VelocityContext();
+    protected Map<String, Object> getTemplateContext() {
+        Map<String, Object> templateContext = new HashMap<>(32);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        velocityContext.put("createTime", simpleDateFormat.format(new Date()));
-        velocityContext.put("className", classModel.getName());
-        velocityContext.put("ClassName", upperFirstCase(classModel.getName()));
-        velocityContext.put("tableName", classModel.getTableName());
-        velocityContext.put("author", settingModel.getAuthor());
-        velocityContext.put("comment", classModel.getComment());
-        velocityContext.put("lombok", settingModel.getLombokState());
-        velocityContext.put("fieldModelList", fieldModelList);
+        templateContext.put("createTime", simpleDateFormat.format(new Date()));
+        templateContext.put("className", classModel.getName());
+        templateContext.put("ClassName", upperFirstCase(classModel.getName()));
+        templateContext.put("tableName", classModel.getTableName());
+        templateContext.put("author", settingModel.getAuthor());
+        templateContext.put("comment", classModel.getComment());
+        templateContext.put("lombok", settingModel.getLombokState());
+        templateContext.put("fieldModelList", fieldModelList);
 
-        return velocityContext;
+        return templateContext;
     }
 }

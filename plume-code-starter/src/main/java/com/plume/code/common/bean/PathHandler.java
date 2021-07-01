@@ -21,7 +21,7 @@ public class PathHandler {
     private Environment env;
 
     public String getDownloadPath() {
-        if ("prod".contains(env.getProperty("spring.profiles.active"))) {
+        if ("prod".equals(env.getProperty("spring.profiles.active"))) {
             String userDirPath = System.getProperty("user.dir");
             return userDirPath.concat("/downloads/");
         }
