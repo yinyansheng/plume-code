@@ -10,6 +10,7 @@ public class FieldModel {
     private String columnName;
     private String name;
     private String type;
+    private String jdbcType;
     private String upperCaseName;
     private Object value;
     private String comment;

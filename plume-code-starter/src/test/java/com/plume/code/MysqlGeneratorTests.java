@@ -59,7 +59,7 @@ public class MysqlGeneratorTests {
 //                        "ElementUi-api.js.tpl",
 //                        "ElementUi-Dialog.vue.tpl",
 //                        "ElementUi-index.js.tpl",
-                        "ElementUi-Main.vue.tpl"
+                        "Mybatis-Mapper.xml.tpl"
 //                        "ElementUi-object.js.tpl",
 //                        "ElementUi-Search.vue.tpl",
 //                        "ElementUi-Table.vue.tpl",
@@ -137,7 +137,7 @@ public class MysqlGeneratorTests {
         Gson gson = new Gson();
 
         List<ClassModel> classModels = databaseBehavior.listClassModel(settingModel);
-        List<FieldModel> fieldModels = databaseBehavior.listFieldModel(settingModel, "SMART_USER");
+        List<FieldModel> fieldModels = databaseBehavior.listFieldModel(settingModel, "test_student");
 
         ContextModel contextModel = ContextModel.builder()
                 .settingModel(settingModel)
@@ -145,16 +145,19 @@ public class MysqlGeneratorTests {
                 .fieldModelList(fieldModels)
                 .build();
 
-        GeneratorBehavior serviceImplGeneratorBehavior = generatorBehaviorFactory
-                .getGeneratorBehavior("serviceImpl", contextModel);
+//        GeneratorBehavior serviceImplGeneratorBehavior = generatorBehaviorFactory
+//                .getGeneratorBehavior("serviceImpl", contextModel);
+//
+//        GeneratorBehavior serviceGeneratorBehavior = generatorBehaviorFactory
+//                .getGeneratorBehavior("service", contextModel);
+//
+//        serviceGeneratorBehavior.generate();
+//        serviceImplGeneratorBehavior.generate();
 
-        GeneratorBehavior serviceGeneratorBehavior = generatorBehaviorFactory
-                .getGeneratorBehavior("service", contextModel);
-
-        serviceGeneratorBehavior.generate();
-        serviceImplGeneratorBehavior.generate();
+        GeneratorBehavior mybatisMapper = generatorBehaviorFactory.getGeneratorBehavior("Mybatis-ENT.java.tpl", contextModel);
+        mybatisMapper.generate();
 
     }
-    
+
 
 }

@@ -106,7 +106,7 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
 
         JDBCType jdbcType = getJdbcType(mysqlColumnModel.getDataType());
         fieldModel.setType(getFieldType(jdbcType));
-
+        fieldModel.setJdbcType(jdbcType.getName());
         fieldModel.setValue(mysqlColumnModel.getColumnDefault());
         fieldModel.setPk(primaryKeySet.contains(mysqlColumnModel.getColumnName()));
         fieldModel.setMultiplePk(primaryKeySet.size() > 1);
