@@ -1,15 +1,13 @@
 package com.plume.code.service.impl;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ZipUtil;
 import com.plume.code.common.bean.PathHandler;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.DatabaseBehavior;
 import com.plume.code.lib.database.DatabaseBehaviorFactory;
-import com.plume.code.lib.database.model.ClassModel;
-import com.plume.code.lib.database.model.ContextModel;
-import com.plume.code.lib.database.model.FieldModel;
-import com.plume.code.lib.database.model.ResultModel;
+import com.plume.code.lib.database.model.*;
 import com.plume.code.lib.generator.GeneratorBehavior;
 import com.plume.code.lib.generator.GeneratorBehaviorFactory;
 import com.plume.code.service.GeneratorService;
@@ -54,6 +52,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         File zip = ZipUtil.zip(directoryPath);
 
         return ResultModel.builder()
+                .batchNo(settingModel.getBatchNo())
                 .directoryPath(directoryPath)
                 .zipPath(zip.getPath())
                 .build();
@@ -96,6 +95,41 @@ public class GeneratorServiceImpl implements GeneratorService {
         }
 
         return contextModels;
+    }
+
+    @SneakyThrows
+    @Override
+    public CodeFileTreeModel getCodeFileTree(String batchNo) {
+        String downloadPath = pathHandler.getDownloadPath();
+        String directoryPath = downloadPath.concat(batchNo);
+
+        if (!(new File(directoryPath).exists())) {
+            throw new FileNotFoundException(directoryPath);
+        }
+        CodeFileTreeModel tree = new CodeFileTreeModel();
+        buildTree(tree, directoryPath);
+        return tree;
+    }
+
+    private  void  buildTree(CodeFileTreeModel tree,String currentPath) {
+        File currentFile =  new File(currentPath);
+        tree.setFileName(currentFile.getName());
+        tree.setFilePath(currentFile.getAbsolutePath());
+        File[] files = FileUtil.ls(currentPath);
+        for (File file : files) {
+            if (file.isDirectory()) {
+                CodeFileTreeModel f = new CodeFileTreeModel();
+                f.setFileName(file.getName());
+                f.setFilePath(file.getAbsolutePath());
+                tree.getChildren().add(f);
+                buildTree(f, currentPath.concat("/").concat(file.getName()));
+            } else {
+                CodeFileTreeModel f = new CodeFileTreeModel();
+                f.setFileName(file.getName());
+                f.setFilePath(file.getAbsolutePath());
+                tree.getChildren().add(f);
+            }
+        }
     }
 
 

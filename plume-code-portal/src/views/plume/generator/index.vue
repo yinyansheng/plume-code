@@ -6,6 +6,7 @@
     </template>
     <el-row>
       <el-col :span="4">
+        <!--  数据库配置-->
         <el-select style="width: 100%;" v-model="value" placeholder="请选择" @change="handleSelectDatabase" clearable>
           <el-option
             v-for="item in databases"
@@ -14,6 +15,7 @@
             :value="item.value">
           </el-option>
         </el-select>
+        <!--  数据库表-->
         <div style="padding:10px">
           <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选
           </el-checkbox>
@@ -48,14 +50,14 @@
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成后台管理页面" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox v-model="settingsForm.portal"  label="Element-UI" />
+                <el-checkbox v-model="settingsForm.portal" label="Element-UI"/>
               </el-form-item>
               <el-form-item label="控制层" prop="controller">
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成UserController类,UserQuery类,UserVO类"
                             placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox  v-model="settingsForm.controller">Controller
+                <el-checkbox v-model="settingsForm.controller">Controller
                 </el-checkbox>
                 <el-checkbox v-model="settingsForm.Query">Query</el-checkbox>
                 <el-checkbox v-model="settingsForm.VO">VO</el-checkbox>
@@ -73,9 +75,11 @@
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成Mapper、Entity、XML" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox :true-label="1" :false-label="0" v-model="settingsForm.repositoryMode" label="MybatisPlus" />
-                <el-checkbox :true-label="2" :false-label="0" v-model="settingsForm.repositoryMode" label="JPA" />
-                <el-checkbox :true-label="3" :false-label="0" v-model="settingsForm.repositoryMode" label="Mybatis"/>
+                <el-checkbox true-label="mybatisPlus" false-label="none" v-model="settingsForm.repositoryMode"
+                             label="MybatisPlus"/>
+                <el-checkbox true-label="jpa" false-label="none" v-model="settingsForm.repositoryMode" label="JPA"/>
+                <el-checkbox true-label="mybatis" false-label="none" v-model="settingsForm.repositoryMode"
+                             label="Mybatis"/>
               </el-form-item>
             </div>
           </el-card>
@@ -103,44 +107,25 @@
     <template slot="footer">
       <el-row>
         <el-col :span="20" :offset="4">
-          <el-button :loading="loading"  type="primary" @click="submitForm('settingsForm')">一键下载</el-button>
-          <el-button :loading="loading"  type="primary" @click="resetForm('settingsForm')">代码预览</el-button>
+          <el-button :loading="loading" type="primary" @click="submitForm('settingsForm')">一键下载</el-button>
+          <el-button :loading="loading" type="primary" @click="submitForm('settingsForm', true)">代码预览</el-button>
         </el-col>
       </el-row>
     </template>
+    <show-code ref="showCode" />
   </d2-container>
 </template>
 
 <script>
 import api from '@api'
-const templateMap = {
-  1: ['MybatisPlus-ENT.java.tpl', 'MybatisPlus-Mapper.java.tpl'],
-  2: ['JPA-ENT.java.tpl', 'JPA-Mapper.java.tpl'],
-  3: ['Mybatis-ENT.java.tpl', 'Mybatis-Mapper.java.tpl'],
-  service: {
-    0: ['Service.java.tpl', 'ServiceImpl.java.tpl'],
-    1: ['MybatisPlus-Service.java.tpl', 'MybatisPlus-ServiceImpl.java.tpl'],
-    2: ['JPA-Service.java.tpl', 'JPA-ServiceImpl.java.tpl'],
-    3: ['Mybatis-Service.java.tpl', 'Mybatis-ServiceImpl.java.tpl']
-  },
-  controller: {
-    0: ['Controller.java.tpl'],
-    1: ['MybatisPlus-Controller.java.tpl'],
-    2: [],
-    3: []
-  },
-  portal: ['ElementUi-api.js.tpl', 'ElementUi-Dialog.vue.tpl', 'ElementUi-index.js.tpl', 'ElementUi-Main.vue.tpl', 'ElementUi-object.js.tpl', 'ElementUi-Search.vue.tpl', 'ElementUi-Table.vue.tpl'],
-  VO: ['VO.java.tpl'],
-  DTO: ['DTO.java.tpl'],
-  Query: ['Query.java.tpl']
-}
-
+import { templateMap } from './settings'
+import showCode from './showCode'
 export default {
   name: 'generator',
-
+  components: { showCode },
   data () {
     return {
-      loading:false,
+      loading: false,
       apiurl: process.env.VUE_APP_API,
       open: '0',
       databases: [],
@@ -165,7 +150,7 @@ export default {
         service: true,
         serviceImpl: true,
         DTO: true,
-        repositoryMode: 1
+        repositoryMode: 'mybatisPlus'
       },
       rules: {
         projectName: [
@@ -223,7 +208,9 @@ export default {
         value: s
       }))
     },
-    submitForm (formName) {
+    submitForm (formName, showCode = false) {
+      this.$refs.showCode.show()
+      return
       if (this.checkedTables.length === 0) {
         this.$message.warning('请选择要生成的表')
         return
@@ -231,35 +218,18 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const req = { ...this.settingsForm }
-          const templateNameSet = []
-
-          if (req.repositoryMode) {
-            templateNameSet.push(...templateMap[req.repositoryMode])
-            req.service && templateNameSet.push(...templateMap.service[req.repositoryMode])
-            req.controller && templateNameSet.push(...templateMap.controller[req.repositoryMode])
-          } else {
-            req.service && templateNameSet.push(...templateMap.service[0])
-            req.controller && templateNameSet.push(...templateMap.controller[0])
-          }
-
-          req.portal && templateNameSet.push(...templateMap.portal)
-
-          req.VO && templateNameSet.push(...templateMap.VO)
-          req.DTO && templateNameSet.push(...templateMap.DTO)
-          req.Query && templateNameSet.push(...templateMap.Query)
-
-          req.templateNameSet = templateNameSet
-
-          req.tableNameSet = this.checkedTables
-
-          console.log(templateNameSet)
+          this.buildRequestBody(req)
           this.loading = true
           api.generate({
             connectionModel: this.selectedSetting,
             settingModel: req
           }).then(res => {
             if (res.success) {
-              window.open(`${this.apiurl}${res.data.zipUrl}`)
+              if (showCode) {
+                this.$refs.showCode.show(res.data.batchNo)
+              } else {
+                window.open(`${this.apiurl}plume/download?batchNo=${res.data.batchNo}`)
+              }
             } else {
               this.$message.warning(res.message)
             }
@@ -270,6 +240,30 @@ export default {
           return false
         }
       })
+    },
+    buildRequestBody(req) {
+      const templateNameSet = []
+
+      if (req.repositoryMode) {
+        templateNameSet.push(...templateMap[req.repositoryMode])
+        req.service && templateNameSet.push(...templateMap.service[req.repositoryMode])
+        req.controller && templateNameSet.push(...templateMap.controller[req.repositoryMode])
+      } else {
+        req.service && templateNameSet.push(...templateMap.service[0])
+        req.controller && templateNameSet.push(...templateMap.controller[0])
+      }
+
+      req.portal && templateNameSet.push(...templateMap.portal)
+
+      req.VO && templateNameSet.push(...templateMap.VO)
+      req.DTO && templateNameSet.push(...templateMap.DTO)
+      req.Query && templateNameSet.push(...templateMap.Query)
+
+      req.templateNameSet = templateNameSet
+
+      req.tableNameSet = this.checkedTables
+
+      console.log(templateNameSet)
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
@@ -288,6 +282,7 @@ export default {
 .box-card {
   margin-bottom: 10px;
 }
+
 .el-checkbox {
   width: 120px
 }

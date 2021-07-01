@@ -12,8 +12,14 @@ import router from './router'
 import {menuHeader, menuAside} from '@/menu'
 import {frameInRoutes} from '@/router/routes'
 
+import VueCodemirror from 'vue-codemirror'
+
+// require styles
+import 'codemirror/lib/codemirror.css'
+
 // 核心插件
 Vue.use(d2Admin)
+Vue.use(VueCodemirror)
 
 new Vue({
   router,

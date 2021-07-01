@@ -1,18 +1,17 @@
 package com.plume.code.controller;
 
 
+import com.plume.code.common.bean.PathHandler;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.controller.vo.GenerateVO;
 import com.plume.code.controller.vo.R;
+import com.plume.code.lib.database.model.CodeFileTreeModel;
 import com.plume.code.lib.database.model.ResultModel;
 import com.plume.code.service.DatabaseService;
 import com.plume.code.service.GeneratorService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
@@ -29,6 +28,8 @@ public class PlumeController {
     private DatabaseService databaseService;
     @Autowired
     private GeneratorService generatorService;
+    @Autowired
+    private PathHandler pathHandler;
 
     @PostMapping("/test")
     public R<Object> test(@RequestBody ConnectionModel connectionModel) {
@@ -48,9 +49,22 @@ public class PlumeController {
         return R.ok(result);
     }
 
+    @GetMapping("codeTree")
+    public R<Object> codeTree(String batchNo) {
+        CodeFileTreeModel codeFileTree =  generatorService.getCodeFileTree(batchNo);
+        return R.ok(codeFileTree);
+    }
+
+    @GetMapping("codeInfo")
+    public R<Object> codeInfo(String filePath) {
+        return R.OK;
+    }
+
     @SneakyThrows
     @RequestMapping("/download")
-    public R<Object> downLoad(String filePath, HttpServletResponse response) {
+    public R<Object> downLoad(String batchNo, HttpServletResponse response) {
+        String downloadPath = pathHandler.getDownloadPath();
+        String filePath = downloadPath.concat(batchNo).concat(".zip");
         File file = new File(filePath);
         if (!file.exists()) {
             return R.fail("file not exists");

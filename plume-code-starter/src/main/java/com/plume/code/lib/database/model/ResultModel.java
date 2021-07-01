@@ -8,4 +8,5 @@ import lombok.Data;
 public class ResultModel {
     private String directoryPath;
     private String zipPath;
+    private String batchNo;
 }
