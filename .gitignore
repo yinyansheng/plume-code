@@ -10,6 +10,6 @@
 */dist/
 /.idea/
 /logs/
-*/web.templates.dist/
+/web.templates.dist/
 */downloads/
 
