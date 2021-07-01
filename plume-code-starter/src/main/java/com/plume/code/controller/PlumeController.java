@@ -4,6 +4,7 @@ package com.plume.code.controller;
 import com.plume.code.common.bean.PathHandler;
 import cn.hutool.core.io.FileUtil;
 import com.plume.code.common.model.ConnectionModel;
+import com.plume.code.common.model.TreeNodeModel;
 import com.plume.code.controller.vo.GenerateVO;
 import com.plume.code.controller.vo.R;
 import com.plume.code.lib.database.model.ResultModel;
@@ -91,10 +92,16 @@ public class PlumeController {
         return R.ok("success");
     }
 
+    @GetMapping("/tree")
+    public R<TreeNodeModel> tree(String batchNo) {
+        String downloadPath = pathHandler.getDownloadPath();
+        String filePath = downloadPath.concat(batchNo);
+        return R.ok(PathHandler.tree(filePath));
+    }
+
     @SneakyThrows
     @RequestMapping("/content")
     public R<Object> content(String filePath) {
-        filePath = pathHandler.getDownloadPath().concat(filePath);
         if (!FileUtil.exist(filePath) || FileUtil.isDirectory(filePath)) {
             return R.fail("file not exists");
         }

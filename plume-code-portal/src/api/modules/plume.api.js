@@ -27,7 +27,14 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
   },
   codeTree (params = {}) {
     return request({
-      url: '/plume/codeTree',
+      url: '/plume/tree',
+      method: 'get',
+      params
+    })
+  },
+  content (params = {}) {
+    return request({
+      url: '/plume/content',
       method: 'get',
       params
     })

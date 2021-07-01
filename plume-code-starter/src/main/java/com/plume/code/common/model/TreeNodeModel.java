@@ -14,7 +14,8 @@ import java.util.List;
 public class TreeNodeModel {
     private String path;
     private String name;
+    private String icon;
     private boolean isDirectory;
 
-    private List<TreeNodeModel> subTreeNodeModelList;
+    private List<TreeNodeModel> children;
 }

@@ -68,6 +68,6 @@ public class PathHandler {
             tree(file.getPath(), treeNodeModel);
         }
 
-        parent.setSubTreeNodeModelList(list);
+        parent.setChildren(list);
     }
 }

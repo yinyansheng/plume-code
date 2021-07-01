@@ -209,8 +209,6 @@ export default {
       }))
     },
     submitForm (formName, showCode = false) {
-      this.$refs.showCode.show()
-      return
       if (this.checkedTables.length === 0) {
         this.$message.warning('请选择要生成的表')
         return
@@ -241,7 +239,7 @@ export default {
         }
       })
     },
-    buildRequestBody(req) {
+    buildRequestBody (req) {
       const templateNameSet = []
 
       if (req.repositoryMode) {
