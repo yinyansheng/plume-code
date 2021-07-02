@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author: ${author}
  * @date: ${createTime}
  **/
-public interface ${ClassName}Repository extends JpaRepository<${ClassName}ENT, ${pkType}}> {
+public interface ${ClassName}Repository extends JpaRepository<${ClassName}ENT, ${pkType}> {
 
 }

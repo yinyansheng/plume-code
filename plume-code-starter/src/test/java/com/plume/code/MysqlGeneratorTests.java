@@ -42,24 +42,25 @@ public class MysqlGeneratorTests {
         connectionModel = ConnectionModel.builder()
                 .type("mysql")
                 .driver("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://10.102.126.18:3306/yugo_test?characterEncoding=utf-8")
-                .username("root")
-                .password("nice!123")
+                .url("jdbc:mysql://rm-bp1k858sp7ycl11guho.mysql.rds.aliyuncs.com/TCPOI?characterEncoding=utf-8")
+                .username("mysqltest_user")
+                .password("JswkFxrOy52#4yX1GNAd7")
                 .build();
 
         settingModel = SettingModel.builder()
                 .batchNo(String.valueOf(System.currentTimeMillis()))
                 .author("yinyansheng")
                 .columnPrefix("s_")
-                .tablePrefix("test_")
+                .tablePrefix("xc_crm_")
                 .basePackageName("com.plume.code")
                 .projectName("plume-code")
-                .tableNameSet(new HashSet<>(Arrays.asList("test_user", "test_student", "test_url")))
+                .tableNameSet(new HashSet<>(Arrays.asList("xc_crm_admin")))
                 .templateNameSet(new HashSet<>(Arrays.asList(
+                        "Jpa-Repository.java.tpl"
 //                        "ElementUi-api.js.tpl",
 //                        "ElementUi-Dialog.vue.tpl",
 //                        "ElementUi-index.js.tpl",
-                        "Mybatis-Mapper.xml.tpl"
+//                        "Mybatis-Mapper.xml.tpl"
 //                        "ElementUi-object.js.tpl",
 //                        "ElementUi-Search.vue.tpl",
 //                        "ElementUi-Table.vue.tpl",
