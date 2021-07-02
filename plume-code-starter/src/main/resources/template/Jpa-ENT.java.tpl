@@ -1,4 +1,4 @@
-package ${basePackageName};
+package ${packageName};
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * @description: ${comment}
+ * @description: ${comment!''}
  * @author: ${author}
  * @date: ${createTime}
  **/

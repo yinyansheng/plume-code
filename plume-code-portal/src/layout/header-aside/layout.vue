@@ -6,14 +6,15 @@
     <div class="d2-layout-header-aside-content" flex="dir:top">
       <!-- 顶栏 -->
       <div class="d2-theme-header" :style="{ opacity: this.searchActive ? 0.5 : 1 }" flex-box="0" flex>
-        <router-link
-          to="/database"
+        <a
+          href="https://gitee.com/yansheng/plume-code"
+          target="_blank"
           :class="{'logo-group': true, 'logo-transition': asideTransition}"
           :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}"
           flex-box="0">
           <img v-if="asideCollapse" :src="`${$baseUrl}image/logo.png`">
           <img v-else :src="`${$baseUrl}image/logo.png`">
-        </router-link>
+        </a>
         <div class="toggle-aside-btn" @click="handleToggleAside" flex-box="0">
           <d2-icon name="bars"/>
         </div>

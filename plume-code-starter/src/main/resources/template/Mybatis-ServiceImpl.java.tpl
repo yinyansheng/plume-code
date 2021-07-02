@@ -1,6 +1,7 @@
 package ${packageName};
 
 import ${basePackageName}.mapper.entity.${ClassName}ENT;
+import ${basePackageName}.admin.controller.query.${ClassName}Query;
 import ${basePackageName}.mapper.${ClassName}Mapper;
 import ${basePackageName}.service.${ClassName}Service;
 import org.springframework.stereotype.Service;
