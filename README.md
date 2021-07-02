@@ -9,6 +9,7 @@ PlumeCode 不仅使用简单而且强大
 - 良好的项目结构，让二次开发变得像喝水一样加单
 
 # 使用文档
+![新增数据库连接](https://gitee.com/yansheng/plume-code/blob/main/plume-code-starter/src/main/resources/images/img1.png "新增数据库连接（内置h2，have a try）")
 
 
 
@@ -16,7 +17,7 @@ PlumeCode 不仅使用简单而且强大
 ## 后端三层架构
 TBD...
 
-### 前端框架
+## 前端框架
 - [d2admin](https://d2.pub/zh/)
 - [element-ui](https://element.eleme.cn/2.15/#/zh-CN)
 
