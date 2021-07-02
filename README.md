@@ -14,7 +14,7 @@ PlumeCode 不仅简单、而且强大
 ![download and preview](/plume-code-starter/src/main/resources/images/img3.png)
 
 # 生成代码结构
-## 后端三层架构
+## 三层架构
 TBD...
 
 ## 前端框架
