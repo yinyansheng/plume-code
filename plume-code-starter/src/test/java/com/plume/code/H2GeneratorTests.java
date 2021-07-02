@@ -51,23 +51,24 @@ public class H2GeneratorTests {
                 .projectName("plume-code")
                 .tableNameSet(new HashSet<>(Arrays.asList("RIGHTS")))
                 .templateNameSet(new HashSet<>(Arrays.asList(
-                        "Jpa-ENT.java.tpl",
-                        "ElementUi-api.js.tpl",
-                        "ElementUi-Dialog.vue.tpl",
-                        "ElementUi-index.js.tpl",
-                        "ElementUi-Main.vue.tpl",
-                        "ElementUi-object.js.tpl",
-                        "ElementUi-Search.vue.tpl",
-                        "ElementUi-Table.vue.tpl",
-                        "MybatisPlus-Controller.java.tpl",
-                        "MybatisPlus-Mapper.java.tpl",
-                        "MybatisPlus-Mapper.xml.tpl",
-                        "MybatisPlus-Service.java.tpl",
-                        "MybatisPlus-ServiceImpl.java.tpl",
-                        "MybatisPlus-ENT.java.tpl",
-                        "DTO.java.tpl",
-                        "Query.java.tpl",
-                        "VO.java.tpl"
+                        "Jpa-Repository.java.tpl"
+//                        "Jpa-ENT.java.tpl",
+//                        "ElementUi-api.js.tpl",
+//                        "ElementUi-Dialog.vue.tpl",
+//                        "ElementUi-index.js.tpl",
+//                        "ElementUi-Main.vue.tpl",
+//                        "ElementUi-object.js.tpl",
+//                        "ElementUi-Search.vue.tpl",
+//                        "ElementUi-Table.vue.tpl",
+//                        "MybatisPlus-Controller.java.tpl",
+//                        "MybatisPlus-Mapper.java.tpl",
+//                        "MybatisPlus-Mapper.xml.tpl",
+//                        "MybatisPlus-Service.java.tpl",
+//                        "MybatisPlus-ServiceImpl.java.tpl",
+//                        "MybatisPlus-ENT.java.tpl",
+//                        "DTO.java.tpl",
+//                        "Query.java.tpl",
+//                        "VO.java.tpl"
                 )))
                 .lombokState(true)
                 .build();

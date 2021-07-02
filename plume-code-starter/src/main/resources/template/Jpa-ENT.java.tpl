@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * @description: ${comment}
+ * @author: ${author}
+ * @date: ${createTime}
+ **/
 @Entity
 @Table(name = "${tableName}")
 public class ${ClassName}ENT {

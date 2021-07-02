@@ -2,7 +2,6 @@ package com.plume.code.lib.generator;
 
 import com.plume.code.lib.template.FreemarkerTemplate;
 import com.plume.code.lib.template.TemplateBehavior;
-import com.plume.code.lib.template.TemplateFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
