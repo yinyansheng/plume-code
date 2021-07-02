@@ -9,9 +9,9 @@ PlumeCode 不仅使用简单而且强大
 - 良好的项目结构，让二次开发变得像喝水一样加单
 
 # 使用文档
-![新增数据库连接](https://gitee.com/yansheng/plume-code/blob/main/plume-code-starter/src/main/resources/images/img1.png "新增数据库连接（内置h2，have a try）")
-
- ![avatar](/plume-code-starter/src/main/resources/images/img1.png)
+![avatar](/plume-code-starter/src/main/resources/images/img1.png)
+![avatar](/plume-code-starter/src/main/resources/images/img2.png)
+![avatar](/plume-code-starter/src/main/resources/images/img3.png)
 
 # 生成代码结构
 ## 后端三层架构
