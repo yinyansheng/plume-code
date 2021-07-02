@@ -1,17 +1,17 @@
 # PlumeCode
-PlumeCode:一个简单易用且功能强大的代码Java & D2Admin(Element-UI)生成工具。
+PlumeCode:一个简单易用且功能强大的 Java & D2Admin(Base on Vue、ElementUI) 代码生成工具。
 熟练使用你就是CURD代码挖掘机！！！
 
-PlumeCode 不仅使用简单而且强大
-- 支持多数据库Mysql、H2（后续会支持MSSQL、Oracle）
-- 支持多种持久层框架MybatisPlus、Mybatis、Jpa(后续会支持Hibernate)
+PlumeCode 不仅简单、而且强大
+- 支持多数据库Mysql、H2（SqlServer、Oracle TBD...）
+- 支持多种持久层框架MybatisPlus、Mybatis、Jpa (Hibernate TBD...)
 - 一键下载拥有portal、controller、service、repository、dto、entity、vo、query等前后端代码
 - 良好的项目结构，让二次开发变得像喝水一样简单
 
 # 使用文档
-![avatar](/plume-code-starter/src/main/resources/images/img1.png)
-![avatar](/plume-code-starter/src/main/resources/images/img2.png)
-![avatar](/plume-code-starter/src/main/resources/images/img3.png)
+![add database connection](/plume-code-starter/src/main/resources/images/img1.png)
+![generator setting](/plume-code-starter/src/main/resources/images/img2.png)
+![download and preview](/plume-code-starter/src/main/resources/images/img3.png)
 
 # 生成代码结构
 ## 后端三层架构
