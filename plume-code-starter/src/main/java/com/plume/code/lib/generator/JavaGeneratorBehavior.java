@@ -39,7 +39,7 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
         templateContext.put("basePackageName", settingModel.getBasePackageName());
         templateContext.put("packageName", getPackageName());
 
-        String entityPackageName = settingModel.getBasePackageName()
+        String entityPackageName = getPackageName()
                 .concat(String.format(".entity.%sENT;", StringHelper.upperFirstCase(classModel.getName())));
 
         templateContext.put("entityPackageName", entityPackageName);
