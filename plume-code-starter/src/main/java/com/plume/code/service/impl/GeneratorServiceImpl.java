@@ -40,6 +40,11 @@ public class GeneratorServiceImpl implements GeneratorService {
     @Override
     public ResultModel generate(ConnectionModel connectionModel, SettingModel settingModel) {
         List<GeneratorBehavior> generatorBehaviorList = getGeneratorBehaviorList(connectionModel, settingModel);
+
+        if (CollectionUtils.isEmpty(generatorBehaviorList)) {
+            throw new RuntimeException("generatorBehaviorList is empty");
+        }
+
         generatorBehaviorList.forEach(GeneratorBehavior::generate);
 
         String downloadPath = pathHandler.getDownloadPath();
@@ -111,8 +116,8 @@ public class GeneratorServiceImpl implements GeneratorService {
         return tree;
     }
 
-    private  void  buildTree(CodeFileTreeModel tree,String currentPath) {
-        File currentFile =  new File(currentPath);
+    private void buildTree(CodeFileTreeModel tree, String currentPath) {
+        File currentFile = new File(currentPath);
         tree.setFileName(currentFile.getName());
         tree.setFilePath(currentFile.getAbsolutePath());
         File[] files = FileUtil.ls(currentPath);

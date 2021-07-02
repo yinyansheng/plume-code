@@ -31,4 +31,9 @@ util.open = function (url) {
   document.body.removeChild(document.getElementById('d2admin-link-temp'))
 }
 
+util.postfix = function (fileName) {
+  const index = fileName.lastIndexOf('.')
+  return fileName.substr(index + 1)
+}
+
 export default util

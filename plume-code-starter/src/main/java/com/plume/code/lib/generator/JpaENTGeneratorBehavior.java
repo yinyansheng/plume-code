@@ -1,25 +1,16 @@
 package com.plume.code.lib.generator;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.plume.code.lib.template.FreemarkerTemplate;
+import com.plume.code.lib.template.TemplateBehavior;
+import com.plume.code.lib.template.TemplateFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-
-import java.util.Locale;
-import java.util.Map;
 
 import static com.plume.code.common.helper.StringHelper.upperFirstCase;
 
 @Component
 @Scope("prototype")
 class JpaENTGeneratorBehavior extends JavaGeneratorBehavior {
-
-    @Autowired
-    private FreeMarkerConfigurer freeMarkerConfigurer;
 
     @Override
     protected String getTemplateName() {
@@ -37,11 +28,7 @@ class JpaENTGeneratorBehavior extends JavaGeneratorBehavior {
     }
 
     @Override
-    @SneakyThrows
-    protected String render(Map<String, Object> templateContext) {
-        Configuration configuration = freeMarkerConfigurer.getConfiguration();
-        Locale locale = new Locale("zh");
-        Template template = configuration.getTemplate(getTemplateName(), locale, "UTF-8");
-        return FreeMarkerTemplateUtils.processTemplateIntoString(template, getTemplateContext());
+    protected TemplateBehavior getTemplateBehavior() {
+        return templateFactory.getTemplateBehavior(FreemarkerTemplate.class);
     }
 }

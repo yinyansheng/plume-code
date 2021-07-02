@@ -29,9 +29,7 @@
       <el-col :span="20" style="padding-left:10px">
         <el-form :model="settingsForm" :rules="rules" ref="settingsForm" label-width="100px" class="demo-settingsForm">
           <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>项目信息</span>
-            </div>
+            <div slot="header" class="clearfix"><span>项目信息</span></div>
             <div>
               <el-form-item label="项目名称" prop="projectName">
                 <el-input v-model="settingsForm.projectName" placeholder="项目名：plume_code"></el-input>
@@ -42,9 +40,7 @@
             </div>
           </el-card>
           <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>项目信息</span>
-            </div>
+            <div slot="header" class="clearfix"><span>项目信息</span></div>
             <div>
               <el-form-item label="页面层" prop="portal">
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成后台管理页面" placement="top">
@@ -84,9 +80,7 @@
             </div>
           </el-card>
           <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>高级配置</span>
-            </div>
+            <div slot="header" class="clearfix"><span>高级配置</span></div>
             <div>
               <el-form-item label="作者" prop="author">
                 <el-input v-model="settingsForm.author" placeholder="作者"></el-input>
@@ -100,7 +94,6 @@
               </el-form-item>
             </div>
           </el-card>
-
         </el-form>
       </el-col>
     </el-row>
@@ -166,12 +159,11 @@ export default {
             trigger: 'blur'
           }
         ],
-        basePackageName: [
-          {
-            required: true,
-            message: '请输入包名',
-            trigger: 'blur'
-          }
+        basePackageName: [{
+          required: true,
+          message: '请输入包名',
+          trigger: 'blur'
+        }
         ]
       }
     }
@@ -215,8 +207,8 @@ export default {
       }
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const req = { ...this.settingsForm }
-          this.buildRequestBody(req)
+          let req = this.buildRequestBody(this.settingsForm)
+          req = { ...req, ...this.settingsForm }
           this.loading = true
           api.generate({
             connectionModel: this.selectedSetting,
@@ -239,29 +231,27 @@ export default {
         }
       })
     },
-    buildRequestBody (req) {
+    buildRequestBody (settings) {
       const templateNameSet = []
 
-      if (req.repositoryMode) {
-        templateNameSet.push(...templateMap[req.repositoryMode])
-        req.service && templateNameSet.push(...templateMap.service[req.repositoryMode])
-        req.controller && templateNameSet.push(...templateMap.controller[req.repositoryMode])
+      if (settings.repositoryMode) {
+        templateNameSet.push(...templateMap[settings.repositoryMode])
+        settings.service && templateNameSet.push(...templateMap.service[settings.repositoryMode])
+        settings.controller && templateNameSet.push(...templateMap.controller[settings.repositoryMode])
       } else {
-        req.service && templateNameSet.push(...templateMap.service[0])
-        req.controller && templateNameSet.push(...templateMap.controller[0])
+        settings.service && templateNameSet.push(...templateMap.service.default)
+        settings.controller && templateNameSet.push(...templateMap.controller.default)
       }
 
-      req.portal && templateNameSet.push(...templateMap.portal)
+      settings.portal && templateNameSet.push(...templateMap.portal)
 
-      req.VO && templateNameSet.push(...templateMap.VO)
-      req.DTO && templateNameSet.push(...templateMap.DTO)
-      req.Query && templateNameSet.push(...templateMap.Query)
-
-      req.templateNameSet = templateNameSet
-
-      req.tableNameSet = this.checkedTables
-
-      console.log(templateNameSet)
+      settings.VO && templateNameSet.push(...templateMap.VO)
+      settings.DTO && templateNameSet.push(...templateMap.DTO)
+      settings.Query && templateNameSet.push(...templateMap.Query)
+      return {
+        templateNameSet,
+        tableNameSet: this.checkedTables
+      }
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()

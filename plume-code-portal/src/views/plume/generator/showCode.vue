@@ -1,6 +1,5 @@
 <template>
   <el-dialog top="10px" title="预览" width="80%" :visible.sync="dialogFormVisible" :close-on-press-escape="false" :close-on-click-modal="false">
-
     <el-row >
       <el-col :span="6" style="height: 80vh;  overflow: auto">
         <el-tree :data="codeTree" :props="defaultProps" default-expand-all  @node-click="handleNodeClick">
@@ -22,6 +21,7 @@
 
 <script>
 import api from '@api'
+import util from '@/libs/util'
 import 'codemirror/mode/vue/vue.js'
 import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/mode/clike/clike.js'
@@ -61,16 +61,11 @@ export default {
     }
   },
   methods: {
-    submitForm () {
-
-    },
     handleNodeClick (node) {
       if (!node.directory) {
         api.content({ filePath: node.path }).then(res => {
           const fileName = node.name
-          const index = fileName.lastIndexOf('.')
-          const postfix = fileName.substr(index + 1)
-          this.cmOptions.mode = postfixModeMap[postfix]
+          this.cmOptions.mode = postfixModeMap[util.postfix(fileName)]
           this.content = res.data
         })
       }

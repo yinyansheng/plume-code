@@ -21,7 +21,6 @@ public class GeneratorBehaviorFactory implements InitializingBean {
 
     private Map<String, GeneratorBehavior> generatorBehaviorMap;
 
-
     public List<GeneratorBehavior> getGeneratorBehaviorList(ContextModel contextModel) {
         return contextModel.getSettingModel().getTemplateNameSet()
                 .stream()
