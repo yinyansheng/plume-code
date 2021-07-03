@@ -39,7 +39,6 @@ TBD...
 - 支持swagger、lombok
 - 支持sqlserver、oracle
 - 支持hibernate
-- 支持自定义模板
 - 支持包路径修改
 - 支持Query 后缀配置
 - 支持VO 后缀配置
