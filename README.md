@@ -31,10 +31,10 @@ TBD...
 
 # Road Map
 ## 0.0.1 version
-- 支持 mysql、h2
-- 支持 element-ui
-- 支持mybatis、mybatis-plus、jpa
-- 支持预览代码、获取代码
+- 支持 mysql、h2   --done
+- 支持 element-ui --done
+- 支持mybatis、mybatis-plus、jpa    --done
+- 支持预览代码、获取代码   --done
 ## 0.0.2 version
 - 支持swagger、lombok
 - 支持sqlserver、oracle
