@@ -46,10 +46,10 @@
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成后台管理页面" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox v-model="settingsForm.portal" label="Element-UI"/>
+                <el-checkbox v-model="settingsForm.portal" label="ElementUI"/>
               </el-form-item>
               <el-form-item label="控制层" prop="controller">
-                <el-tooltip style="margin-right: 10px" effect="dark" content="生成UserController类,UserQuery类,UserVO类"
+                <el-tooltip style="margin-right: 10px" effect="dark" content="Controller,Query,VO"
                             placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
@@ -68,7 +68,7 @@
                 <el-checkbox v-model="settingsForm.DTO">DTO</el-checkbox>
               </el-form-item>
               <el-form-item label="持久层" prop="repositoryMode">
-                <el-tooltip style="margin-right: 10px" effect="dark" content="生成Mapper、Entity、XML" placement="top">
+                <el-tooltip style="margin-right: 10px" effect="dark" content="Mapper、Entity、XML" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
                 <el-checkbox true-label="mybatisPlus" false-label="none" v-model="settingsForm.repositoryMode"
