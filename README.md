@@ -1,5 +1,6 @@
 # PlumeCode
-PlumeCode:一个简单易用且功能强大的 Java & D2Admin(Base on Vue、ElementUI) 代码生成工具。
+PlumeCode:一个简单易用且功能强大的代码生成器
+Java & D2Admin(Base on Vue、ElementUI)
 熟练使用你就是CURD代码挖掘机！！！
 
 PlumeCode 不仅简单、而且强大
