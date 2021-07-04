@@ -1,8 +1,9 @@
 <template>
-  <el-dialog top="10px" title="预览" width="80%" :visible.sync="dialogFormVisible" :close-on-press-escape="false" :close-on-click-modal="false">
-    <el-row >
+  <el-dialog top="10px" title="预览" width="80%" :visible.sync="dialogFormVisible" :close-on-press-escape="false"
+             :close-on-click-modal="false">
+    <el-row>
       <el-col :span="6" style="height: 80vh;  overflow: auto">
-        <el-tree :data="codeTree" :props="defaultProps" default-expand-all  @node-click="handleNodeClick">
+        <el-tree :data="tree" :props="defaultProps" default-expand-all @node-click="handleNodeClick">
           <span class="custom-tree-node" slot-scope="{ node, data }">
             <span>
                 <i v-if="data.directory" class="el-icon-folder-opened"></i>
@@ -35,8 +36,8 @@ const postfixModeMap = {
 }
 
 export default {
-  name: 'showCode',
-  data () {
+  name: 'showContent',
+  data() {
     this.defaultProps = {
       children: 'children',
       label: 'name'
@@ -44,7 +45,7 @@ export default {
     return {
       dialogFormVisible: false,
       batchNo: '',
-      codeTree: [],
+      tree: [],
       content: '',
       cmOptions: {
         auto: '300px',
@@ -61,26 +62,26 @@ export default {
     }
   },
   methods: {
-    handleNodeClick (node) {
+    handleNodeClick(node) {
       if (!node.directory) {
-        api.content({ filePath: node.path }).then(res => {
+        api.content({filePath: node.path}).then(res => {
           const fileName = node.name
           this.cmOptions.mode = postfixModeMap[util.postfix(fileName)]
           this.content = res.data
         })
       }
     },
-    loadCodeTree () {
-      api.codeTree({ batchNo: this.batchNo }).then(res => {
-        this.codeTree = [...res.data.children]
+    loadTree() {
+      api.tree({batchNo: this.batchNo}).then(res => {
+        this.tree = [...res.data.children]
       })
     },
-    show (batchNo) {
+    show(batchNo) {
       this.batchNo = batchNo
       this.content = ''
       this.dialogFormVisible = true
       this.$nextTick(() => {
-        this.loadCodeTree()
+        this.loadTree()
       })
     }
   }
@@ -88,11 +89,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .vue-codemirror  {
-    ::v-deep .CodeMirror {
-      height: 100%;
-      font-family: monospace,Arial;
-      font-size: 18px;
-    }
+.vue-codemirror {
+  ::v-deep .CodeMirror {
+    height: 100%;
+    font-family: monospace, Arial;
+    font-size: 18px;
   }
+}
 </style>

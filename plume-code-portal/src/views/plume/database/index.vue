@@ -229,7 +229,7 @@ export default {
       })
     },
     doTestConnection (data) {
-      return api.test_connection(data)
+      return api.testConnection(data)
     },
     submit () {
       this.$refs.formRef.validate((valid) => {

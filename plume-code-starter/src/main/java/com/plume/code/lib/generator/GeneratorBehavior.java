@@ -1,6 +1,6 @@
 package com.plume.code.lib.generator;
 
-import com.plume.code.common.bean.PathHandler;
+import com.plume.code.common.helper.PathHelper;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.ContextModel;
@@ -34,9 +34,6 @@ public abstract class GeneratorBehavior {
     protected String projectPath;
 
     @Autowired
-    protected PathHandler pathHandler;
-
-    @Autowired
     protected TemplateFactory templateFactory;
 
     void initialize(ContextModel contextModel) {
@@ -57,7 +54,7 @@ public abstract class GeneratorBehavior {
 
     @SneakyThrows
     private String getProjectPath() {
-        String downloadPath = pathHandler.getDownloadPath();
+        String downloadPath = PathHelper.getDownloadPath();
         File downloadPathFile = new File(downloadPath);
 
         if (!downloadPathFile.exists()) {

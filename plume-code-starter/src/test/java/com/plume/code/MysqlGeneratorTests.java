@@ -1,11 +1,8 @@
 package com.plume.code;
 
 import com.google.gson.Gson;
-import com.plume.code.common.bean.PathHandler;
-import com.plume.code.common.constrant.SettingConstant;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
-import com.plume.code.common.model.TreeNodeModel;
 import com.plume.code.lib.database.DatabaseBehavior;
 import com.plume.code.lib.database.DatabaseBehaviorFactory;
 import com.plume.code.lib.database.model.ClassModel;

@@ -9,7 +9,7 @@ const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 const frameIn = [
   {
     path: '/',
-    redirect: { name: 'database' },
+    redirect: {name: 'database'},
     component: layoutHeaderAside,
     children: [
       // 首页
@@ -40,15 +40,15 @@ const frameIn = [
         },
         component: _import('plume/generator')
       },
-      {
-        path: 'template',
-        name: 'template',
-        meta: {
-          title: '模版管理',
-          auth: true
-        },
-        component: _import('plume/template')
-      },
+      // {
+      //   path: 'template',
+      //   name: 'template',
+      //   meta: {
+      //     title: '模版管理',
+      //     auth: true
+      //   },
+      //   component: _import('plume/template')
+      // },
       // 系统 前端日志
       {
         path: 'log',

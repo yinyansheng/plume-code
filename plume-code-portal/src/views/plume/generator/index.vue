@@ -105,18 +105,19 @@
         </el-col>
       </el-row>
     </template>
-    <show-code ref="showCode" />
+    <show-content ref="showContent"/>
   </d2-container>
 </template>
 
 <script>
 import api from '@api'
-import { templateMap } from './settings'
-import showCode from './showCode'
+import {templateMap} from './settings'
+import showContent from './showContent'
+
 export default {
   name: 'generator',
-  components: { showCode },
-  data () {
+  components: {showContent},
+  data() {
     return {
       loading: false,
       apiurl: process.env.VUE_APP_API,
@@ -168,14 +169,14 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.loadSettings()
   },
   methods: {
-    handleSelectDatabase (setting) {
+    handleSelectDatabase(setting) {
       if (setting) {
         this.selectedSetting = setting
-        api.listTables(setting).then(res => {
+        api.listTableName(setting).then(res => {
           this.tables = res.data
         })
       } else {
@@ -184,23 +185,23 @@ export default {
         this.checkedTables = []
       }
     },
-    handleCheckAllChange (val) {
+    handleCheckAllChange(val) {
       this.checkedTables = val ? this.tables : []
       this.isIndeterminate = false
     },
-    handleCheckedChange (value) {
+    handleCheckedChange(value) {
       const checkedCount = value.length
       this.checkAll = checkedCount === this.tables.length
       this.isIndeterminate = checkedCount > 0 && checkedCount < this.tables.length
     },
-    async loadSettings () {
+    async loadSettings() {
       const settings = await this.getSettings()
       this.databases = settings.map(s => ({
         label: s.name,
         value: s
       }))
     },
-    submitForm (formName, showCode = false) {
+    submitForm(formName, showCode = false) {
       if (this.checkedTables.length === 0) {
         this.$message.warning('请选择要生成的表')
         return
@@ -208,7 +209,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let req = this.buildRequestBody(this.settingsForm)
-          req = { ...req, ...this.settingsForm }
+          req = {...req, ...this.settingsForm}
           this.loading = true
           api.generate({
             connectionModel: this.selectedSetting,
@@ -216,9 +217,9 @@ export default {
           }).then(res => {
             if (res.success) {
               if (showCode) {
-                this.$refs.showCode.show(res.data.batchNo)
+                this.$refs.showContent.show(res.data.batchNo)
               } else {
-                window.open(`${this.apiurl}plume/download?batchNo=${res.data.batchNo}`)
+                window.open(`${this.apiurl}generator/download?batchNo=${res.data.batchNo}`)
               }
             } else {
               this.$message.warning(res.message)
@@ -231,7 +232,7 @@ export default {
         }
       })
     },
-    buildRequestBody (settings) {
+    buildRequestBody(settings) {
       const templateNameSet = []
 
       if (settings.repositoryMode) {
@@ -253,15 +254,15 @@ export default {
         tableNameSet: this.checkedTables
       }
     },
-    resetForm (formName) {
+    resetForm(formName) {
       this.$refs[formName].resetFields()
     },
-    getSettings () {
+    getSettings() {
       return this.$store.dispatch('d2admin/db/get', {
         dbName: 'database',
         path: 'database.settings',
         defaultValue: []
-      }, { root: true })
+      }, {root: true})
     }
   }
 }

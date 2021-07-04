@@ -1,4 +1,4 @@
-package com.plume.code.common.bean;
+package com.plume.code.common.helper;
 
 import cn.hutool.core.io.FileUtil;
 import com.plume.code.common.model.TreeNodeModel;
@@ -14,19 +14,15 @@ import java.util.List;
 /**
  * @author yinyansheng
  */
-@Component
-public class PathHandler {
+public class PathHelper {
 
-    @Autowired
-    private Environment env;
-
-    public String getDownloadPath() {
-        if ("prod".equals(env.getProperty("spring.profiles.active"))) {
+    public static String getDownloadPath() {
+        if ("prod".equals(System.getProperty("spring.profiles.active"))) {
             String userDirPath = System.getProperty("user.dir");
             return userDirPath.concat("/downloads/");
         }
 
-        URL resource = PathHandler.class.getClassLoader().getResource("");
+        URL resource = PathHelper.class.getClassLoader().getResource("");
 
         if (null == resource) {
             throw new RuntimeException("can't find the resource URL");
@@ -40,13 +36,7 @@ public class PathHandler {
             throw new RuntimeException("directory not exists :" + directoryPath);
         }
 
-        String name = FileUtil.getName(directoryPath);
-        TreeNodeModel root = TreeNodeModel.builder()
-                .path(directoryPath)
-                .isDirectory(true)
-                .name(name)
-                .build();
-
+        TreeNodeModel root = new TreeNodeModel(new File(directoryPath));
         tree(directoryPath, root);
         return root;
     }
@@ -58,12 +48,7 @@ public class PathHandler {
 
         List<TreeNodeModel> list = new ArrayList<>();
         for (File file : FileUtil.ls(path)) {
-            TreeNodeModel treeNodeModel = TreeNodeModel.builder()
-                    .path(file.getPath())
-                    .isDirectory(file.isDirectory())
-                    .name(file.getName())
-                    .build();
-
+            TreeNodeModel treeNodeModel = new TreeNodeModel(file);
             list.add(treeNodeModel);
             tree(file.getPath(), treeNodeModel);
         }

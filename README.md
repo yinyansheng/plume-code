@@ -38,8 +38,8 @@ TBD...
 ## 0.0.2 version
 - 支持swagger、lombok
 - 支持sqlserver、oracle
-- 支持hibernate
-- 支持包路径修改
+- 支持hibernate、tk-Mybatis
+- 支持包路径修改(TBD)
 - 支持Query 后缀配置
 - 支持VO 后缀配置
 - 支持DTO后缀配置（DTO,Dto,PoJo）

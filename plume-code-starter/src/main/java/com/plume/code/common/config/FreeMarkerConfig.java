@@ -1,4 +1,4 @@
-package com.plume.code.common.bean;
+package com.plume.code.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

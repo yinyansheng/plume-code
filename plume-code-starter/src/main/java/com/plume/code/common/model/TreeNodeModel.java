@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.File;
 import java.util.List;
 
 @Data
@@ -12,6 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TreeNodeModel {
+
+    public TreeNodeModel(File file) {
+        this.path = file.getPath();
+        this.isDirectory = file.isDirectory();
+        this.name = file.getName();
+    }
+
     private String path;
     private String name;
     private String icon;

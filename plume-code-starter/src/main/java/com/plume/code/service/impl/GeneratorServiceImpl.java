@@ -2,7 +2,7 @@ package com.plume.code.service.impl;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ZipUtil;
-import com.plume.code.common.bean.PathHandler;
+import com.plume.code.common.helper.PathHelper;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.DatabaseBehavior;
@@ -33,9 +33,6 @@ public class GeneratorServiceImpl implements GeneratorService {
     @Autowired
     protected GeneratorBehaviorFactory generatorBehaviorFactory;
 
-    @Autowired
-    private PathHandler pathHandler;
-
     @SneakyThrows
     @Override
     public ResultModel generate(ConnectionModel connectionModel, SettingModel settingModel) {
@@ -47,7 +44,7 @@ public class GeneratorServiceImpl implements GeneratorService {
 
         generatorBehaviorList.forEach(GeneratorBehavior::generate);
 
-        String downloadPath = pathHandler.getDownloadPath();
+        String downloadPath = PathHelper.getDownloadPath();
         String directoryPath = downloadPath.concat(settingModel.getBatchNo());
 
         if (!(new File(directoryPath).exists())) {
@@ -105,7 +102,7 @@ public class GeneratorServiceImpl implements GeneratorService {
     @SneakyThrows
     @Override
     public CodeFileTreeModel getCodeFileTree(String batchNo) {
-        String downloadPath = pathHandler.getDownloadPath();
+        String downloadPath = PathHelper.getDownloadPath();
         String directoryPath = downloadPath.concat(batchNo);
 
         if (!(new File(directoryPath).exists())) {
