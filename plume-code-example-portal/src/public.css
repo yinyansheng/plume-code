@@ -1,0 +1,64 @@
+.el-table th {
+    padding: 0 !important
+}
+.el-table td, .el-table th  {
+    padding: 4px !important;
+
+}
+
+.el-table td, .el-table th .el-button {
+    padding:0
+}
+
+.el-date-editor.el-input {
+    width: 100%
+}
+
+.el-card__body {
+    padding: 5px !important;
+}
+
+.upload-class {
+    padding-left: 5px
+}
+
+.search-button-group {
+    margin-top:10px
+}
+.ivu-btn {
+    margin-left :10px
+}
+.table-container {
+    margin-top: 10px
+}
+.page-container {
+    margin-top: 10px;
+    float: right;
+}
+.el-breadcrumb {
+    padding: 20px 0;
+    font-size: 16px;
+}
+.default {
+    color: #409eff;
+    font-weight: bold;
+}
+.success {
+    color: #67c23a;font-weight: bold;
+}
+
+.waring {
+    color: #e6a23c;font-weight: bold;
+}
+
+.info {
+    color: #909399;font-weight: bold;
+}
+
+.danger {
+    color: #f56c6c;font-weight: bold;
+}
+
+.mw50 {
+    max-width: 50%
+}
