@@ -2,7 +2,7 @@
 一个简单易用且功能强大的代码生成器(Java & D2Admin(Base on Vue、ElementUI)),熟练使用你就是CURD代码挖掘机！！！
 
 PlumeCode 不仅简单、而且强大
-- 支持多数据库Mysql、H2（SqlServer、Oracle TBD...）
+- 支持多数据库Mysql、H2（SqlServer、Oracle、PostgreSQL TBD...）
 - 支持多种持久层框架MybatisPlus、Mybatis、Jpa (Hibernate、tk-Mybatis TBD...)
 - 一键下载拥有portal、controller、service、repository、mapper、dto、entity、vo、query、mapper.xml等前后端代码
 - 良好的项目结构，让二次开发变得像喝水一样简单
