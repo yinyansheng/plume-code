@@ -1,6 +1,6 @@
 export let searchForm = {
 #foreach(${fieldModel} in ${fieldModelList})
-    ${fieldModel.name},
+    ${fieldModel.name} : null,
 #end
 }
 

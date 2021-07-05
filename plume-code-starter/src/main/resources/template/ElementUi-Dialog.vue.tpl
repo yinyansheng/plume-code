@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :title="isEdit ? 'Edit': 'Add'" width="45%" :visible.sync="visible" :before-close="close" label-position="right"
+  <el-dialog :title="isEdit ? '编 辑': '新 增'" width="45%" :visible.sync="visible" :before-close="close" label-position="right"
             close-on-press-escape="false" :close-on-click-modal="false">
     <el-form ref="ent" :model="ent" :rules="rules" label-width="110px">
 #foreach(${fieldModel} in ${fieldModelList})

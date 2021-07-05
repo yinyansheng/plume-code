@@ -1,16 +1,13 @@
 <template>
   <el-form label-width="110px" label-position="right" :model="searchForm" ref="searchForm" size="mini">
     <el-row>
-      <el-col :span="6">
-        <el-form-item label="彩店" prop="shopId">
-          <el-input v-model="searchForm.shopId"/>
+  #foreach(${fieldModel} in ${fieldModelList})
+  <el-col :span="6">
+        <el-form-item label="${fieldModel.comment}" prop="${fieldModel.name}">
+          <el-input v-model="searchForm.${fieldModel.name}"></el-input>
         </el-form-item>
-      </el-col>
-      <el-col :span="6">
-        <el-form-item label="状态" prop="status">
-          <yes-no-select v-model="searchForm.status" tip="状态"/>
-        </el-form-item>
-      </el-col>
+  </el-col>
+  #end
     </el-row>
     <el-row>
       <el-col :span="6">

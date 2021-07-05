@@ -24,7 +24,7 @@ public class ElementUiApiGeneratorBehavior extends VueGeneratorBehavior {
 
     @Override
     protected String getFileName() {
-        return classModel.getName().concat("api.js");
+        return classModel.getName().concat(".js");
     }
 
     @Override

@@ -3,7 +3,7 @@
       <div class="table-container">
         <el-table stripe border :data="data" v-loading="loading" highlight-current-row>
 #foreach(${fieldModel} in ${fieldModelList})
-    <el-table-column prop="${fieldModel.name}" label="${fieldModel.comment}" width="300" align="center"/>
+          <el-table-column prop="${fieldModel.name}" label="${fieldModel.comment}" width="300" align="center"/>
 #end
           <el-table-column label="操作" width="100">
             <template slot-scope="{row}">
@@ -30,9 +30,9 @@
 import {
   Page,
   Delete,
-} from '@/api/bankcard'
+} from '@/api/${className}'
 export default {
-  name: "Table",
+  name: "${className}",
   inject: ['showEdit'],
   data() {
     return {

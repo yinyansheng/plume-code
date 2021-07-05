@@ -1,6 +1,6 @@
 package ${packageName};
 
-import ${basePackageName}.admin.query.${ClassName}Query;
+import ${basePackageName}.admin.controller.query.${ClassName}Query;
 import ${basePackageName}.mapper.entity.${ClassName}ENT;
 import ${basePackageName}.service.${ClassName}Service;
 import org.springframework.beans.factory.annotation.Autowired;

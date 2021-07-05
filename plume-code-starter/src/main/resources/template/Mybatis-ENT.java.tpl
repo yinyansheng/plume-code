@@ -5,7 +5,6 @@ ${extraPackageName}
 #end
 
 import java.io.Serializable;
-import ${entityPackageName};
 
 /**
  * @description: ${comment}

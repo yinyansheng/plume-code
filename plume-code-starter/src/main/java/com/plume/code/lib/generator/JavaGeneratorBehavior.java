@@ -39,8 +39,9 @@ public abstract class JavaGeneratorBehavior extends GeneratorBehavior {
         templateContext.put("basePackageName", settingModel.getBasePackageName());
         templateContext.put("packageName", getPackageName());
 
+        //TODO 问题 例如当前是MybatisPlusServiceGeneratorBehavior , getPackageName = xxx.service
         String entityPackageName = getPackageName()
-                .concat(String.format(".entity.%sENT;", StringHelper.upperFirstCase(classModel.getName())));
+                .concat(String.format(".%sENT", StringHelper.upperFirstCase(classModel.getName())));
 
         templateContext.put("entityPackageName", entityPackageName);
 

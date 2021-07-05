@@ -9,8 +9,6 @@ ${extraPackageName}
 #end
 
 import java.io.Serializable;
-import com.baomidou.mybatisplus.extension.service.IService;
-import ${entityPackageName};
 
 /**
  * @description: ${comment}

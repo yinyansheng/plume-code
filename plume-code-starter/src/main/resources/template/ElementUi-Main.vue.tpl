@@ -2,7 +2,7 @@
   <div>
     <Search ref="search" />
     <el-row style="text-align: left">
-      <el-button @click="showAdd">Add</el-button>
+      <el-button @click="showAdd">新 增</el-button>
     </el-row>
     <Table ref="table" />
     <OptionDialog ref="dialog"/>
@@ -17,7 +17,7 @@ import Table from './Table'
 import OptionDialog from './OptionDialog'
 import {${ClassName}Ent} from "./object";
 export default {
-  name: "Bankcard",
+  name: "${className}",
   components: {Search,Table, OptionDialog},
   provide: function () {
     return {

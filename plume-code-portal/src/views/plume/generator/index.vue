@@ -134,7 +134,7 @@ export default {
         tablePrefix: '',
         columnPrefix: '',
         projectName: 'plume_code',
-        basePackageName: 'com.github.plume',
+        basePackageName: 'com.plume.code',
         author: 'plume-code',
         swaggerState: false,
         lombokState: false,
