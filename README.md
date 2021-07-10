@@ -46,3 +46,7 @@ TBD...
 ## 0.0.3 version
 - 支持docker部署（部署plume-code）
 - 支持docker compose 部署（含所有数据库类型）
+## 0.0.4 version
+- 配置基于xml、yml配置
+- 编写dtd约束文件
+- 用户自定义配置文件
