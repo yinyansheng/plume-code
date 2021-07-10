@@ -43,3 +43,6 @@ TBD...
 - 支持VO 后缀配置
 - 支持DTO后缀配置（DTO,Dto,PoJo）
 - 支持Entity后缀配置（PO、ENT、Entity）
+## 0.0.3 version
+- 支持docker部署（部署plume-code）
+- 支持docker compose 部署（含所有数据库类型）
