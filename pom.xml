@@ -19,8 +19,6 @@
     <modules>
         <module>plume-code-starter</module>
         <module>plume-code-portal</module>
-        <module>plume-code-example-portal</module>
-        <module>plume-code-example-admin</module>
     </modules>
 
     <dependencyManagement>
