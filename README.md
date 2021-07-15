@@ -32,7 +32,7 @@ PlumeCode 不仅简单、而且强大
 - 支持预览代码、获取代码   --done
 ## 0.0.2 version
 - 支持联合主键
-- 支持sqlserver、oracle
+- 支持sqlserver、oracle、PostgreSQL
 - 支持hibernate、tk-Mybatis
 - 支持Query 后缀配置
 - 支持VO 后缀配置
