@@ -1,5 +1,5 @@
 # PlumeCode
-一个简单易用且功能强大的代码生成器(Java & D2Admin(Base on Vue、ElementUI)),熟练使用你就是CURD代码挖掘机！！！
+一个简单易用且功能强大的代码生成器(Java & ElementUI),熟练使用你就是CURD代码挖掘机！！！
 
 PlumeCode 不仅简单、而且强大
 - 支持多数据库Mysql、H2（SqlServer、Oracle、PostgreSQL TBD...）
