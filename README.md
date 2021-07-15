@@ -12,6 +12,9 @@ PlumeCode 不仅简单、而且强大
 ![generator setting](/plume-code-starter/src/main/resources/images/img2.png)
 ![download and preview](/plume-code-starter/src/main/resources/images/img3.png)
 
+# sample
+[sample](https://gitee.com/yansheng/plume-code-sample)
+
 # 生成代码结构
 ## 三层架构
 - controller layer(controller、vo、query)
