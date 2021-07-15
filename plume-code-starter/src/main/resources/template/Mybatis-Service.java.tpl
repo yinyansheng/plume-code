@@ -1,6 +1,6 @@
 package ${packageName};
 
-import ${basePackageName}.repository.entity.${ClassName}ENT;
+import ${basePackageName}.mapper.entity.${ClassName}ENT;
 import ${basePackageName}.admin.controller.query.${ClassName}Query;
 import com.github.pagehelper.PageInfo;
 /**
@@ -15,5 +15,5 @@ public interface ${ClassName}Service  {
 
     void updateById(${ClassName}ENT ${className}ENT);
 
-    void removeById(${ClassName}ENT ${className}ENT);
+    void removeById(Long id);
 }

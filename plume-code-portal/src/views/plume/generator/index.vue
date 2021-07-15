@@ -76,6 +76,8 @@
                 <el-checkbox true-label="jpa" false-label="none" v-model="settingsForm.repositoryMode" label="JPA"/>
                 <el-checkbox true-label="mybatis" false-label="none" v-model="settingsForm.repositoryMode"
                              label="Mybatis"/>
+                <el-checkbox true-label="tkMybatis" false-label="none" v-model="settingsForm.repositoryMode"
+                             label="tk-Mybatis"/>
               </el-form-item>
             </div>
           </el-card>
