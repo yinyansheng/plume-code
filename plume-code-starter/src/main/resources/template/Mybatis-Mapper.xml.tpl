@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="${basePackageName}.mapper.${ClassName}Mapper">
-  <resultMap id="BaseResultMap" type="${basePackageName}.mapper.entity.${ClassName}">
+  <resultMap id="BaseResultMap" type="${basePackageName}.mapper.entity.${ClassName}ENT">
 #foreach(${fieldModel} in ${fieldModelList})
 #if($fieldModel.pk)
     <id column="${fieldModel.columnName}" property="${fieldModel.name}" jdbcType="${fieldModel.jdbcType}"/>
@@ -39,7 +39,7 @@
     #if($foreach.hasNext) and #end
 #end
     </delete>
-    <insert id="insert" parameterType="${basePackageName}.mapper.entity.${ClassName}">
+    <insert id="insert" parameterType="${basePackageName}.mapper.entity.${ClassName}ENT">
     insert into ${tableName} (
 #foreach(${fieldModel} in ${fieldModelList})
     ${fieldModel.columnName}#if($foreach.hasNext),#end
@@ -53,7 +53,7 @@
 #end
   )
   </insert>
-  <insert id="insertSelective" parameterType="${basePackageName}.mapper.entity.${ClassName}">
+  <insert id="insertSelective" parameterType="${basePackageName}.mapper.entity.${ClassName}ENT">
     insert into ${tableName}
     <trim prefix="(" suffix=")" suffixOverrides=",">
 #foreach(${fieldModel} in ${fieldModelList})
@@ -72,7 +72,7 @@
 #end
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="${basePackageName}.mapper.entity.${ClassName}">
+  <update id="updateByPrimaryKeySelective" parameterType="${basePackageName}.mapper.entity.${ClassName}ENT">
     update ${tableName}
     <set>
 #foreach(${fieldModel} in ${fieldModelList})
@@ -88,7 +88,7 @@
     #if($foreach.hasNext) and #end
 #end
   </update>
-  <update id="updateByPrimaryKey" parameterType="${basePackageName}.mapper.entity.${ClassName}">
+  <update id="updateByPrimaryKey" parameterType="${basePackageName}.mapper.entity.${ClassName}ENT">
     update ${tableName}
     set
 #foreach(${fieldModel} in ${fieldModelList})

@@ -1,16 +1,15 @@
 package ${packageName};
 
-import ${entityPackageName};
 import ${basePackageName}.repository.entity.${ClassName}ENT;
 import ${basePackageName}.admin.controller.query.${ClassName}Query;
-import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 /**
  * @description: ${comment}
  * @author: ${author}
  * @date: ${createTime}
  **/
 public interface ${ClassName}Service  {
-    Page<${ClassName}> page(${ClassName}Query query);
+    PageInfo<${ClassName}ENT> page(${ClassName}Query query);
 
     void save(${ClassName}ENT ${className}ENT);
 

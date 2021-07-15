@@ -1,6 +1,6 @@
 package ${packageName};
 
-import  ${entityPackageName};
+import ${basePackageName}.mapper.entity.${ClassName}ENT;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 /**
@@ -17,7 +17,7 @@ public interface ${ClassName}Mapper {
 
     int insertSelective(${ClassName}ENT ${className}ENT);
 
-    T selectByPrimaryKey(#foreach(${primaryKey} in ${primaryKeyList})${primaryKey.type} ${primaryKey.name}#if($foreach.hasNext),#end#end);
+    ${ClassName}ENT selectByPrimaryKey(#foreach(${primaryKey} in ${primaryKeyList})${primaryKey.type} ${primaryKey.name}#if($foreach.hasNext),#end#end);
 
     int updateByPrimaryKeySelective(${ClassName}ENT ${className}ENT);
 

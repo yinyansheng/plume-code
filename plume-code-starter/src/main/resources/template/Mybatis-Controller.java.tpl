@@ -5,7 +5,7 @@ import ${basePackageName}.mapper.entity.${ClassName}ENT;
 import ${basePackageName}.service.${ClassName}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @description: ${comment}
@@ -20,22 +20,22 @@ public class ${ClassName}Controller {
     private ${ClassName}Service ${className}Service;
 
     @PostMapping("page")
-    public Page<${ClassName}ENT> page(@RequestBody ${ClassName}Query query) {
+    public PageInfo<${ClassName}ENT> page(@RequestBody ${ClassName}Query query) {
       return ${className}Service.page(query);
     }
 
     @PostMapping(value = "save")
-    public Boolean save(@RequestBody ${ClassName}ENT ent) {
-        return ${className}Service.save(ent);
+    public void save(@RequestBody ${ClassName}ENT ent) {
+        ${className}Service.save(ent);
     }
 
     @PostMapping(value = "update")
-    public Boolean update(@RequestBody ${ClassName}ENT ent) {
-        return ${className}Service.updateById(ent);
+    public void update(@RequestBody ${ClassName}ENT ent) {
+        ${className}Service.updateById(ent);
     }
 
     @PostMapping(value = "delete")
-    public Boolean delete(@RequestParam("id") Integer id) {
-        return ${className}Service.removeById(id);
+    public void delete(@RequestParam("id") Long id) {
+        ${className}Service.removeById(id);
     }
 }

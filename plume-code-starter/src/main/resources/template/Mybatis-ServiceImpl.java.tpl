@@ -5,7 +5,9 @@ import ${basePackageName}.admin.controller.query.${ClassName}Query;
 import ${basePackageName}.mapper.${ClassName}Mapper;
 import ${basePackageName}.service.${ClassName}Service;
 import org.springframework.stereotype.Service;
-import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 /**
  * @description: ${comment}
  * @author: ${author}
@@ -17,21 +19,25 @@ public class ${ClassName}ServiceImpl implements ${ClassName}Service {
     @Autowired
     private ${ClassName}Mapper ${className}Mapper;
 
-    Page<${ClassName}> page(${ClassName}Query query) {
-        Page<${ClassName}> page = PageHelper.startPage(query.getPageIndex(), query.getPageSize())
-                                .doSelectPage(()-> ${className}Mapper.page(query));
+    @Override
+    public PageInfo<${ClassName}ENT> page(${ClassName}Query query) {
+        PageInfo<${ClassName}> page = PageHelper.startPage(query.getPageIndex(), query.getPageSize())
+                                .doSelectPageInfo(()-> ${className}Mapper.page(query));
         return page;
     }
 
-    void save(${ClassName}ENT ${className}ENT) {
+    @Override
+    public void save(${ClassName}ENT ${className}ENT) {
         ${className}Mapper.insert(${className}ENT);
     }
 
-    void updateById(${ClassName}ENT ${className}ENT) {
+    @Override
+    public void updateById(${ClassName}ENT ${className}ENT) {
         ${className}Mapper.updateByPrimaryKeySelective(${className}ENT);
     }
 
-    void removeById(${ClassName}ENT ${className}ENT) {
-        ${className}Mapper.deleteByPrimaryKey(${className}ENT);
+    @Override
+    public void removeById(Long id) {
+        ${className}Mapper.deleteByPrimaryKey(id);
     }
 }

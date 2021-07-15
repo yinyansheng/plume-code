@@ -21,7 +21,7 @@ class MybatisMapperXmlGeneratorBehavior extends JavaGeneratorBehavior {
 
     @Override
     protected String getPackageName() {
-        return settingModel.getBasePackageName().concat(".mapper.xml");
+        return settingModel.getBasePackageName().concat(".mapper");
     }
 
     @Override
