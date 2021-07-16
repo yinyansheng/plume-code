@@ -2,12 +2,13 @@ package com.plume.code.lib.database;
 
 import com.plume.code.common.constrant.DatabaseConstant;
 import com.plume.code.common.model.SettingModel;
-import com.plume.code.lib.database.model.*;
+import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.lib.database.model.FieldModel;
+import com.plume.code.lib.database.model.MetaDataColumnModel;
+import com.plume.code.lib.database.model.MetaDataTableModel;
 import lombok.SneakyThrows;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.sql.JDBCType;
 import java.sql.ResultSet;

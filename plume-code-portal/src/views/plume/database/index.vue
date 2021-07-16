@@ -97,8 +97,8 @@
             <el-option label="MySQL" value="mysql"></el-option>
             <el-option label="H2" value="h2"></el-option>
             <el-option label="PostgreSQL" value="postgreSQL"></el-option>
-            <el-option label="Oracle" value="oracle"></el-option>
             <el-option label="SqlServer" value="sqlServer"></el-option>
+            <el-option label="Oracle" value="oracle"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="数据库驱动" prop="driver">
@@ -107,6 +107,8 @@
             <el-option label="com.mysql.jdbc.Driver" value="com.mysql.jdbc.Driver"></el-option>
             <el-option label="org.h2.Driver" value="org.h2.Driver"></el-option>
             <el-option label="org.postgresql.Driver" value="org.postgresql.Driver"></el-option>
+            <el-option label="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                       value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="jdbc url" prop="url">
