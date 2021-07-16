@@ -13,7 +13,7 @@ PlumeCode 不仅简单、而且强大
   
 - 启动项目
   java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.1.jar
-    ![startup](/0.png)
+    ![start](/image/0.png)
   
 - 功能简介
   http://localhost:8844/web/index.html
