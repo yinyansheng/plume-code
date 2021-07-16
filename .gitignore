@@ -10,5 +10,5 @@
 */dist/
 /.idea/
 /logs/
-/web.templates.dist/
+**/web/
 */downloads/

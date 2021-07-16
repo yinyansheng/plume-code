@@ -3,7 +3,7 @@ const VueFilenameInjector = require('@d2-projects/vue-filename-injector')
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
 const forElementUI = require('webpack-theme-color-replacer/forElementUI')
 const cdnDependencies = require('./dependencies-cdn')
-const { chain, set, each } = require('lodash')
+const {chain, set, each} = require('lodash')
 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
@@ -37,7 +37,7 @@ const pages = undefined
 module.exports = {
   // 根据你的实际情况更改这里
   publicPath,
-  outputDir: '../plume-code-starter/src/main/resources/web/templates/dist',
+  outputDir: '../plume-code-starter/src/main/resources/web/',
   lintOnSave: true,
   devServer: {
     publicPath, // 和 publicPath 保持一致

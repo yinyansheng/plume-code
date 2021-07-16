@@ -7,7 +7,6 @@ import com.plume.code.lib.database.model.FieldModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
-import com.plume.code.service.dto.UserDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,9 +65,4 @@ public class H2Tests {
         System.out.println(gson.toJson(columnModels));
     }
 
-    public static void main(String[] args) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.age(1).name("zhagnsan");
-        System.out.println(userDTO);
-    }
 }
