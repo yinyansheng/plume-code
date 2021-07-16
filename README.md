@@ -26,8 +26,9 @@ PlumeCode 不仅简单、而且强大
   http://localhost:8844/web/index.html
 - 数据库配置
   ![start](/image/1.png)
+  ![database](/image/3.png)
 - 生成代码
-  ![generator](/image/3.png)
+  ![generator](/image/2.png)
 - 代码预览
   ![preview](/image/4.png)
 
