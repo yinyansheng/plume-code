@@ -43,9 +43,11 @@ PlumeCode 不仅简单、而且强大
 - controller layer(controller、vo、query)
 - servicer layer(service、serviceImpl、dto)
 - dao layer(repository/mapper/dao、repositoryImpl/daoImpl、entity)
+- ![project layer](/image/6.png)
+- ![package](/image/7.png)
 
 ### 前端框架
-
+    由于前端代码公司间差异比较大，这里只是做了ElementUI的示例，如有需要，可根据实际前端技术选型，做二次开发集成
 - [d2admin](https://d2.pub/zh/)
 - [element-ui](https://element.eleme.cn/2.15/#/zh-CN)
 
