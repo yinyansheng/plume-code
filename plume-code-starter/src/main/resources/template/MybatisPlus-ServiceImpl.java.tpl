@@ -1,6 +1,6 @@
 package ${packageName};
 
-import ${entityPackageName};
+import ${basePackageName}.mapper.entity.${ClassName}ENT;
 import ${basePackageName}.mapper.${ClassName}Mapper;
 import ${basePackageName}.service.${ClassName}Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

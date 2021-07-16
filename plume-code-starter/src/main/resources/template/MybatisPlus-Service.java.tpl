@@ -1,7 +1,7 @@
 package ${packageName};
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import ${entityPackageName};
+import ${basePackageName}.mapper.entity.${ClassName}ENT;
 
 /**
  * @description: ${comment}
