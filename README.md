@@ -43,9 +43,8 @@ PlumeCode 不仅简单、而且强大
 - controller layer(controller、vo、query)
 - servicer layer(service、serviceImpl、dto)
 - dao layer(repository/mapper/dao、repositoryImpl/daoImpl、entity)
-
-![project layer](/image/6.png)
-![package](/image/7.png)
+- ![project layer](/image/6.png)
+- ![package](/image/7.png)
 
 ### 前端框架
 
