@@ -3,9 +3,11 @@
     <template slot="header">
       <d2-icon name="database"/>
       数据库配置
-      <el-tooltip style="margin-right: 10px" effect="dark" content="配置存储在浏览器Local Storage 【key: d2admin-1.20.1 value: database/public/database/settings】" placement="right-end">
-      <i class="el-icon-warning-outline"></i>
-    </el-tooltip>
+      <el-tooltip style="margin-right: 10px" effect="dark"
+                  content="配置存储在浏览器Local Storage 【key: d2admin-1.20.1 value: database/public/database/settings】"
+                  placement="right-end">
+        <i class="el-icon-warning-outline"></i>
+      </el-tooltip>
     </template>
     <el-row>
       <el-button type="primary" @click="handleAdd">新增</el-button>
@@ -19,7 +21,7 @@
         title="确定清空配置吗？"
         @onConfirm="handleClearSetting"
       >
-        <el-button style="margin-left: 10px" type="danger" slot="reference" >清空配置</el-button>
+        <el-button style="margin-left: 10px" type="danger" slot="reference">清空配置</el-button>
       </el-popconfirm>
     </el-row>
     <el-table
@@ -37,7 +39,7 @@
             title="确定删除吗？"
             @onConfirm="handleRemove($index, row)"
           >
-            <el-button style="margin-right: 10px" type="danger"  slot="reference">删 除</el-button>
+            <el-button style="margin-right: 10px" type="danger" slot="reference">删 除</el-button>
           </el-popconfirm>
           <el-button type="primary" @click="handleShowEdit($index, row)">编 辑</el-button>
           <el-button type="primary" style="margin-right: 10px;" @click="handleTest(row)">测试连接</el-button>
@@ -84,7 +86,8 @@
       </el-table-column>
 
     </el-table>
-    <el-dialog title="数据库配置" width="30%" :visible.sync="dialogFormVisible" :close-on-press-escape="false" :close-on-click-modal="false">
+    <el-dialog title="数据库配置" width="30%" :visible.sync="dialogFormVisible" :close-on-press-escape="false"
+               :close-on-click-modal="false">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="120px">
         <el-form-item label="数据库名称" prop="name">
           <el-input v-model="form.name"/>
@@ -93,13 +96,17 @@
           <el-select style="width: 100%;" v-model="form.type" placeholder="请选择数据库类型">
             <el-option label="MySQL" value="mysql"></el-option>
             <el-option label="H2" value="h2"></el-option>
+            <el-option label="PostgreSQL" value="postgreSQL"></el-option>
+            <el-option label="Oracle" value="oracle"></el-option>
+            <el-option label="SqlServer" value="sqlServer"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="数据库驱动" prop="driver">
-          <el-select style="width: 100%;"  v-model="form.driver" placeholder="请选择数据库驱动">
+          <el-select style="width: 100%;" v-model="form.driver" placeholder="请选择数据库驱动">
             <el-option label="com.mysql.cj.jdbc.Driver" value="com.mysql.cj.jdbc.Driver"></el-option>
             <el-option label="com.mysql.jdbc.Driver" value="com.mysql.jdbc.Driver"></el-option>
             <el-option label="org.h2.Driver" value="org.h2.Driver"></el-option>
+            <el-option label="org.postgresql.Driver" value="org.postgresql.Driver"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="jdbc url" prop="url">
@@ -126,7 +133,7 @@ import api from '@/api'
 
 export default {
   name: 'database',
-  data () {
+  data() {
     return {
       testing: false,
       testName: '测试连接',
@@ -167,36 +174,36 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.load()
   },
   methods: {
-    async load () {
+    async load() {
       this.tableData = await this.getSettings()
     },
-    handleClearSetting () {
+    handleClearSetting() {
       this.tableData = []
       this.doSave([])
     },
-    handleAdd () {
+    handleAdd() {
       this.form.isValid = false
       this.form.index = -1
       this.dialogFormVisible = true
     },
-    async handleRemove (index) {
+    async handleRemove(index) {
       const settings = await this.getSettings()
       settings.splice(index, 1)
       this.doSave(settings)
       this.tableData = settings
     },
-    handleShowEdit (index, row) {
+    handleShowEdit(index, row) {
       this.form = {
         ...row,
         index
       }
       this.dialogFormVisible = true
     },
-    handleTest (row) {
+    handleTest(row) {
       this.doTestConnection(row).then(res => {
         if (res.success) {
           this.$message.success('测试通过')
@@ -207,7 +214,7 @@ export default {
         }
       })
     },
-    test () {
+    test() {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           this.testing = true
@@ -228,19 +235,19 @@ export default {
         }
       })
     },
-    doTestConnection (data) {
+    doTestConnection(data) {
       return api.testConnection(data)
     },
-    submit () {
+    submit() {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
-          this.save({ ...this.form })
+          this.save({...this.form})
           this.$refs.formRef.resetFields()
           this.dialogFormVisible = false
         }
       })
     },
-    async save (form) {
+    async save(form) {
       if (form.index > -1) {
         this.doEdit(form)
       } else {
@@ -250,7 +257,7 @@ export default {
         this.tableData = settings
       }
     },
-    async doEdit (form) {
+    async doEdit(form) {
       const s = form
       const index = s.index
       delete s.index
@@ -259,14 +266,14 @@ export default {
       this.doSave(settings)
       this.tableData = settings
     },
-    doSave (settings) {
+    doSave(settings) {
       this.$store.dispatch('d2admin/db/set', {
         dbName: 'database',
         path: 'database.settings',
         value: settings
-      }, { root: true })
+      }, {root: true})
     },
-    getSettings () {
+    getSettings() {
       return this.$store.dispatch('d2admin/db/get', {
         dbName: 'database',
         path: 'database.settings',
@@ -280,7 +287,7 @@ export default {
           password: '',
           isValid: true
         }]
-      }, { root: true })
+      }, {root: true})
     }
   }
 }

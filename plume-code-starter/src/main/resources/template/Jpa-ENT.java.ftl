@@ -18,6 +18,9 @@ import javax.persistence.Id;
 public class ${ClassName}ENT {
 
 <#list fieldModelList as fieldModel>
+    /**
+    * comment:${fieldModel.comment}
+    */
     @Column(name = "${fieldModel.columnName}")
     <#if (!isMultiplePK && fieldModel.pk)>
     @Id

@@ -5,10 +5,13 @@ import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.FieldModel;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.SneakyThrows;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.JDBCType;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +23,7 @@ import java.util.Set;
  */
 public abstract class DatabaseBehavior {
     protected ConnectionModel connectionModel;
-
+    
     void initialize(ConnectionModel connectionModel) {
         if (null == connectionModel) {
             throw new IllegalArgumentException("connectionModel must be not null");
@@ -33,10 +36,17 @@ public abstract class DatabaseBehavior {
         return new JdbcTemplate(getDataSource());
     }
 
-    private DataSource getDataSource() {
+    protected DataSource getDataSource() {
         SingleConnectionDataSource dataSource = new SingleConnectionDataSource(connectionModel.getUrl(), connectionModel.getUsername(), connectionModel.getPassword(), false);
         dataSource.setDriverClassName(connectionModel.getDriver());
         return dataSource;
+    }
+
+    @SneakyThrows
+    protected DatabaseMetaData getDatabaseMetaData() {
+        DataSource dataSource = getDataSource();
+        Connection connection = dataSource.getConnection();
+        return connection.getMetaData();
     }
 
     public abstract String getDatabaseName();

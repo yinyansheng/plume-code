@@ -1,5 +1,6 @@
 package com.plume.code.lib.database;
 
+import com.plume.code.common.helper.StringHelper;
 import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
 import org.apache.commons.lang3.NotImplementedException;
@@ -20,9 +21,9 @@ public class DatabaseBehaviorFactory {
     }
 
     public DatabaseBehavior getDatabaseBehavior(ConnectionModel connectionModel) {
-        String beanName = connectionModel.getType().toLowerCase().concat("DatabaseBehavior");
+        String beanName = StringHelper.lowerFirstCase(connectionModel.getType()).concat("DatabaseBehavior");
         if (!databaseBehaviorMap.containsKey(beanName)) {
-            throw new NotImplementedException("not support:%s", beanName);
+            throw new NotImplementedException(String.format("not support:%s", beanName));
         }
 
         DatabaseBehavior databaseBehavior = databaseBehaviorMap.get(beanName);

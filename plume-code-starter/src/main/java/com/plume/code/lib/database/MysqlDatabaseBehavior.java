@@ -28,7 +28,7 @@ import static com.plume.code.common.helper.StringHelper.*;
 @Scope(value = "prototype")
 class MysqlDatabaseBehavior extends DatabaseBehavior {
 
-    private static final String SCHEME_SQL = "SELECT database()";
+    private static final String DATABASE_SQL = "SELECT database()";
     private static final String COLUMN_SQL = "SELECT DISTINCT * FROM information_schema.COLUMNS WHERE table_schema = ? AND table_name = ? ORDER BY ORDINAL_POSITION";
     private static final String TABLE_SQL = "SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_COMMENT, CREATE_TIME FROM information_schema.tables WHERE table_schema = ?";
     private static final String PRIMARY_KEY_SQL = "SELECT k.column_name\n" +
@@ -41,7 +41,7 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
 
     @Override
     public String getDatabaseName() {
-        String schema = getJdbcTemplate().queryForObject(SCHEME_SQL, String.class);
+        String schema = getJdbcTemplate().queryForObject(DATABASE_SQL, String.class);
 
         if (StringUtils.isEmpty(schema)) {
             throw new IllegalArgumentException("get schema failure");

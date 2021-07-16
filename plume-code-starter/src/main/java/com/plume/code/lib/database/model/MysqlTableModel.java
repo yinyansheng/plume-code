@@ -10,8 +10,6 @@ import java.sql.Timestamp;
  */
 @Data
 public class MysqlTableModel {
-    private String tableSchema;
     private String tableName;
     private String tableComment;
-    private Timestamp createTime;
 }

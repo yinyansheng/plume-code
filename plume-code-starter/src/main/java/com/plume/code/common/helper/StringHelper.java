@@ -47,6 +47,10 @@ public class StringHelper {
 
         char[] chars = str.toCharArray();
         //首字母小写方法，大写会变成小写，如果小写首字母会消失
+        if (chars[0] >= 'a' && chars[0] <= 'z') {
+            return String.valueOf(chars);
+        }
+
         chars[0] += 32;
         return String.valueOf(chars);
     }
@@ -58,6 +62,10 @@ public class StringHelper {
 
         char[] chars = str.toCharArray();
         //首字母小写方法，大写会变成小写，如果小写首字母会消失
+        if (chars[0] >= 'A' && chars[0] <= 'Z') {
+            return String.valueOf(chars);
+        }
+
         chars[0] -= 32;
         return String.valueOf(chars);
     }
