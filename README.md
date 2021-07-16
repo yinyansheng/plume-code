@@ -19,8 +19,8 @@ PlumeCode 不仅简单、而且强大
   http://localhost:8844/web/index.html
 
 
-# sample
-[sample](https://gitee.com/yansheng/plume-code-sample)
+# 生成代码示例
+[plume-code-sample](https://gitee.com/yansheng/plume-code-sample)
 
 # 生成代码结构
 ## 三层架构
