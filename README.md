@@ -9,11 +9,11 @@ PlumeCode 不仅简单、而且强大
 
 
 # Quick Start
-- 下载文件 plume-code-starter-0.0.1.jar 
-    路径：plume-code/assemble/plume-code-starter-0.0.1.jar
+- 下载文件 [plume-code-starter-0.0.1.jar](https://gitee.com/yansheng/plume-code/raw/main/assemble/plume-code-starter-0.0.1.jar)
   
 - 启动项目
   java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.1.jar
+  (/image/0.png)
   
 - 功能简介
   http://localhost:8844/web/index.html
