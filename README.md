@@ -12,12 +12,17 @@ PlumeCode 不仅简单、而且强大
 - 下载文件 [plume-code-starter-0.0.1.jar](https://gitee.com/yansheng/plume-code/raw/main/assemble/plume-code-starter-0.0.1.jar)
   
 - 启动项目
-  java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.1.jar
+    java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.1.jar
     ![start](/image/0.png)
   
 - 功能简介
   http://localhost:8844/web/index.html
-
+  数据库配置
+  ![start](/image/1.png)
+  生成代码
+  ![generator](/image/3.png)
+  代码预览
+  ![preview](/image/4.png)
 
 # 生成代码示例
 [plume-code-sample](https://gitee.com/yansheng/plume-code-sample)
