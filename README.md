@@ -44,6 +44,9 @@ PlumeCode 不仅简单、而且强大
 - servicer layer(service、serviceImpl、dto)
 - dao layer(repository/mapper/dao、repositoryImpl/daoImpl、entity)
 
+![project layer](/image/6.png)
+![package](/image/7.png)
+
 ### 前端框架
 
 - [d2admin](https://d2.pub/zh/)
