@@ -85,8 +85,7 @@ PlumeCode 不仅简单、而且强大
 
 ## 项目结构
 
-TBD...
-
+ ![framework](/image/5.png)
 
 
 ## 二开说明
