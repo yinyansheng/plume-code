@@ -7,10 +7,17 @@ PlumeCode 不仅简单、而且强大
 - 一键下载拥有portal、controller、service、repository、mapper、dto、entity、vo、query、mapper.xml等前后端代码
 - 良好的项目结构，让二次开发变得像喝水一样简单
 
-# 使用文档
-![add database connection](/plume-code-starter/src/main/resources/images/img1.png)
-![generator setting](/plume-code-starter/src/main/resources/images/img2.png)
-![download and preview](/plume-code-starter/src/main/resources/images/img3.png)
+
+# Quick Start
+- 下载文件 plume-code-starter-0.0.1.jar 
+    路径：plume-code/assemble/plume-code-starter-0.0.1.jar
+  
+- 启动项目
+  java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.1.jar
+  
+- 功能简介
+  http://localhost:8844/web/index.html
+
 
 # sample
 [sample](https://gitee.com/yansheng/plume-code-sample)
@@ -24,7 +31,6 @@ PlumeCode 不仅简单、而且强大
 ## 前端框架
 - [d2admin](https://d2.pub/zh/)
 - [element-ui](https://element.eleme.cn/2.15/#/zh-CN)
-
 
 
 # Road Map
