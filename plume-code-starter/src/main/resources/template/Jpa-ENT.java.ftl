@@ -12,11 +12,14 @@ import javax.persistence.Id;
  **/
 @Entity
 @Table(name = "${tableName}")
+<#if (isMultiplePK)>
+@IdClass(${ClassName}PK.class)
+</#if>
 public class ${ClassName}ENT {
 
 <#list fieldModelList as fieldModel>
     @Column(name = "${fieldModel.columnName}")
-    <#if (fieldModel.pk)>
+    <#if (!isMultiplePK && fieldModel.pk)>
     @Id
         <#if (fieldModel.pkStrategy==1)>
     @GeneratedValue(strategy = GenerationType.IDENTITY)

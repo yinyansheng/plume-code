@@ -1,6 +1,6 @@
 export const templateMap = {
   mybatisPlus: ['MybatisPlus-ENT.java.tpl', 'MybatisPlus-Mapper.java.tpl'],
-  jpa: ['Jpa-ENT.java.tpl', 'Jpa-Repository.java.tpl'],
+  jpa: ['Jpa-ENT.java.ftl', 'Jpa-ENT-PK.java.ftl', 'Jpa-Repository.java.tpl'],
   mybatis: ['Mybatis-ENT.java.tpl', 'Mybatis-Mapper.xml.tpl', 'Mybatis-Mapper.java.tpl'],
   tkMybatis: ['Mybatis-ENT.java.tpl', 'Mybatis-TK-Mapper.xml.tpl', 'Mybatis-TK-Mapper.java.tpl'],
   service: {

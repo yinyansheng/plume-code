@@ -28,11 +28,5 @@ class MybatisMapperXmlGeneratorBehavior extends JavaGeneratorBehavior {
     protected String getFileName() {
         return String.format("%sMapper.xml", upperFirstCase(classModel.getName()));
     }
-
-    @Override
-    protected Map<String, Object> getTemplateContext() {
-        Map<String, Object> templateContext = super.getTemplateContext();
-        templateContext.put("primaryKeyList", fieldModelList.stream().filter(FieldModel::isPk).collect(Collectors.toList()));
-        return templateContext;
-    }
+    
 }

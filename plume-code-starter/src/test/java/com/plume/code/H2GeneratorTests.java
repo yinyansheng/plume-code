@@ -52,7 +52,7 @@ public class H2GeneratorTests {
                 .tableNameSet(new HashSet<>(Arrays.asList("RIGHTS")))
                 .templateNameSet(new HashSet<>(Arrays.asList(
                         "Jpa-Repository.java.tpl"
-//                        "Jpa-ENT.java.tpl",
+//                        "Jpa-ENT.java.ftl",
 //                        "ElementUi-api.js.tpl",
 //                        "ElementUi-Dialog.vue.tpl",
 //                        "ElementUi-index.js.tpl",

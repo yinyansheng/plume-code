@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.plume.code.common.helper.StringHelper.upperFirstCase;
 
@@ -113,6 +114,8 @@ public abstract class GeneratorBehavior {
         templateContext.put("comment", classModel.getComment());
         templateContext.put("lombok", settingModel.getLombokState());
         templateContext.put("fieldModelList", fieldModelList);
+        templateContext.put("isMultiplePK", fieldModelList.stream().filter(FieldModel::isPk).count() > 1);
+        templateContext.put("primaryKeyList", fieldModelList.stream().filter(FieldModel::isPk).collect(Collectors.toList()));
 
         return templateContext;
     }
