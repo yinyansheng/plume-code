@@ -65,21 +65,24 @@ PlumeCode 不仅简单、而且强大
 - 支持联合主键 --done
 - 支持sqlserver、oracle、PostgreSQL --done
 - 支持hibernate、tk-Mybatis --done
-- 支持Query 后缀配置
-- 支持VO 后缀配置
-- 支持DTO后缀配置
-- 支持Entity后缀配置
+- 支持Query 后缀配置   --done
+- 支持VO 后缀配置  --done
+- 支持DTO后缀配置  --done
+- 支持Entity后缀配置   --done
 
 ### 0.0.3 version
 
-- 支持包路径修改
-- 基于xml(dtd) 配置执行
-- 用户自定义配置文件
+- 支持docker部署（部署plume-code）
+- 支持docker compose 部署（含所有数据库类型）
 
 ### 0.0.4 version
 
-- 支持docker部署，发布到公共仓库
-- 支持docker compose 部署（编排所有支持的数据库类型）
+- 支持包路径修改
+- 支持swagger、lombok
+- 配置基于xml、yml配置
+- 编写dtd约束文件
+- 用户自定义配置文件
+
 
 
 ## 项目结构
