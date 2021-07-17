@@ -21,6 +21,17 @@
         <module>plume-code-portal</module>
     </modules>
 
+    <developers>
+        <developer>
+            <name>yinyansheng</name>
+            <email>yinyansheng@plumeorg.com</email>
+        </developer>
+        <developer>
+            <name>pudongliang</name>
+            <email>pudongliang@plumeorg.com</email>
+        </developer>
+    </developers>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
