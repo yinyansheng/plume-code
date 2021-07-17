@@ -1,7 +1,7 @@
 package ${packageName};
 
-import ${basePackageName}.repository.entity.${ClassName}ENT;
-import ${basePackageName}.admin.controller.query.${ClassName}Query;
+import ${basePackageName}.repository.entity.${ClassName}${setting.entPostfix};
+import ${basePackageName}.admin.controller.query.${ClassName}${setting.queryPostfix};
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 /**
@@ -10,5 +10,5 @@ import org.springframework.data.domain.Page;
  * @date: ${createTime}
  **/
 public interface ${ClassName}Service  {
-    Page<${ClassName}ENT> page(${ClassName}Query query);
+    Page<${ClassName}${setting.entPostfix}> page(${ClassName}${setting.queryPostfix} query);
 }

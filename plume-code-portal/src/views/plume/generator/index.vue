@@ -29,18 +29,18 @@
       <el-col :span="20" style="padding-left:10px">
         <el-form :model="settingsForm" :rules="rules" ref="settingsForm" label-width="100px" class="demo-settingsForm">
           <el-card class="box-card">
-            <div slot="header" class="clearfix"><span>项目信息</span></div>
+            <div slot="header" class="clearfix"><span>基本配置</span></div>
             <div>
               <el-form-item label="项目名称" prop="projectName">
                 <el-input v-model="settingsForm.projectName" placeholder="项目名：plume_code"></el-input>
               </el-form-item>
-              <el-form-item label="包名" prop="basePackageName">
+              <el-form-item label="基础包名" prop="basePackageName">
                 <el-input v-model="settingsForm.basePackageName" placeholder="报名：com.github.plume"></el-input>
               </el-form-item>
             </div>
           </el-card>
           <el-card class="box-card">
-            <div slot="header" class="clearfix"><span>项目信息</span></div>
+            <div slot="header" class="clearfix"><span>框架配置</span></div>
             <div>
               <el-form-item label="页面层" prop="portal">
                 <el-tooltip style="margin-right: 10px" effect="dark" content="生成后台管理页面" placement="top">
@@ -71,11 +71,15 @@
                 <el-tooltip style="margin-right: 10px" effect="dark" content="Mapper、Entity、XML" placement="top">
                   <i class="el-icon-warning-outline"></i>
                 </el-tooltip>
-                <el-checkbox true-label="mybatisPlus" false-label="none" v-model="settingsForm.repositoryMode" label="MybatisPlus"/>
+                <el-checkbox true-label="mybatisPlus" false-label="none" v-model="settingsForm.repositoryMode"
+                             label="MybatisPlus"/>
                 <el-checkbox true-label="jpa" false-label="none" v-model="settingsForm.repositoryMode" label="JPA"/>
-                <el-checkbox true-label="hibernate" false-label="none" v-model="settingsForm.repositoryMode" label="Hibernate"/>
-                <el-checkbox true-label="mybatis" false-label="none" v-model="settingsForm.repositoryMode" label="Mybatis"/>
-                <el-checkbox true-label="tkMybatis" false-label="none" v-model="settingsForm.repositoryMode" label="tk-Mybatis"/>
+                <el-checkbox true-label="hibernate" false-label="none" v-model="settingsForm.repositoryMode"
+                             label="Hibernate"/>
+                <el-checkbox true-label="mybatis" false-label="none" v-model="settingsForm.repositoryMode"
+                             label="Mybatis"/>
+                <el-checkbox true-label="tkMybatis" false-label="none" v-model="settingsForm.repositoryMode"
+                             label="tk-Mybatis"/>
               </el-form-item>
             </div>
           </el-card>
@@ -87,10 +91,22 @@
               </el-form-item>
               <el-form-item label="表名前缀" prop="tablePrefix">
                 <el-input v-model="settingsForm.tablePrefix" style="display: inline-block;"
-                          placeholder="填写前缀生成的文件将移除前缀，例如：plume_"></el-input>
+                          placeholder="填写前缀生成的文件将移除前缀（可多选），例如：plume_,user_"></el-input>
               </el-form-item>
               <el-form-item label="字段前缀" prop="columnPrefix">
-                <el-input v-model="settingsForm.columnPrefix" placeholder="填写前缀生成的文件将移除前缀，例如：n_,s_,d_"></el-input>
+                <el-input v-model="settingsForm.columnPrefix" placeholder="填写前缀生成的文件将移除前缀（可多选），例如：n_,s_,d_"></el-input>
+              </el-form-item>
+              <el-form-item label="Query后缀" prop="queryPostfix">
+                <el-input v-model="settingsForm.queryPostfix" placeholder="默认Query"></el-input>
+              </el-form-item>
+              <el-form-item label="VO后缀" prop="voPostfix">
+                <el-input v-model="settingsForm.voPostfix" placeholder="默认VO"></el-input>
+              </el-form-item>
+              <el-form-item label="DTO后缀" prop="dtoPostfix">
+                <el-input v-model="settingsForm.dtoPostfix" placeholder="默认DTO"></el-input>
+              </el-form-item>
+              <el-form-item label="ENT后缀" prop="entPostfix">
+                <el-input v-model="settingsForm.entPostfix" placeholder="默认ENT"></el-input>
               </el-form-item>
             </div>
           </el-card>
@@ -144,7 +160,11 @@ export default {
         service: true,
         serviceImpl: true,
         DTO: true,
-        repositoryMode: 'mybatisPlus'
+        repositoryMode: 'mybatisPlus',
+        queryPostfix: "Query",
+        voPostfix: "VO",
+        dtoPostfix: "DTO",
+        entPostfix: "ENT"
       },
       rules: {
         projectName: [

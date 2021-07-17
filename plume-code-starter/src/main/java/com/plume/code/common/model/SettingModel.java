@@ -45,4 +45,24 @@ public class SettingModel {
      * 模板文件列表
      */
     private Set<String> templateNameSet;
+
+    /**
+     * query 对象后缀
+     */
+    private String queryPostfix = "Query";
+
+    /**
+     * vo 对象后缀
+     */
+    private String voPostfix = "VO";
+
+    /**
+     * dto 对象后缀
+     */
+    private String dtoPostfix = "DTO";
+
+    /**
+     * ent 对象后缀
+     */
+    private String entPostfix = "ENT";
 }

@@ -1,7 +1,7 @@
 package ${packageName};
 
-import ${basePackageName}.mapper.entity.${ClassName}ENT;
-import ${basePackageName}.admin.controller.query.${ClassName}Query;
+import ${basePackageName}.mapper.entity.${ClassName}${setting.entPostfix};
+import ${basePackageName}.admin.controller.query.${ClassName}${setting.queryPostfix};
 import ${basePackageName}.mapper.${ClassName}Mapper;
 import ${basePackageName}.service.${ClassName}Service;
 import org.springframework.stereotype.Service;
@@ -20,20 +20,20 @@ public class ${ClassName}ServiceImpl implements ${ClassName}Service {
     private ${ClassName}Mapper ${className}Mapper;
 
     @Override
-    public PageInfo<${ClassName}ENT> page(${ClassName}Query query) {
+    public PageInfo<${ClassName}${setting.entPostfix}> page(${ClassName}${setting.queryPostfix} query) {
         PageInfo<${ClassName}> page = PageHelper.startPage(query.getPageIndex(), query.getPageSize())
                                 .doSelectPageInfo(()-> ${className}Mapper.page(query));
         return page;
     }
 
     @Override
-    public void save(${ClassName}ENT ${className}ENT) {
-        ${className}Mapper.insert(${className}ENT);
+    public void save(${ClassName}${setting.entPostfix} ${className}${setting.entPostfix}) {
+        ${className}Mapper.insert(${className}${setting.entPostfix});
     }
 
     @Override
-    public void updateById(${ClassName}ENT ${className}ENT) {
-        ${className}Mapper.updateByPrimaryKeySelective(${className}ENT);
+    public void updateById(${ClassName}${setting.entPostfix} ${className}${setting.entPostfix}) {
+        ${className}Mapper.updateByPrimaryKeySelective(${className}${setting.entPostfix});
     }
 
     @Override

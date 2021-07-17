@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @date: ${createTime}
  **/
 @TableName("${tableName}")
-public class ${ClassName}ENT implements Serializable {
+public class ${ClassName}${setting.entPostfix} implements Serializable {
 
 #foreach(${fieldModel} in ${fieldModelList})
     /**

@@ -1,7 +1,7 @@
 package ${packageName};
 
-import ${basePackageName}.admin.controller.query.${ClassName}Query;
-import ${basePackageName}.mapper.entity.${ClassName}ENT;
+import ${basePackageName}.admin.controller.query.${ClassName}${setting.queryPostfix};
+import ${basePackageName}.mapper.entity.${ClassName}${setting.entPostfix};
 import ${basePackageName}.service.${ClassName}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,17 +20,17 @@ public class ${ClassName}Controller {
     private ${ClassName}Service ${className}Service;
 
     @PostMapping("page")
-    public PageInfo<${ClassName}ENT> page(@RequestBody ${ClassName}Query query) {
+    public PageInfo<${ClassName}${setting.entPostfix}> page(@RequestBody ${ClassName}${setting.queryPostfix} query) {
       return ${className}Service.page(query);
     }
 
     @PostMapping(value = "save")
-    public void save(@RequestBody ${ClassName}ENT ent) {
+    public void save(@RequestBody ${ClassName}${setting.entPostfix} ent) {
         ${className}Service.save(ent);
     }
 
     @PostMapping(value = "update")
-    public void update(@RequestBody ${ClassName}ENT ent) {
+    public void update(@RequestBody ${ClassName}${setting.entPostfix} ent) {
         ${className}Service.updateById(ent);
     }
 

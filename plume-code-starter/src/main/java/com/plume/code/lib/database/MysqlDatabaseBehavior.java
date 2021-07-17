@@ -82,7 +82,7 @@ class MysqlDatabaseBehavior extends DatabaseBehavior {
         ClassModel classModel = new ClassModel();
 
         String name = mysqlTableModel.getTableName().toLowerCase();
-        if (StringUtils.isNotEmpty(settingModel.getTablePrefix()) && mysqlTableModel.getTableName().startsWith(settingModel.getTablePrefix())) {
+        if (StringUtils.isNotEmpty(settingModel.getTablePrefix())) {
             name = removePrefix(mysqlTableModel.getTableName(), settingModel.getTablePrefix().split(","));
         }
         classModel.setName(removeUnderline(name));

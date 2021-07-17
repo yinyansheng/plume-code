@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author: ${author}
  * @date: ${createTime}
  **/
-public class ${ClassName}DTO implements Serializable {
+public class ${ClassName}${setting.dtoPostfix} implements Serializable {
 
 #foreach(${fieldModel} in ${fieldModelList})
     /**

@@ -21,8 +21,7 @@ class MybatisPlusENTGeneratorBehavior extends JavaGeneratorBehavior {
 
     @Override
     protected String getFileName() {
-        return String.format("%sENT.java", upperFirstCase(classModel.getName()));
+        return String.format("%s%s.java", upperFirstCase(classModel.getName()), settingModel.getEntPostfix());
     }
-
 
 }

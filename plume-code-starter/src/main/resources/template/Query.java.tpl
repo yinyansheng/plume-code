@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author: ${author}
  * @date: ${createTime}
  **/
-public class ${ClassName}Query implements Serializable {
+public class ${ClassName}${setting.queryPostfix} implements Serializable {
     protected Integer pageIndex = 1;
     protected Integer pageSize = 10;
 

@@ -15,7 +15,7 @@ import javax.persistence.Id;
 <#if (isMultiplePK)>
 @IdClass(${ClassName}PK.class)
 </#if>
-public class ${ClassName}ENT {
+public class ${ClassName}${setting.entPostfix} {
 
 <#list fieldModelList as fieldModel>
     /**

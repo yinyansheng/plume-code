@@ -1,6 +1,6 @@
 package ${packageName};
 
-import ${basePackageName}.mapper.entity.${ClassName}ENT;
+import ${basePackageName}.mapper.entity.${ClassName}${setting.entPostfix};
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 /**
@@ -9,17 +9,17 @@ import org.apache.ibatis.annotations.Param;
  * @date: ${createTime}
  **/
 public interface ${ClassName}Mapper {
-    List<${ClassName}ENT> page(@Param("q") ${ClassName}Query query);
+    List<${ClassName}${setting.entPostfix}> page(@Param("q") ${ClassName}${setting.queryPostfix} query);
 
     int deleteByPrimaryKey(#foreach(${primaryKey} in ${primaryKeyList})${primaryKey.type} ${primaryKey.name}#if($foreach.hasNext),#end#end);
 
-    int insert(${ClassName}ENT ${className}ENT);
+    int insert(${ClassName}${setting.entPostfix} ${className}${setting.entPostfix});
 
-    int insertSelective(${ClassName}ENT ${className}ENT);
+    int insertSelective(${ClassName}${setting.entPostfix} ${className}${setting.entPostfix});
 
-    ${ClassName}ENT selectByPrimaryKey(#foreach(${primaryKey} in ${primaryKeyList})${primaryKey.type} ${primaryKey.name}#if($foreach.hasNext),#end#end);
+    ${ClassName}${setting.entPostfix} selectByPrimaryKey(#foreach(${primaryKey} in ${primaryKeyList})${primaryKey.type} ${primaryKey.name}#if($foreach.hasNext),#end#end);
 
-    int updateByPrimaryKeySelective(${ClassName}ENT ${className}ENT);
+    int updateByPrimaryKeySelective(${ClassName}${setting.entPostfix} ${className}${setting.entPostfix});
 
-    int updateByPrimaryKey(${ClassName}ENT ${className}ENT);
+    int updateByPrimaryKey(${ClassName}${setting.entPostfix} ${className}${setting.entPostfix});
 }

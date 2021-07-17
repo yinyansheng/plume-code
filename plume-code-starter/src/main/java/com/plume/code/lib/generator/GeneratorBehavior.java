@@ -106,6 +106,7 @@ public abstract class GeneratorBehavior {
         Map<String, Object> templateContext = new HashMap<>(32);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        templateContext.put("setting", settingModel);
         templateContext.put("createTime", simpleDateFormat.format(new Date()));
         templateContext.put("className", classModel.getName());
         templateContext.put("ClassName", upperFirstCase(classModel.getName()));

@@ -84,7 +84,7 @@ abstract class MetaDataDatabaseBehavior extends DatabaseBehavior {
         ClassModel classModel = new ClassModel();
 
         String name = metaDataTableModel.getTABLE_NAME().toLowerCase();
-        if (StringUtils.isNotEmpty(settingModel.getTablePrefix()) && metaDataTableModel.getTABLE_NAME().startsWith(settingModel.getTablePrefix())) {
+        if (StringUtils.isNotEmpty(settingModel.getTablePrefix())) {
             name = removePrefix(metaDataTableModel.getTABLE_NAME(), settingModel.getTablePrefix().split(","));
         }
         classModel.setName(removeUnderline(name));

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author: ${author}
 * @date: ${createTime}
 **/
-public class ${ClassName}PK implements Serializable {
+public class ${ClassName}${setting.entPostfix}PK implements Serializable {
 
 <#list primaryKeyList as pkModel>
     private ${pkModel.type} ${pkModel.name};

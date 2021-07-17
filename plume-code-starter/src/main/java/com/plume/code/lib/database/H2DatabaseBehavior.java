@@ -78,7 +78,7 @@ class H2DatabaseBehavior extends DatabaseBehavior {
         ClassModel classModel = new ClassModel();
 
         String name = h2TableModel.getTableName().toLowerCase();
-        if (StringUtils.isNotEmpty(settingModel.getTablePrefix()) && h2TableModel.getTableName().startsWith(settingModel.getTablePrefix())) {
+        if (StringUtils.isNotEmpty(settingModel.getTablePrefix())){
             name = removePrefix(h2TableModel.getTableName(), settingModel.getTablePrefix().split(","));
         }
         classModel.setName(removeUnderline(name));

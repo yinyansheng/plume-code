@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author: ${author}
  * @date: ${createTime}
  **/
-public class ${ClassName}VO implements Serializable {
+public class ${ClassName}${setting.voPostfix} implements Serializable {
 
 #foreach(${fieldModel} in ${fieldModelList})
     /**

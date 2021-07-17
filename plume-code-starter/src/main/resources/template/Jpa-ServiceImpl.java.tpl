@@ -1,7 +1,7 @@
 package ${packageName};
 
-import ${basePackageName}.repository.entity.${ClassName}ENT;
-import ${basePackageName}.admin.controller.query.${ClassName}Query;
+import ${basePackageName}.repository.entity.${ClassName}${setting.entPostfix};
+import ${basePackageName}.admin.controller.query.${ClassName}${setting.queryPostfix};
 import ${basePackageName}.repository.${ClassName}Repository;
 import ${basePackageName}.service.${ClassName}Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class ${ClassName}ServiceImpl implements ${ClassName}Service {
     private ${ClassName}Repository ${className}Repository;
 
     @Override
-    public Page<${ClassName}ENT> page(${ClassName}Query query) {
+    public Page<${ClassName}${setting.entPostfix}> page(${ClassName}${setting.queryPostfix} query) {
         //jpa zero-based page index
         Pageable pageable = PageRequest.of(query.getPageIndex() - 1, query.getPageSize());
         return ${className}Repository.findAll(pageable);

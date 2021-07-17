@@ -1,7 +1,7 @@
 package ${packageName};
 
-import ${basePackageName}.mapper.entity.${ClassName}ENT;
-import ${basePackageName}.admin.controller.query.${ClassName}Query;
+import ${basePackageName}.mapper.entity.${ClassName}${setting.entPostfix};
+import ${basePackageName}.admin.controller.query.${ClassName}${setting.queryPostfix};
 import com.github.pagehelper.PageInfo;
 /**
  * @description: ${comment}
@@ -9,11 +9,11 @@ import com.github.pagehelper.PageInfo;
  * @date: ${createTime}
  **/
 public interface ${ClassName}Service  {
-    PageInfo<${ClassName}ENT> page(${ClassName}Query query);
+    PageInfo<${ClassName}${setting.entPostfix}> page(${ClassName}${setting.queryPostfix} query);
 
-    void save(${ClassName}ENT ${className}ENT);
+    void save(${ClassName}${setting.entPostfix} ${className}${setting.entPostfix});
 
-    void updateById(${ClassName}ENT ${className}ENT);
+    void updateById(${ClassName}${setting.entPostfix} ${className}${setting.entPostfix});
 
     void removeById(Long id);
 }
