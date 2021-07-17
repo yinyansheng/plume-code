@@ -29,11 +29,11 @@ public class DatabaseMetaDataTests {
     @Before
     public void contextLoads() {
         connectionModel = ConnectionModel.builder()
-                .type("PostgreSQL")
-                .driver("org.postgresql.Driver")
-                .url("jdbc:postgresql://127.0.0.1:5432/plume_pg")
-                .username("postgres")
-                .password("123456")
+                .type("h3")
+                .driver("org.h2.Driver")
+                .url("jdbc:h2:~/plume_test")
+                .username("sa")
+                .password("")
                 .build();
 
         settingModel = SettingModel.builder().author("yinyansheng")
@@ -43,6 +43,7 @@ public class DatabaseMetaDataTests {
                 .projectName("plume-code-demo")
                 .build();
     }
+
 
     @Autowired
     private DatabaseBehaviorFactory databaseBehaviorFactory;
@@ -63,9 +64,10 @@ public class DatabaseMetaDataTests {
         List<ClassModel> tableModels = databaseBehavior.listClassModel(settingModel);
         System.out.println(gson.toJson(tableModels));
 
-        Set<String> primaryKeySet = databaseBehavior.getPrimaryKeySet("test_user");
+        Set<String> primaryKeySet = databaseBehavior.getPrimaryKeySet("SMART_USER");
+        System.out.println(gson.toJson(primaryKeySet));
 
-        List<FieldModel> columnModels = databaseBehavior.listFieldModel(settingModel, "test_user");
+        List<FieldModel> columnModels = databaseBehavior.listFieldModel(settingModel, "SMART_USER");
         System.out.println(gson.toJson(columnModels));
     }
 

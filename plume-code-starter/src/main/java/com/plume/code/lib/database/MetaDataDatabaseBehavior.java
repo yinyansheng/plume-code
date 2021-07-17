@@ -26,6 +26,19 @@ import static com.plume.code.common.helper.StringHelper.*;
  */
 abstract class MetaDataDatabaseBehavior extends DatabaseBehavior {
 
+    protected abstract String getDatabaseNameSql();
+
+    @Override
+    public String getDatabaseName() {
+        String databaseName = getJdbcTemplate().queryForObject(getDatabaseNameSql(), String.class);
+
+        if (StringUtils.isEmpty(databaseName)) {
+            throw new IllegalArgumentException("get schema failure");
+        }
+
+        return databaseName;
+    }
+
     @Override
     @SneakyThrows
     public List<String> listTableName() {

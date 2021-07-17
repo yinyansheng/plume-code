@@ -109,6 +109,7 @@
             <el-option label="org.postgresql.Driver" value="org.postgresql.Driver"></el-option>
             <el-option label="com.microsoft.sqlserver.jdbc.SQLServerDriver"
                        value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></el-option>
+            <el-option label="oracle.jdbc.driver.OracleDriver" value="oracle.jdbc.driver.OracleDriver"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="jdbc url" prop="url">
