@@ -62,9 +62,9 @@ PlumeCode 不仅简单、而且强大
 
 ### 0.0.2 version
 
-- 支持联合主键
-- 支持sqlserver、oracle、PostgreSQL
-- 支持hibernate、tk-Mybatis
+- 支持联合主键 --done
+- 支持sqlserver、oracle、PostgreSQL --done
+- 支持hibernate、tk-Mybatis --done
 - 支持Query 后缀配置
 - 支持VO 后缀配置
 - 支持DTO后缀配置
