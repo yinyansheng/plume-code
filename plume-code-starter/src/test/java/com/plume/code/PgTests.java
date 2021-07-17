@@ -7,6 +7,7 @@ import com.plume.code.lib.database.DatabaseBehavior;
 import com.plume.code.lib.database.DatabaseBehaviorFactory;
 import com.plume.code.lib.database.model.ClassModel;
 import com.plume.code.lib.database.model.FieldModel;
+import lombok.SneakyThrows;
 import oracle.jdbc.OracleDriver;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Driver;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
@@ -74,7 +74,9 @@ public class PgTests {
         System.out.println(gson.toJson(columnModels));
     }
 
-    public static void main(String[] args) throws SQLException {
+    @Test
+    @SneakyThrows
+    public void test2() {
         Driver driver = new OracleDriver();
         DriverManager.deregisterDriver(driver);
     }
