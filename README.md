@@ -1,6 +1,7 @@
 # Plume-Code
 
 一个简单易用且功能强大的代码生成器(Java & ElementUI),熟练使用你就是CURD代码挖掘机！！！
+ **新项目，需要大家的支持，欢迎star、pr、issue、评论！！！** 
 
 PlumeCode 不仅简单、而且强大
 
