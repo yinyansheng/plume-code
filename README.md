@@ -4,8 +4,8 @@
 
 PlumeCode 不仅简单、而且强大
 
-- 支持多数据库Mysql、H2（SqlServer、Oracle、PostgreSQL TBD...）
-- 支持多种持久层框架MybatisPlus、Mybatis、Jpa、tk-Mybatis (Hibernate TBD...)
+- 支持多数据库Mysql、H2、SqlServer、Oracle、PostgreSQL
+- 支持多种持久层框架MybatisPlus、Mybatis、Jpa、tk-Mybatis、Hibernate
 - 一键下载拥有portal、controller、service、repository、mapper、dto、entity、vo、query、mapper.xml等前后端代码
 - 良好的项目结构，让二次开发变得像喝水一样简单
 
