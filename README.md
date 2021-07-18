@@ -60,35 +60,6 @@ PlumeCode 不仅简单、而且强大
 - [d2admin](https://d2.pub/zh/)
 - [element-ui](https://element.eleme.cn/2.15/#/zh-CN)
 
-## Road Map
-
-### 0.0.1 version
-
-- 支持 mysql、h2 --done
-- 支持 element-ui --done
-- 支持mybatis、mybatis-plus、jpa --done
-- 支持预览代码、获取代码 --done
-
-### 0.0.2 version
-
-- 支持联合主键 --done
-- 支持sqlserver、oracle、PostgreSQL --done
-- 支持hibernate、tk-Mybatis --done
-- 支持Query 后缀配置   --done
-- 支持VO 后缀配置  --done
-- 支持DTO后缀配置  --done
-- 支持Entity后缀配置   --done
-
-### 0.0.3 version
-- 支持包路径修改
-- 基于xml(dtd)配置执行
-- 用户自定义配置文件
-
-### 0.0.4 version
-
-- 支持docker部署（部署plume-code）
-- 支持docker compose 部署（含所有数据库类型）
-
 
 ## 项目结构
 
@@ -222,7 +193,32 @@ protected Map<String, Object> getTemplateContext() {
 
 略
 
+## Road Map
 
+### 0.0.1 version
 
+- 支持 mysql、h2 --done
+- 支持 element-ui --done
+- 支持mybatis、mybatis-plus、jpa --done
+- 支持预览代码、获取代码 --done
 
+### 0.0.2 version
+
+- 支持联合主键 --done
+- 支持sqlserver、oracle、PostgreSQL --done
+- 支持hibernate、tk-Mybatis --done
+- 支持Query 后缀配置   --done
+- 支持VO 后缀配置  --done
+- 支持DTO后缀配置  --done
+- 支持Entity后缀配置   --done
+
+### 0.0.3 version
+- 支持包路径修改
+- 基于xml(dtd)配置执行
+- 用户自定义配置文件
+
+### 0.0.4 version
+
+- 支持docker部署（部署plume-code）
+- 支持docker compose 部署（含所有数据库类型）
 
