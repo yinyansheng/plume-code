@@ -89,7 +89,7 @@ PlumeCode 不仅简单、而且强大
 
 ## 二开说明
 
-### 新增数据库类型
+### 新增数据库
 
 项目本身是基于JDBC获取数据库信息,数据库需要有JDBC实现
 
@@ -114,7 +114,7 @@ public class PostgreSQLDatabaseBehavior extends MetaDataDatabaseBehavior {
 }
 ```
 
-### 新增模板文件
+### 新增模板
 ![tempalte behavior class](/image/11.png)
 默认使用Velocity模板引擎、FreeMarker可选  
 新增模板文件  
