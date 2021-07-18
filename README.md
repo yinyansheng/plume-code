@@ -14,12 +14,13 @@ PlumeCode 不仅简单、而且强大
 ## 快速开始
 
 ### 下载文件
-
-[plume-code-starter-0.0.2.jar](https://gitee.com/yansheng/plume-code/raw/main/assemble/plume-code-starter-0.0.2.jar)
+- 发行版[下载](https://gitee.com/yansheng/plume-code/releases/0.0.2)
+- 直接[下载](https://gitee.com/yansheng/plume-code/raw/main/assemble/plume-code-starter-0.0.2.jar)
 
 ### 启动项目
 
-​	java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.2.jar
+​	`java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.2.jar`
+        参数说明：jar打包方式，文件位置不能使用ResourcePath或ClassPath,所以要加prod来区别 
 ![start](/image/0.png)
 
 ### 功能简介
@@ -35,7 +36,6 @@ PlumeCode 不仅简单、而且强大
   ![preview](/image/4.png)
 
 ## 生成代码示例
-
 [plume-code-sample](https://gitee.com/yansheng/plume-code-sample)
 
 ## 生成代码结构
