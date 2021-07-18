@@ -39,13 +39,19 @@ PlumeCode 不仅简单、而且强大
 
 ## 生成代码结构
 
-### 三层架构
+### 后端框架
+对于java后端项目分层，以及包结构，目前比较多的是面向数据的传统三层（如下列表），以及面向领域（DDD），日常工作本身做了微服务，已经做了业务边界的区分，所以通常而言纯DDD的设计并不多，所以下面着重说传统三层框架    
 
-- controller layer(controller、vo、query)
-- servicer layer(service、serviceImpl、dto)
-- dao layer(repository/mapper/dao、repositoryImpl/daoImpl、entity)
-- ![project layer](/image/6.png)
-- ![package](/image/7.png)
+- controller层(controller、vo、query)
+- servicer层(service、serviceImpl、dto)
+- repository层(repository/mapper/dao、repositoryImpl/daoImpl、entity)  
+
+下面是我常用的系统分层设计（参考自阿里巴巴代码规约）  
+![project layer](/image/6.png)  
+以及我常用的包结构设计  
+![package](/image/7.png)  
+**以上都是个人理解，对于系统设计，没有银弹，适合的，符合场景的实践才是好的**
+
 
 ### 前端框架
 由于前端代码公司间差异比较大，这里只是做了ElementUI的示例，如有需要，可根据实际前端技术选型，做二次开发集成  
