@@ -116,7 +116,7 @@ public class PostgreSQLDatabaseBehavior extends MetaDataDatabaseBehavior {
 
 ### 新增模板文件
 ![tempalte behavior class](/image/11.png)
-默认使用Velocity模板引擎、FreeMarker可选
+默认使用Velocity模板引擎、FreeMarker可选  
 新增模板文件  
 ![template file](/image/12.png)
 
