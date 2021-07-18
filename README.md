@@ -19,9 +19,8 @@ PlumeCode 不仅简单、而且强大
 
 ### 启动项目
 
-​	`java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.2.jar`
-
-        参数说明：jar打包方式，文件位置不能使用ResourcePath或ClassPath,所以要加prod来区别 
+`java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.2.jar`
+参数说明：jar打包方式，文件位置不能使用ResourcePath或ClassPath,所以要加prod来区别 
 ![start](/image/0.png)
 
 ### 功能简介
