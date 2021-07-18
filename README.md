@@ -2,7 +2,7 @@
 
 一个简单易用且功能强大的代码生成器(Java & ElementUI),熟练使用你就是CURD代码挖掘机！！！
 
-     **⭐⭐⭐新项目，需要大家的支持，欢迎Star、PR、Issue⭐⭐⭐** 
+     ⭐⭐⭐新项目，需要大家的支持，欢迎Star、PR、Issue⭐⭐⭐  
 
 PlumeCode 不仅简单、而且强大
 
@@ -14,8 +14,7 @@ PlumeCode 不仅简单、而且强大
 ## 快速开始
 
 ### 下载文件
-- 发行版[下载](https://gitee.com/yansheng/plume-code/releases/0.0.2)
-- 直接[下载](https://gitee.com/yansheng/plume-code/raw/main/assemble/plume-code-starter-0.0.2.jar)
+- 发行版[下载](https://gitee.com/yansheng/plume-code/releases/0.0.2)  
 
 ### 启动项目
 `java -Dspring.profiles.active=prod -jar plume-code-starter-0.0.2.jar`   
@@ -41,8 +40,8 @@ PlumeCode 不仅简单、而且强大
 
 ### 后端框架
 对于java后端项目框架设计，目前主要有两种：  
--- 面向领域（DDD）
--- 面向数据的传统三层框架  
+- 面向领域（DDD）
+- 面向数据的传统三层框架  
 
 一般而言互联网后端C端业务并不复杂（相对B端或企业级项目），且通常也做了微服务，业务边界划分良好的话，DDD并不是一个好的选择，所以本项目是基于传统三层框架的代码生成下列后端代码  
 - controller层(controller、vo、query)
