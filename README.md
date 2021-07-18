@@ -41,9 +41,9 @@ PlumeCode 不仅简单、而且强大
 ### 后端框架
 对于java后端项目框架设计，目前主要有两种：  
 - 面向领域（DDD）
-- 面向数据的传统三层框架  
+- 面向数据(三层框架）  
 
-一般而言互联网后端C端业务并不复杂（相对B端或企业级项目），且通常也做了微服务，业务边界划分良好的话，DDD并不是一个好的选择，所以本项目是基于传统三层框架的代码生成下列后端代码  
+一般而言互联网后端C端业务并不复杂（相对B端或企业级项目），且通常也做了微服务，业务边界划分良好的话，DDD并不是一个好的选择，所以本项目基于三层框架生成后端代码  
 - controller层(controller、vo、query)
 - servicer层(service、serviceImpl、dto)
 - repository层(repository/mapper/dao、repositoryImpl/daoImpl、entity)  
