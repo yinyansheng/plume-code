@@ -88,5 +88,132 @@ PlumeCode 不仅简单、而且强大
 
 ## 二开说明
 
-TBD...
+### 新增数据库类型
+
+项目本身是基于JDBC获取数据库信息,数据库需要有JDBC实现
+
+获取数据信息有两种方式
+
+- 通过JDBC Connection 获取DatabaseMetaData,从而获取数据库、表、字段、主键信息（推荐），只需要继承MetaDataDatabaseBehavior，且提供一个获取数据库名称的SQL即可
+- 通过JDBC执行Raw SQL获取数据库、表、字段、主键信息
+
+![database behavior class](/image/10.png)
+
+Sample：新增PostgreSQL
+
+```java
+@Component
+@Scope(value = "prototype")
+public class PostgreSQLDatabaseBehavior extends MetaDataDatabaseBehavior {
+
+    @Override
+    protected String getDatabaseNameSql() {
+        return "SELECT current_database();";
+    }
+}
+```
+
+### 新增模板文件
+![tempalte behavior class](/image/11.png)
+默认使用Velocity模板引擎、FreeMarker可选
+新增模板文件  
+![template file](/image/12.png)
+
+新增后端java、xml模板实现类，继承JavaGeneratorBehavior类
+```java
+@Component
+@Scope("prototype")
+class JpaControllerGeneratorBehavior extends JavaGeneratorBehavior {
+	
+    //获取模板文件名
+    @Override
+    protected String getTemplateName() {
+        return "Jpa-Controller.java.tpl";
+    }
+	
+    //获取文件包名（也是文件相对路径）
+    @Override
+    protected String getPackageName() {
+        return settingModel.getBasePackageName().concat(".admin.controller");
+    }
+
+    //获取文件名
+    @Override
+    protected String getFileName() {
+        return String.format("%sController.java", upperFirstCase(classModel.getName()));
+    }
+}
+```
+
+
+
+新增前端js、vue模板实现类，继承VueGeneratorBehavior类
+```java
+@Component
+@Scope("prototype")
+public class ElementUiTableGeneratorBehavior extends VueGeneratorBehavior {
+    //文件路径在基类中已经实现，如有调整需要重写父类getFilePath方法
+    
+    //获取文件名
+    @Override
+    protected String getFileName() {
+        return "Table.vue";
+    }
+	
+    //获取模板文件名
+    @Override
+    protected String getTemplateName() {
+        return "ElementUi-Table.vue.tpl";
+    }
+}
+```
+
+### 模板上下文变量
+
+```java
+protected Map<String, Object> getTemplateContext() {
+    Map<String, Object> templateContext = new HashMap<>(32);
+
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    templateContext.put("setting", settingModel);
+    templateContext.put("createTime", simpleDateFormat.format(new Date()));
+    templateContext.put("className", classModel.getName());
+    templateContext.put("ClassName", upperFirstCase(classModel.getName()));
+    templateContext.put("tableName", classModel.getTableName());
+    templateContext.put("author", settingModel.getAuthor());
+    templateContext.put("comment", classModel.getComment());
+    templateContext.put("lombok", settingModel.getLombokState());
+    templateContext.put("fieldModelList", fieldModelList);
+    templateContext.put("isMultiplePK", fieldModelList.stream().filter(FieldModel::isPk).count() > 1);
+    templateContext.put("primaryKeyList", fieldModelList.stream().filter(FieldModel::isPk).collect(Collectors.toList()));
+
+    return templateContext;
+}
+```
+
+如果有额外的变量，可以在模板实现类中重写基类getTemplateContext方法
+
+```java
+@Override
+protected Map<String, Object> getTemplateContext() {
+    Map<String, Object> templateContext = super.getTemplateContext();
+
+    templateContext.put("basePackageName", settingModel.getBasePackageName());
+    templateContext.put("packageName", getPackageName());
+
+    String servicePackageName = settingModel.getBasePackageName().concat(".service");
+    templateContext.put("servicePackageName", servicePackageName);
+
+    templateContext.put("typePackageNameList", getTypePackageNameList());
+    return templateContext;
+}
+```
+
+### 修改portal页面
+
+略
+
+
+
+
 
