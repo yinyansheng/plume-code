@@ -41,7 +41,7 @@ public class GeneratorController {
         }
 
         download(response, file);
-        return R.ok("success");
+        return null;
     }
 
 
