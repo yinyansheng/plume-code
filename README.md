@@ -42,7 +42,7 @@ PlumeCode 不仅简单、而且强大
 
 ## 测试地址
 
-- 代码生成界面：[PlumeCode-Demo](http://42.192.14.60:8844/web/index.html)
+- DEMO演示：[http://42.192.14.60:8844/web/index.html](http://42.192.14.60:8844/web/index.html)
 
 ## 生成代码结构
 
