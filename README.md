@@ -36,6 +36,14 @@ PlumeCode 不仅简单、而且强大
 ## 生成代码示例
 [plume-code-sample](https://gitee.com/yansheng/plume-code-sample)
 
+## 联系交流
+
+- QQ群：691455148
+
+## 测试地址
+
+- 代码生成界面：[PlumeCode-Demo](http://42.192.14.60:8844/web/index.html)
+
 ## 生成代码结构
 
 ### 后端框架
