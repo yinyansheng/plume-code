@@ -42,7 +42,7 @@ PlumeCode 不仅简单、而且强大
 
 ## 测试地址
 
-- DEMO演示：<a href="http://42.192.14.60:8844/web/index.html" target="_blank">http://42.192.14.60:8844/web/index.html
+- DEMO演示：<a href="http://42.192.14.60:8844/web/index.html" target="_blank">http://42.192.14.60:8844/web/index.html</a>
   
 ## 生成代码结构
 
