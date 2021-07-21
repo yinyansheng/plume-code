@@ -1,6 +1,13 @@
-# Plume-Code
-
-一个简单易用且功能强大的代码生成器(Java & ElementUI),熟练使用你就是CURD代码挖掘机！！！
+<p align="center">
+    <h3 align="center">Plume-Code</h3>
+    <div align="center">
+        <a href='https://gitee.com/yansheng/plume-code/stargazers'><img src='https://gitee.com/yansheng/plume-code/badge/star.svg?theme=dark' alt='star'></img></a>
+        <a href='https://gitee.com/yansheng/plume-code/members'><img src='https://gitee.com/yansheng/plume-code/badge/fork.svg?theme=dark' alt='fork'></img></a>
+    </div>
+</p>
+<p align="center">
+        一个简单易用且功能强大的代码生成器(Java & ElementUI),熟练使用你就是CURD代码挖掘机！！！
+</p>
 
      ⭐⭐⭐新项目，需要大家的支持，欢迎Star、PR、Issue⭐⭐⭐  
 
@@ -42,8 +49,8 @@ PlumeCode 不仅简单、而且强大
 
 ## 测试地址
 
-- DEMO演示：<a href="http://42.192.14.60:8844/web/index.html" target="_blank">http://42.192.14.60:8844/web/index.html</a>
-  
+- DEMO演示：[http://42.192.14.60:8844/web/index.html](http://42.192.14.60:8844/web/index.html)
+
 ## 生成代码结构
 
 ### 后端框架
