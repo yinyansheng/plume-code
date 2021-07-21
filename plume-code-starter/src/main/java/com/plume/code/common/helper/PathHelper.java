@@ -17,7 +17,7 @@ import java.util.List;
 public class PathHelper {
 
     public static String getDownloadPath() {
-        if ("prod".equals(System.getProperty("spring.profiles.active"))) {
+        if (!"dev".equals(System.getProperty("env"))) {
             String userDirPath = System.getProperty("user.dir");
             return userDirPath.concat("/downloads/");
         }
