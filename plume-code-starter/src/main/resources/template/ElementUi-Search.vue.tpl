@@ -2,11 +2,11 @@
   <el-form label-width="110px" label-position="right" :model="searchForm" ref="searchForm" size="mini">
     <el-row>
   #foreach(${fieldModel} in ${fieldModelList})
-  <el-col :span="6">
-        <el-form-item label="${fieldModel.comment}" prop="${fieldModel.name}">
-          <el-input v-model="searchForm.${fieldModel.name}"></el-input>
-        </el-form-item>
-  </el-col>
+      <el-col :span="6">
+            <el-form-item label="${fieldModel.comment}" prop="${fieldModel.name}">
+              <el-input v-model="searchForm.${fieldModel.name}"></el-input>
+            </el-form-item>
+      </el-col>
   #end
     </el-row>
     <el-row>

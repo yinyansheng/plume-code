@@ -1,6 +1,6 @@
 <template>
   <el-dialog :title="isEdit ? '编 辑': '新 增'" width="45%" :visible.sync="visible" :before-close="close" label-position="right"
-            close-on-press-escape="false" :close-on-click-modal="false">
+            :close-on-press-escape="false" :close-on-click-modal="false">
     <el-form ref="ent" :model="ent" :rules="rules" label-width="110px">
 #foreach(${fieldModel} in ${fieldModelList})
       <el-form-item label="${fieldModel.comment}" prop="${fieldModel.name}">
@@ -9,8 +9,8 @@
 #end
     </el-form>
     <span slot="footer" class="dialog-footer">
-            <el-button @click="close">Cancel</el-button>
-            <el-button type="primary" @click="submit">Submit</el-button>
+            <el-button @click="close">取 消</el-button>
+            <el-button type="primary" @click="submit">确 定</el-button>
     </span>
   </el-dialog>
 </template>
