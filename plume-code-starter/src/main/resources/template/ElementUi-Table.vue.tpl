@@ -17,9 +17,9 @@
         <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="pageInfo.page"
+            :current-page="pageInfo.pageIndex"
             :page-sizes="[10, 20, 30]"
-            :page-size="pageInfo.limit"
+            :page-size="pageInfo.pageSize"
             layout="total, sizes, prev, pager, next, jumper"
             :total="pageInfo.total">
         </el-pagination>
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     loadData(firstPage = false, searchForm) {
-      firstPage && (this.pageInfo.page = 1)
+      firstPage && (this.pageInfo.pageIndex = 1)
       let req = {...searchForm, ...this.pageInfo}
       this.doLoadData(req)
     },
@@ -80,11 +80,11 @@ export default {
       })
     },
     handleSizeChange(v) {
-      this.pageInfo.limit = v
+      this.pageInfo.pageSize = v
       this.loadData()
     },
     handleCurrentChange(v) {
-      this.pageInfo.page = v
+      this.pageInfo.pageIndex = v
       this.loadData()
     },
     handleShowEdit(row) {
