@@ -20,7 +20,7 @@ export const templateMap = {
     mybatis: ['Mybatis-Controller.java.tpl'],
     tkMybatis: ['Mybatis-Controller.java.tpl']
   },
-  portal: ['ElementUi-api.js.tpl', 'ElementUi-Dialog.vue.tpl', 'ElementUi-index.js.tpl', 'ElementUi-Main.vue.tpl', 'ElementUi-object.js.tpl', 'ElementUi-Search.vue.tpl', 'ElementUi-Table.vue.tpl'],
+  portal: ['ElementUi-api.js.tpl', 'ElementUi-Dialog.vue.tpl', 'ElementUi-index.js.tpl', 'ElementUi-Main.vue.tpl', 'ElementUi-object.js.tpl', 'ElementUi-Search.vue.tpl'],
   VO: ['VO.java.tpl'],
   DTO: ['DTO.java.tpl'],
   Query: ['Query.java.tpl']
