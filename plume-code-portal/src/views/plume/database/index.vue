@@ -134,6 +134,17 @@
 
 import api from '@/api'
 
+class DBSetting {
+  index = -1
+  name = 'plume_code'
+  driver = 'com.mysql.cj.jdbc.Driver'
+  type = 'mysql'
+  url
+  username
+  password
+  isValid= false
+}
+
 export default {
   name: 'database',
   data() {
@@ -189,8 +200,7 @@ export default {
       this.doSave([])
     },
     handleAdd() {
-      this.form.isValid = false
-      this.form.index = -1
+      this.form = new DBSetting()
       this.dialogFormVisible = true
     },
     async handleRemove(index) {
