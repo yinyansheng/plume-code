@@ -7,7 +7,10 @@ import com.plume.code.common.model.ConnectionModel;
 import com.plume.code.common.model.SettingModel;
 import com.plume.code.lib.database.DatabaseBehavior;
 import com.plume.code.lib.database.DatabaseBehaviorFactory;
-import com.plume.code.lib.database.model.*;
+import com.plume.code.lib.database.model.ClassModel;
+import com.plume.code.lib.database.model.ContextModel;
+import com.plume.code.lib.database.model.FieldModel;
+import com.plume.code.lib.database.model.ResultModel;
 import com.plume.code.lib.generator.GeneratorBehavior;
 import com.plume.code.lib.generator.GeneratorBehaviorFactory;
 import com.plume.code.service.GeneratorService;
@@ -103,40 +106,21 @@ public class GeneratorServiceImpl implements GeneratorService {
         return contextModels;
     }
 
-    @SneakyThrows
     @Override
-    public CodeFileTreeModel getCodeFileTree(String batchNo) {
+    public void clearFile() {
         String downloadPath = PathHelper.getDownloadPath();
-        String directoryPath = downloadPath.concat(batchNo);
+        logger.info("[历史数据清空]清空文件下载目录开始");
+        File downloadDir = new File(downloadPath);
+        File[] files = downloadDir.listFiles();
 
-        if (!(new File(directoryPath).exists())) {
-            throw new FileNotFoundException(directoryPath);
+        if (null == files || files.length == 0) {
+            return;
         }
-        CodeFileTreeModel tree = new CodeFileTreeModel();
-        buildTree(tree, directoryPath);
-        return tree;
-    }
 
-    private void buildTree(CodeFileTreeModel tree, String currentPath) {
-        File currentFile = new File(currentPath);
-        tree.setFileName(currentFile.getName());
-        tree.setFilePath(currentFile.getAbsolutePath());
-        File[] files = FileUtil.ls(currentPath);
         for (File file : files) {
-            if (file.isDirectory()) {
-                CodeFileTreeModel f = new CodeFileTreeModel();
-                f.setFileName(file.getName());
-                f.setFilePath(file.getAbsolutePath());
-                tree.getChildren().add(f);
-                buildTree(f, currentPath.concat("/").concat(file.getName()));
-            } else {
-                CodeFileTreeModel f = new CodeFileTreeModel();
-                f.setFileName(file.getName());
-                f.setFilePath(file.getAbsolutePath());
-                tree.getChildren().add(f);
-            }
+            FileUtil.del(file);
         }
+        logger.info("[历史数据清空]目录已清空,目录: {}", downloadPath);
     }
-
 
 }
