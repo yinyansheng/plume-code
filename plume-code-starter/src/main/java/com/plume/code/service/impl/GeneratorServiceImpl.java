@@ -12,6 +12,8 @@ import com.plume.code.lib.generator.GeneratorBehavior;
 import com.plume.code.lib.generator.GeneratorBehaviorFactory;
 import com.plume.code.service.GeneratorService;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -26,7 +28,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class GeneratorServiceImpl implements GeneratorService {
-
+    private static final Logger logger = LoggerFactory.getLogger(GeneratorServiceImpl.class);
     @Autowired
     protected DatabaseBehaviorFactory databaseBehaviorFactory;
 
@@ -51,7 +53,9 @@ public class GeneratorServiceImpl implements GeneratorService {
             throw new FileNotFoundException(directoryPath);
         }
 
+        logger.info("[plume-code] 文件生成完毕 目录:{}", directoryPath);
         File zip = ZipUtil.zip(directoryPath);
+        logger.info("[plume-code] 文件zip生成 路径:{}", zip.getAbsolutePath());
 
         return ResultModel.builder()
                 .batchNo(settingModel.getBatchNo())
