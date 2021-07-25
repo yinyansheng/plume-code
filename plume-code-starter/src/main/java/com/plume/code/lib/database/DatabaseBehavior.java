@@ -23,7 +23,7 @@ import java.util.Set;
  */
 public abstract class DatabaseBehavior {
     protected ConnectionModel connectionModel;
-    
+
     void initialize(ConnectionModel connectionModel) {
         if (null == connectionModel) {
             throw new IllegalArgumentException("connectionModel must be not null");
@@ -78,8 +78,6 @@ public abstract class DatabaseBehavior {
             case DECIMAL:
             case NUMERIC:
                 return "BigDecimal";
-            case TIMESTAMP:
-                return "Timestamp";
             case VARCHAR:
             case CHAR:
             case NCHAR:
@@ -89,6 +87,7 @@ public abstract class DatabaseBehavior {
                 return "String";
             case DATE:
             case TIME:
+            case TIMESTAMP:
                 return "Date";
             case CLOB:
             case NCLOB:
