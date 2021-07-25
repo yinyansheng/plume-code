@@ -106,7 +106,7 @@ abstract class MetaDataDatabaseBehavior extends DatabaseBehavior {
 
         fieldModel.setComment(metaDataColumnModel.getREMARKS());
 
-        JDBCType jdbcType = JDBCType.valueOf(metaDataColumnModel.getDATA_TYPE());
+        JDBCType jdbcType = getJDBCType(metaDataColumnModel.getDATA_TYPE());
         fieldModel.setType(getFieldType(jdbcType));
         fieldModel.setJdbcType(jdbcType.getName());
         fieldModel.setValue(metaDataColumnModel.getCOLUMN_DEF());
@@ -120,5 +120,16 @@ abstract class MetaDataDatabaseBehavior extends DatabaseBehavior {
         }
 
         return fieldModel;
+    }
+
+    private JDBCType getJDBCType(Integer dataType) {
+        switch (dataType) {
+            case 91:
+            case 92:
+            case 93:
+                return JDBCType.valueOf(91);
+            default:
+                return JDBCType.valueOf(dataType);
+        }
     }
 }
