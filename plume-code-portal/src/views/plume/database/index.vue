@@ -144,7 +144,7 @@ class DBSetting {
   url
   username
   password
-  isValid= false
+  isValid = false
 }
 
 export default {
@@ -157,10 +157,10 @@ export default {
       tableData: [],
       form: {
         index: -1,
-        name: 'plume_test',
+        name: 'h2_test',
         driver: 'org.h2.Driver',
         type: 'h2',
-        url: 'jdbc:h2:~/plume_test',
+        url: 'jdbc:h2:~/h2_test',
         username: 'sa',
         password: '',
         isValid: false
@@ -294,10 +294,10 @@ export default {
         path: 'database.settings',
         defaultValue: [{
           index: -1,
-          name: 'plume_test',
+          name: 'h2_test',
           driver: 'org.h2.Driver',
           type: 'h2',
-          url: 'jdbc:h2:~/plume_test',
+          url: 'jdbc:h2:~/h2_test',
           username: 'sa',
           password: '',
           isValid: true
