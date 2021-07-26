@@ -1,7 +1,7 @@
-package com.plume.code.web.core.database;
+package com.plume.code.core.database;
 
-import com.plume.code.web.core.common.helper.StringHelper;
-import com.plume.code.web.core.common.model.ConnectionModel;
+import com.plume.code.core.common.helper.StringHelper;
+import com.plume.code.core.common.model.ConnectionModel;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;

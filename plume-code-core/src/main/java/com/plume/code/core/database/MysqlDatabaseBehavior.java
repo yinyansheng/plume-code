@@ -1,11 +1,11 @@
-package com.plume.code.web.core.database;
+package com.plume.code.core.database;
 
-import com.plume.code.web.core.common.constrant.DatabaseConstant;
-import com.plume.code.web.core.common.model.SettingModel;
-import com.plume.code.web.core.database.model.ClassModel;
-import com.plume.code.web.core.database.model.FieldModel;
-import com.plume.code.web.core.database.model.MysqlColumnModel;
-import com.plume.code.web.core.database.model.MysqlTableModel;
+import com.plume.code.core.common.constrant.DatabaseConstant;
+import com.plume.code.core.common.model.SettingModel;
+import com.plume.code.core.database.model.ClassModel;
+import com.plume.code.core.database.model.FieldModel;
+import com.plume.code.core.database.model.MysqlColumnModel;
+import com.plume.code.core.database.model.MysqlTableModel;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.plume.code.web.core.common.helper.StringHelper.*;
+import static com.plume.code.core.common.helper.StringHelper.*;
 
 /**
  * mysql database service implement

@@ -2,7 +2,7 @@ package com.plume.code.web.controller;
 
 
 import com.plume.code.web.controller.vo.R;
-import com.plume.code.web.core.common.model.ConnectionModel;
+import com.plume.code.core.common.model.ConnectionModel;
 import com.plume.code.web.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

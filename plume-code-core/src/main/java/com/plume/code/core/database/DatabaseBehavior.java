@@ -1,9 +1,9 @@
-package com.plume.code.web.core.database;
+package com.plume.code.core.database;
 
-import com.plume.code.web.core.common.model.ConnectionModel;
-import com.plume.code.web.core.common.model.SettingModel;
-import com.plume.code.web.core.database.model.ClassModel;
-import com.plume.code.web.core.database.model.FieldModel;
+import com.plume.code.core.common.model.ConnectionModel;
+import com.plume.code.core.common.model.SettingModel;
+import com.plume.code.core.database.model.ClassModel;
+import com.plume.code.core.database.model.FieldModel;
 import lombok.SneakyThrows;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;

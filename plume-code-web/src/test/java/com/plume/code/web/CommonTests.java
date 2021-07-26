@@ -1,8 +1,8 @@
 package com.plume.code.web;
 
 import com.google.gson.Gson;
-import com.plume.code.web.core.common.helper.PathHelper;
-import com.plume.code.web.core.common.model.TreeNodeModel;
+import com.plume.code.core.common.helper.PathHelper;
+import com.plume.code.core.common.model.TreeNodeModel;
 
 
 public class CommonTests {

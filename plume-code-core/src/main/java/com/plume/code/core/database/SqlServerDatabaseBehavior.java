@@ -1,4 +1,4 @@
-package com.plume.code.web.core.database;
+package com.plume.code.core.database;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

@@ -20,6 +20,7 @@
         <module>plume-code-web</module>
         <module>plume-code-portal</module>
         <module>plume-code-core</module>
+        <module>plume-code-cli</module>
     </modules>
 
     <developers>

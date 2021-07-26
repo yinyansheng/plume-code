@@ -1,6 +1,6 @@
 package com.plume.code.web.service;
 
-import com.plume.code.web.core.common.model.ConnectionModel;
+import com.plume.code.core.common.model.ConnectionModel;
 
 import java.util.List;
 

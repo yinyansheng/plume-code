@@ -1,12 +1,12 @@
 package com.plume.code.web;
 
 import com.google.gson.Gson;
-import com.plume.code.web.core.common.model.SettingModel;
-import com.plume.code.web.core.database.DatabaseBehaviorFactory;
-import com.plume.code.web.core.database.model.ClassModel;
-import com.plume.code.web.core.common.model.ConnectionModel;
-import com.plume.code.web.core.database.model.FieldModel;
-import com.plume.code.web.core.database.DatabaseBehavior;
+import com.plume.code.core.common.model.SettingModel;
+import com.plume.code.core.database.DatabaseBehaviorFactory;
+import com.plume.code.core.database.model.ClassModel;
+import com.plume.code.core.common.model.ConnectionModel;
+import com.plume.code.core.database.model.FieldModel;
+import com.plume.code.core.database.DatabaseBehavior;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
