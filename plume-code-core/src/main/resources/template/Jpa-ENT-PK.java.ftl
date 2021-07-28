@@ -1,16 +1,16 @@
 package ${packageName};
 
 import java.io.Serializable;
-<#if (setting.lombokState??)>
-    import lombok.Data;
+<#if setting.lombokState>
+import lombok.Data;
 </#if>
 /**
 * @description: ${comment!''}
 * @author: ${author}
 * @date: ${createTime}
 **/
-<#if setting.lombokState??>
-    @Data
+<#if setting.lombokState>
+@Data
 </#if>
 public class ${ClassName}${setting.entPostfix}PK implements Serializable {
 
@@ -18,7 +18,7 @@ public class ${ClassName}${setting.entPostfix}PK implements Serializable {
     private ${pkModel.type} ${pkModel.name};
 
 </#list>
-<#if setting.lombokState??>
+<#if !setting.lombokState>
 <#list primaryKeyList as pkModel>
     public ${pkModel.type} get${pkModel.upperCaseName}() {
     return ${pkModel.name};
