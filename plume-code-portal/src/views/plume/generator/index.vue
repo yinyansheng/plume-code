@@ -196,10 +196,10 @@ export default {
     this.loadSettings()
   },
   methods: {
-    handleSelectDatabase(setting) {
-      if (setting) {
-        this.selectedSetting = setting
-        api.listTableName(setting).then(res => {
+    handleSelectDatabase(name) {
+      if (name) {
+        this.selectedSetting = this.databases.filter(d => d.value === name)[0].data
+        api.listTableName(this.selectedSetting).then(res => {
           this.tables = res.data
         })
       } else {
@@ -221,7 +221,8 @@ export default {
       const settings = await this.getSettings()
       this.databases = settings.map(s => ({
         label: s.name,
-        value: s
+        value: s.name,
+        data: s
       }))
     },
     submitForm(formName, showCode = false) {
