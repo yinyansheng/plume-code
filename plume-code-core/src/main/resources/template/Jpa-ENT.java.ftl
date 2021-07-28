@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<#if (setting.lombokState??)>
+import lombok.Data;
+</#if>
 
 /**
  * @description: ${comment!''}
@@ -14,6 +17,9 @@ import javax.persistence.Id;
 @Table(name = "${tableName}")
 <#if (isMultiplePK)>
 @IdClass(${ClassName}PK.class)
+</#if>
+<#if setting.lombokState??>
+@Data
 </#if>
 public class ${ClassName}${setting.entPostfix} {
 
@@ -31,6 +37,7 @@ public class ${ClassName}${setting.entPostfix} {
     private ${fieldModel.type} ${fieldModel.name};
 
 </#list>
+<#if setting.lombokState??>
 <#list fieldModelList as fieldModel>
     public ${fieldModel.type} get${fieldModel.upperCaseName}() {
     return ${fieldModel.name};
@@ -41,4 +48,5 @@ public class ${ClassName}${setting.entPostfix} {
     }
 
 </#list>
+</#if>
 }

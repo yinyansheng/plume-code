@@ -5,12 +5,17 @@ ${typePackageName}
 #end
 
 import java.io.Serializable;
-
+#if($setting.lombokState)
+import lombok.Data;
+#end
 /**
  * @description: ${comment}
  * @author: ${author}
  * @date: ${createTime}
  **/
+#if($setting.lombokState)
+@Data
+#end
 public class ${ClassName}${setting.queryPostfix} implements Serializable {
     protected Integer pageIndex = 1;
     protected Integer pageSize = 10;
@@ -23,6 +28,7 @@ public class ${ClassName}${setting.queryPostfix} implements Serializable {
 
 #end
 
+#if(!$setting.lombokState)
 #foreach(${fieldModel} in ${fieldModelList})
     public ${fieldModel.type} get${fieldModel.upperCaseName}() {
         return ${fieldModel.name};
@@ -33,6 +39,7 @@ public class ${ClassName}${setting.queryPostfix} implements Serializable {
     }
 
 #end
+
     public Integer getPageIndex() {
         return pageIndex;
     }
@@ -48,5 +55,6 @@ public class ${ClassName}${setting.queryPostfix} implements Serializable {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+#end
 }
 

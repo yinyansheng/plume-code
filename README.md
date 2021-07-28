@@ -225,6 +225,7 @@ protected Map<String, Object> getTemplateContext() {
 - 支持VO 后缀配置  --done
 - 支持DTO后缀配置  --done
 - 支持Entity后缀配置   --done
+- 支持Lombok --done
 
 ### 0.0.3 version
 - 支持包路径修改

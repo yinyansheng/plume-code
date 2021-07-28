@@ -108,6 +108,9 @@
               <el-form-item label="ENT后缀" prop="entPostfix">
                 <el-input v-model="settingsForm.entPostfix" placeholder="默认ENT"></el-input>
               </el-form-item>
+              <el-form-item label="Lombok" prop="entPostfix">
+                <el-checkbox :true-label="true" :false-label="false" v-model="settingsForm.lombokState"/>
+              </el-form-item>
             </div>
           </el-card>
         </el-form>

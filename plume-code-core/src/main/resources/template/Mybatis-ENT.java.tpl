@@ -5,12 +5,17 @@ ${extraPackageName}
 #end
 
 import java.io.Serializable;
-
+#if($setting.lombokState)
+import lombok.Data;
+#end
 /**
  * @description: ${comment}
  * @author: ${author}
  * @date: ${createTime}
  **/
+#if($setting.lombokState)
+@Data
+#end
 public class ${ClassName}${setting.entPostfix} implements Serializable {
 
 #foreach(${fieldModel} in ${fieldModelList})
@@ -22,6 +27,7 @@ public class ${ClassName}${setting.entPostfix} implements Serializable {
 
 #end
 
+#if(!$setting.lombokState)
 #foreach(${fieldModel} in ${fieldModelList})
     public ${fieldModel.type} get${fieldModel.upperCaseName}() {
         return ${fieldModel.name};
@@ -31,6 +37,7 @@ public class ${ClassName}${setting.entPostfix} implements Serializable {
         this.${fieldModel.name} = ${fieldModel.name};
     }
 
+#end
 #end
 }
 
