@@ -228,12 +228,9 @@ protected Map<String, Object> getTemplateContext() {
 - 支持Lombok --done
 
 ### 0.0.3 version
-- 支持包路径修改
-- 基于xml(dtd)配置执行
-- 用户自定义配置文件
+- 支持cli运行
 
 ### 0.0.4 version
 
 - 支持docker部署（部署plume-code）
-- 支持docker compose 部署（含所有数据库类型）
 
