@@ -2,6 +2,7 @@ package com.plume.code.web.controller;
 
 
 import cn.hutool.core.io.FileUtil;
+import com.plume.code.core.common.model.SettingModel;
 import com.plume.code.web.controller.vo.GenerateVO;
 import com.plume.code.web.controller.vo.R;
 import com.plume.code.core.common.helper.PathHelper;
@@ -9,6 +10,7 @@ import com.plume.code.core.common.model.TreeNodeModel;
 import com.plume.code.core.database.model.ResultModel;
 import com.plume.code.web.service.GeneratorService;
 import lombok.SneakyThrows;
+import org.h2.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +27,25 @@ public class GeneratorController {
 
     @PostMapping("generate")
     public R<ResultModel> generate(@RequestBody GenerateVO generateVO) {
-        generateVO.getSettingModel().setBatchNo(String.valueOf(System.currentTimeMillis()));
+        SettingModel settingModel = generateVO.getSettingModel();
+        settingModel.setBatchNo(String.valueOf(System.currentTimeMillis()));
+
+        if (StringUtils.isNullOrEmpty(settingModel.getDtoPostfix())) {
+            settingModel.setDtoPostfix("DTO");
+        }
+
+        if (StringUtils.isNullOrEmpty(settingModel.getEntPostfix())) {
+            settingModel.setEntPostfix("ENT");
+        }
+
+        if (StringUtils.isNullOrEmpty(settingModel.getVoPostfix())) {
+            settingModel.setVoPostfix("VO");
+        }
+
+        if (StringUtils.isNullOrEmpty(settingModel.getQueryPostfix())) {
+            settingModel.setQueryPostfix("Query");
+        }
+
         ResultModel result = generatorService.generate(generateVO.getConnectionModel(), generateVO.getSettingModel());
         return R.ok(result);
     }
@@ -43,8 +63,7 @@ public class GeneratorController {
         download(response, file);
         return null;
     }
-
-
+    
     @GetMapping("/tree")
     public R<TreeNodeModel> tree(String batchNo) {
         String downloadPath = PathHelper.getDownloadPath();

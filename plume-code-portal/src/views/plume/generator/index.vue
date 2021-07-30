@@ -164,10 +164,10 @@ export default {
         serviceImpl: true,
         DTO: true,
         repositoryMode: 'mybatisPlus',
-        queryPostfix: "Query",
-        voPostfix: "VO",
-        dtoPostfix: "DTO",
-        entPostfix: "ENT"
+        queryPostfix: "",
+        voPostfix: "",
+        dtoPostfix: "",
+        entPostfix: ""
       },
       rules: {
         projectName: [

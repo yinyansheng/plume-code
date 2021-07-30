@@ -89,7 +89,7 @@
     <el-dialog title="数据库配置" width="30%" :visible.sync="dialogFormVisible" :close-on-press-escape="false"
                :close-on-click-modal="false">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="120px">
-        <el-form-item label="数据库名称" prop="name">
+        <el-form-item label="连接名称" prop="name">
           <el-input v-model="form.name"/>
         </el-form-item>
         <el-form-item label="数据库类型" prop="type">
