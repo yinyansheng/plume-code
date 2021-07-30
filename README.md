@@ -24,7 +24,7 @@ PlumeCode 不仅简单、而且强大
 ## quick start with web
 
 ### 下载文件
-- 发行版[下载](https://gitee.com/yansheng/plume-code/releases/0.0.2)  
+- 发行版[下载](https://gitee.com/yansheng/plume-code/releases)  
 
 ### 启动项目
 `java -jar plume-code-web-0.0.3.jar`
