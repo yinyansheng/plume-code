@@ -231,7 +231,7 @@ protected Map<String, Object> getTemplateContext() {
 - 支持Lombok --done
 
 ### 0.0.3 version
-- 支持cli运行
+- 支持cli运行 --done
 
 ### 0.0.4 version
 
