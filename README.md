@@ -18,13 +18,16 @@ PlumeCode 不仅简单、而且强大
 - 一键下载拥有portal、controller、service、repository、mapper、dto、entity、vo、query、mapper.xml等前后端代码
 - 良好的项目结构，让二次开发变得像喝水一样简单
 
-## 快速开始
+## quick start with code
+![cli](/image/13.png)
+
+## quick start with web
 
 ### 下载文件
 - 发行版[下载](https://gitee.com/yansheng/plume-code/releases/0.0.2)  
 
 ### 启动项目
-`java -jar plume-code-starter-0.0.2.jar`
+`java -jar plume-code-web-0.0.3.jar`
 ![start](/image/0.png)
 
 ### 功能简介
