@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class SettingModel {
      * 0：关闭
      * 1：打开
      */
-    private Boolean lombokState;
+    private Boolean lombokState = false;
 
 
     /**
@@ -63,4 +64,9 @@ public class SettingModel {
      * ent 对象后缀
      */
     private String entPostfix = "ENT";
+
+    /**
+     * 下载路径
+     */
+    private String downloadPath;
 }

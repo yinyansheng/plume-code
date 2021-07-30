@@ -1,6 +1,7 @@
 package com.plume.code.web;
 
 import com.google.gson.Gson;
+import com.plume.code.core.GeneratorFacade;
 import com.plume.code.core.common.model.ConnectionModel;
 import com.plume.code.core.common.model.SettingModel;
 import com.plume.code.core.database.DatabaseBehavior;
@@ -86,6 +87,8 @@ public class H2GeneratorTests {
     @Autowired
     private DatabaseService databaseService;
 
+    @Autowired
+    private GeneratorFacade generatorFacade;
 
     @Test
     public void test5() {
@@ -95,18 +98,18 @@ public class H2GeneratorTests {
 
     @Test
     public void test4() {
-        generatorService.generate(connectionModel, settingModel);
+        generatorFacade.generate(connectionModel, settingModel);
     }
 
     @Test
     public void test3() {
-        List<GeneratorBehavior> generatorBehaviorList = generatorService.getGeneratorBehaviorList(connectionModel, settingModel);
+        List<GeneratorBehavior> generatorBehaviorList = generatorFacade.getGeneratorBehaviorList(connectionModel, settingModel);
         generatorBehaviorList.forEach(GeneratorBehavior::generate);
     }
 
     @Test
     public void test2() {
-        List<ContextModel> contextModelList = generatorService.getContextModelList(connectionModel, settingModel);
+        List<ContextModel> contextModelList = generatorFacade.getContextModelList(connectionModel, settingModel);
 
         contextModelList.forEach(contextModel -> {
             List<GeneratorBehavior> generatorBehaviorList = generatorBehaviorFactory.getGeneratorBehaviorList(contextModel);

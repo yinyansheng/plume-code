@@ -10,10 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConnectionModel {
-    /**
-     * mysql
-     * h2
-     */
     private String type;
     private String driver;
     private String url;

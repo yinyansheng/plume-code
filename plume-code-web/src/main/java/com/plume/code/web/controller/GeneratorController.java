@@ -2,6 +2,7 @@ package com.plume.code.web.controller;
 
 
 import cn.hutool.core.io.FileUtil;
+import com.plume.code.core.GeneratorFacade;
 import com.plume.code.core.common.model.SettingModel;
 import com.plume.code.web.controller.vo.GenerateVO;
 import com.plume.code.web.controller.vo.R;
@@ -25,28 +26,12 @@ public class GeneratorController {
     @Autowired
     private GeneratorService generatorService;
 
+    @Autowired
+    private GeneratorFacade generatorFacade;
+
     @PostMapping("generate")
     public R<ResultModel> generate(@RequestBody GenerateVO generateVO) {
-        SettingModel settingModel = generateVO.getSettingModel();
-        settingModel.setBatchNo(String.valueOf(System.currentTimeMillis()));
-
-        if (StringUtils.isNullOrEmpty(settingModel.getDtoPostfix())) {
-            settingModel.setDtoPostfix("DTO");
-        }
-
-        if (StringUtils.isNullOrEmpty(settingModel.getEntPostfix())) {
-            settingModel.setEntPostfix("ENT");
-        }
-
-        if (StringUtils.isNullOrEmpty(settingModel.getVoPostfix())) {
-            settingModel.setVoPostfix("VO");
-        }
-
-        if (StringUtils.isNullOrEmpty(settingModel.getQueryPostfix())) {
-            settingModel.setQueryPostfix("Query");
-        }
-
-        ResultModel result = generatorService.generate(generateVO.getConnectionModel(), generateVO.getSettingModel());
+        ResultModel result = generatorFacade.generate(generateVO.getConnectionModel(), generateVO.getSettingModel());
         return R.ok(result);
     }
 
@@ -63,7 +48,7 @@ public class GeneratorController {
         download(response, file);
         return null;
     }
-    
+
     @GetMapping("/tree")
     public R<TreeNodeModel> tree(String batchNo) {
         String downloadPath = PathHelper.getDownloadPath();

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-<#if setting.lombokState>
+<#if lombok>
 import lombok.Data;
 </#if>
 
