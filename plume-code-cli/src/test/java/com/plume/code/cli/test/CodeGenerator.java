@@ -34,11 +34,11 @@ public class CodeGenerator {
     @Before
     public void contextLoads() {
         connectionModel = ConnectionModel.builder()
-                .type("PostgreSQL")
-                .driver("org.postgresql.Driver")
-                .url("jdbc:postgresql://127.0.0.1:5432/plume_pg")
-                .username("postgres")
-                .password("123456")
+                .type("h2")
+                .driver("org.h2.Driver")
+                .url("jdbc:h2:~/plume_test")
+                .username("sa")
+                .password("")
                 .build();
 
         settingModel = SettingModel.builder().author("yinyansheng")
@@ -68,18 +68,10 @@ public class CodeGenerator {
         List<ClassModel> tableModels = databaseBehavior.listClassModel(settingModel);
         System.out.println(gson.toJson(tableModels));
 
-        Set<String> primaryKeySet = databaseBehavior.getPrimaryKeySet("test_user");
+        Set<String> primaryKeySet = databaseBehavior.getPrimaryKeySet("VIEWS");
         System.out.println(gson.toJson(primaryKeySet));
 
-        List<FieldModel> columnModels = databaseBehavior.listFieldModel(settingModel, "test_user");
+        List<FieldModel> columnModels = databaseBehavior.listFieldModel(settingModel, "VIEWS");
         System.out.println(gson.toJson(columnModels));
     }
-
-    @Test
-    @SneakyThrows
-    public void test2() {
-        Driver driver = new OracleDriver();
-        DriverManager.deregisterDriver(driver);
-    }
-
 }
