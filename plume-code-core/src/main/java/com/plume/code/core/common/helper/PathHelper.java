@@ -2,6 +2,7 @@ package com.plume.code.core.common.helper;
 
 import cn.hutool.core.io.FileUtil;
 import com.plume.code.core.common.model.TreeNodeModel;
+import org.h2.util.StringUtils;
 
 import java.io.File;
 import java.net.URL;
@@ -12,6 +13,14 @@ import java.util.List;
  * @author yinyansheng
  */
 public class PathHelper {
+
+    public static String getDownloadPath(String downloadPath) {
+        if (StringUtils.isNullOrEmpty(downloadPath)) {
+            return getDownloadPath();
+        }
+
+        return downloadPath;
+    }
 
     public static String getDownloadPath() {
         if (!"dev".equals(System.getProperty("env"))) {

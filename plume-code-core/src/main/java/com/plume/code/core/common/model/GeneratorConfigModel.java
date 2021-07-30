@@ -5,12 +5,21 @@ import com.plume.code.core.common.enums.PortalOption;
 import com.plume.code.core.common.enums.RepositoryOption;
 import com.plume.code.core.common.enums.ServiceOption;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.util.List;
 
 @Data
 public class GeneratorConfigModel {
+
+    public GeneratorConfigModel() {
+
+    }
+
+    public GeneratorConfigModel(ConnectionModel connectionModel, SettingModel settingModel) {
+        this.connectionModel = connectionModel;
+        this.settingModel = settingModel;
+    }
+    
     private ConnectionModel connectionModel;
     private SettingModel settingModel;
 

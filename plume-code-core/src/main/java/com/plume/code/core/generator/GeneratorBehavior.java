@@ -54,7 +54,7 @@ public abstract class GeneratorBehavior {
 
     @SneakyThrows
     private String getProjectPath() {
-        String downloadPath = PathHelper.getDownloadPath();
+        String downloadPath = PathHelper.getDownloadPath(settingModel.getDownloadPath());
         File downloadPathFile = new File(downloadPath);
 
         if (!downloadPathFile.exists()) {

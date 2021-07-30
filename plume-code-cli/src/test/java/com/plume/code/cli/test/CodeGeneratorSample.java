@@ -10,7 +10,6 @@ import com.plume.code.core.common.model.ConnectionModel;
 import com.plume.code.core.common.model.GeneratorConfigModel;
 import com.plume.code.core.common.model.SettingModel;
 import com.plume.code.core.database.model.ResultModel;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +23,7 @@ import java.util.HashSet;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PlumeCodeCliApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CodeGenerator {
+public class CodeGeneratorSample {
 
     @Autowired
     private GeneratorFacade generatorFacade;
@@ -47,12 +46,11 @@ public class CodeGenerator {
                 .basePackageName("com.plume.code.demo")
                 .projectName("plume-code-demo")
                 .tableNameSet(new HashSet<>(Arrays.asList("RIGHTS", "VIEWS")))
-                .templateNameSet(new HashSet<>(Arrays.asList("Jpa-ENT.java.ftl", "Controller.java.tpl")))
+                .downloadPath("D:/") //缺省为：和项目路径同一级 downloads文件夹
                 .build();
 
-        setConnectionModel = new GeneratorConfigModel();
-        setConnectionModel.setConnectionModel(connectionModel);
-        setConnectionModel.setSettingModel(settingModel);
+        setConnectionModel = new GeneratorConfigModel(connectionModel, settingModel);
+
         setConnectionModel.setPortal(Arrays.asList(PortalOption.ElementUI));
         setConnectionModel.setController(Arrays.asList(ControllerOption.Controller, ControllerOption.Query, ControllerOption.VO));
         setConnectionModel.setService(Arrays.asList(ServiceOption.Service, ServiceOption.DTO));
