@@ -17,6 +17,11 @@ public class GeneratorServiceImpl implements GeneratorService {
         String downloadPath = PathHelper.getDownloadPath();
         log.info("[历史数据清空]清空文件下载目录开始");
         File downloadDir = new File(downloadPath);
+
+        if (!downloadDir.exists()) {
+            return;
+        }
+
         File[] files = downloadDir.listFiles();
 
         if (null == files || files.length == 0) {
