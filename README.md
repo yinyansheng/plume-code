@@ -26,15 +26,15 @@ PlumeCode 不仅简单、而且强大
 ### 下载文件
 - 发行版[下载](https://gitee.com/yansheng/plume-code/releases)  
 
-- docker运行  
+### 启动项目
+`java -jar plume-code-web-0.0.3.jar`
+![start](/image/0.png)
+
+### docker运行  
 `docker pull yinyansheng/plumecode:v0.0.3`  
 ![docker-pull](/image/14.png)  
 `docker run -d yinyansheng/plumecode:v0.0.3`  
 ![docker-run](/image/15.png)  
-
-### 启动项目
-`java -jar plume-code-web-0.0.3.jar`
-![start](/image/0.png)
 
 ### 功能简介
 
@@ -241,5 +241,5 @@ protected Map<String, Object> getTemplateContext() {
 
 ### 0.0.4 version
 
-- 支持docker部署（部署plume-code）
+- 支持docker部署（部署plume-code） --done
 
