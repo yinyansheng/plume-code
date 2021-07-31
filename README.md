@@ -23,10 +23,9 @@ PlumeCode 不仅简单、而且强大
 
 ## quick start with web
 
-### 下载文件
+### jar包运行
 - 发行版[下载](https://gitee.com/yansheng/plume-code/releases)  
-
-### 启动项目
+- 启动项目  
 `java -jar plume-code-web-0.0.3.jar`
 ![start](/image/0.png)
 
@@ -36,7 +35,7 @@ PlumeCode 不仅简单、而且强大
 `docker run -d yinyansheng/plumecode:v0.0.3`  
 ![docker-run](/image/15.png)  
 
-### 功能简介
+## 功能简介
 
 - 打开网页
   http://localhost:8844/web/index.html
